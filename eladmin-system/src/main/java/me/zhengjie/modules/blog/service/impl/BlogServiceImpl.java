@@ -19,6 +19,9 @@ import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.service.BlogService;
+import me.zhengjie.modules.blog.service.CommentLikeService;
+import me.zhengjie.modules.blog.service.CommentService;
+import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
 import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.BlogMapper;
@@ -50,6 +53,9 @@ public class BlogServiceImpl implements BlogService {
 
     private final BlogRepository blogRepository;
     private final BlogMapper blogMapper;
+    private final DiaryUserService diaryUserService;
+    private final CommentService commentService;
+    private final CommentLikeService commentLikeService;
 
     @Override
     public Map
@@ -72,8 +78,7 @@ public class BlogServiceImpl implements BlogService {
     public BlogDto findById(Long blogId) {
         Blog blog = blogRepository.findById(blogId).orElseGet(Blog
                 ::new);
-        ValidationUtil.isNull(blog.getBlogId(), "Blog", "blogId
-                ",blogId);
+        ValidationUtil.isNull(blog.getBlogId(), "Blog", "blogId", blogId);
         return blogMapper.toDto(blog);
     }
 
@@ -88,9 +93,8 @@ public class BlogServiceImpl implements BlogService {
     public void update(Blog resources) {
         Blog blog = blogRepository.findById(resources.getBlogId
                 ()).orElseGet(Blog::new);
-        ValidationUtil.isNull(blog.getBlogId(), "Blog
-                ","id",resources.getBlogId());
-                blog.copy(resources);
+        ValidationUtil.isNull(blog.getBlogId(), "Blog", "id", resources.getBlogId());
+        blog.copy(resources);
         blogRepository.save(blog);
     }
 
@@ -102,16 +106,10 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void download(List
-                                 <BlogDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<BlogDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (BlogDto blog : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("用户ID", blog.getUserId());
             map.put("内容", blog.getContent());
             map.put("视频URL", blog.getVideoUrl());
@@ -121,5 +119,10 @@ public class BlogServiceImpl implements BlogService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public void buildBlog() {
+
     }
 }

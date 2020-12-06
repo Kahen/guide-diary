@@ -20,10 +20,8 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -35,44 +33,29 @@ import java.sql.Timestamp;
  **/
 @Entity
 @Data
-@Table(name = "blog")
-public class Blog implements Serializable {
+@Table(name = "comment_like")
+public class CommentLike implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "blog_id")
-    @ApiModelProperty(value = "博客ID")
-    private Long blogId;
+    @Column(name = "like_id")
+    @ApiModelProperty(value = "点赞ID")
+    private Long likeId;
+
+    @Column(name = "comment_id")
+    @ApiModelProperty(value = "评论ID")
+    private Long commentId;
 
     @Column(name = "user_id")
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty(value = "点赞用户ID")
     private Long userId;
-
-    @Column(name = "content", nullable = false)
-    @NotBlank
-    @ApiModelProperty(value = "内容")
-    private String content;
-
-    @Column(name = "video_url")
-    @ApiModelProperty(value = "视频URL")
-    private String videoUrl;
 
     @Column(name = "create_time")
     @CreationTimestamp
     @ApiModelProperty(value = "创建时间")
     private Timestamp createTime;
 
-    @Column(name = "publish_time")
-    @UpdateTimestamp
-    @ApiModelProperty(value = "发布时间")
-    private Timestamp publishTime;
-
-    @Column(name = "is_original", nullable = false)
-    @NotBlank
-    @ApiModelProperty(value = "是否原创")
-    private String isOriginal;
-
-    public void copy(Blog source) {
+    public void copy(CommentLike source) {
         BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

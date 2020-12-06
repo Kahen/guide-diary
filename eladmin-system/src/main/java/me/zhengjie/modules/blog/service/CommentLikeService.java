@@ -15,9 +15,9 @@
  */
 package me.zhengjie.modules.blog.service;
 
-import me.zhengjie.modules.blog.domain.DiaryUser;
-import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
-import me.zhengjie.modules.blog.service.dto.DiaryUserQueryCriteria;
+import me.zhengjie.modules.blog.domain.CommentLike;
+import me.zhengjie.modules.blog.service.dto.CommentLikeDto;
+import me.zhengjie.modules.blog.service.dto.CommentLikeQueryCriteria;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +31,7 @@ import java.util.Map;
  * @description 服务接口
  * @date 2020-12-06
  **/
-public interface DiaryUserService {
+public interface CommentLikeService {
 
     /**
      * 查询数据分页
@@ -42,40 +42,40 @@ public interface DiaryUserService {
      * <String,Object>
      */
     Map
-            <String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable);
+            <String, Object> queryAll(CommentLikeQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
      *
      * @param criteria 条件参数
      * @return List
-     * <DiaryUserDto>
+     * <CommentLikeDto>
      */
     List
-            <DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria);
+            <CommentLikeDto> queryAll(CommentLikeQueryCriteria criteria);
 
     /**
      * 根据ID查询
      *
-     * @param id ID
-     * @return DiaryUserDto
+     * @param likeId ID
+     * @return CommentLikeDto
      */
-    DiaryUserDto findById(Long id);
+    CommentLikeDto findById(Long likeId);
 
     /**
      * 创建
      *
      * @param resources /
-     * @return DiaryUserDto
+     * @return CommentLikeDto
      */
-    DiaryUserDto create(DiaryUser resources);
+    CommentLikeDto create(CommentLike resources);
 
     /**
      * 编辑
      *
      * @param resources /
      */
-    void update(DiaryUser resources);
+    void update(CommentLike resources);
 
     /**
      * 多选删除
@@ -92,5 +92,5 @@ public interface DiaryUserService {
      * @throws IOException /
      */
     void download(List
-                          <DiaryUserDto> all, HttpServletResponse response) throws IOException;
-            }
+                          <CommentLikeDto> all, HttpServletResponse response) throws IOException;
+}

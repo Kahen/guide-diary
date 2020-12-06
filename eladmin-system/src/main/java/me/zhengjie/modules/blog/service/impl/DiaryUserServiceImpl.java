@@ -72,8 +72,7 @@ public class DiaryUserServiceImpl implements DiaryUserService {
     public DiaryUserDto findById(Long id) {
         DiaryUser diaryUser = diaryUserRepository.findById(id).orElseGet(DiaryUser
                 ::new);
-        ValidationUtil.isNull(diaryUser.getId(), "DiaryUser", "id
-                ",id);
+        ValidationUtil.isNull(diaryUser.getId(), "DiaryUser", "id ", id);
         return diaryUserMapper.toDto(diaryUser);
     }
 
@@ -88,9 +87,8 @@ public class DiaryUserServiceImpl implements DiaryUserService {
     public void update(DiaryUser resources) {
         DiaryUser diaryUser = diaryUserRepository.findById(resources.getId
                 ()).orElseGet(DiaryUser::new);
-        ValidationUtil.isNull(diaryUser.getId(), "DiaryUser
-                ","id",resources.getId());
-                diaryUser.copy(resources);
+        ValidationUtil.isNull(diaryUser.getId(), "DiaryUser", "id", resources.getId());
+        diaryUser.copy(resources);
         diaryUserRepository.save(diaryUser);
     }
 

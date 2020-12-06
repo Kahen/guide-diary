@@ -12,6 +12,14 @@
         <el-input v-model="query.uid" class="filter-item"
                   clearable
                   placeholder="uid" style="width: 185px;" @keyup.enter.native="crud.toQuery"/>
+        <label class="el-form-item-label">用户名</label>
+        <el-input v-model="query.name" class="filter-item"
+                  clearable
+                  placeholder="用户名" style="width: 185px;" @keyup.enter.native="crud.toQuery"/>
+        <label class="el-form-item-label">昵称</label>
+        <el-input v-model="query.nickname" class="filter-item"
+                  clearable
+                  placeholder="昵称" style="width: 185px;" @keyup.enter.native="crud.toQuery"/>
         <rrOperation :crud="crud"/>
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
@@ -118,6 +126,7 @@
 </template>
 
 <script>
+import crudDiaryUser from '@/api/blog/diaryUser'
 import CRUD, {crud, form, header, presenter} from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
@@ -197,6 +206,14 @@ export default {
         {
           key: 'uid',
           display_name: 'uid'
+        },
+        {
+          key: 'name',
+          display_name: '用户名'
+        },
+        {
+          key: 'nickname',
+          display_name: '昵称'
         }
       ]
     }

@@ -31,7 +31,9 @@ import java.util.Map;
  * @description 服务接口
  * @date 2020-12-05
  **/
-public interface ImgService {
+public interface
+
+ImgService {
 
     /**
      * 查询数据分页
