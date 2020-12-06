@@ -31,7 +31,7 @@ import java.sql.Timestamp;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-05
+ * @date 2020-12-06
  **/
 @Entity
 @Data
@@ -49,6 +49,8 @@ public class Blog implements Serializable {
     private Long userId;
 
     @Column(name = "content", nullable = false)
+    @NotBlank
+    @UpdateTimestamp
     @ApiModelProperty(value = "内容")
     private String content;
 

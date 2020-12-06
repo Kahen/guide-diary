@@ -15,9 +15,9 @@
  */
 package me.zhengjie.modules.blog.service;
 
-import me.zhengjie.modules.blog.domain.Blog;
-import me.zhengjie.modules.blog.service.dto.BlogDto;
-import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
+import me.zhengjie.modules.blog.domain.DiaryUser;
+import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
+import me.zhengjie.modules.blog.service.dto.DiaryUserQueryCriteria;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +31,7 @@ import java.util.Map;
  * @description 服务接口
  * @date 2020-12-06
  **/
-public interface BlogService {
+public interface DiaryUserService {
 
     /**
      * 查询数据分页
@@ -42,40 +42,40 @@ public interface BlogService {
      * <String,Object>
      */
     Map
-            <String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable);
+            <String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
      *
      * @param criteria 条件参数
      * @return List
-     * <BlogDto>
+     * <DiaryUserDto>
      */
     List
-            <BlogDto> queryAll(BlogQueryCriteria criteria);
+            <DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria);
 
     /**
      * 根据ID查询
      *
-     * @param blogId ID
-     * @return BlogDto
+     * @param id ID
+     * @return DiaryUserDto
      */
-    BlogDto findById(Long blogId);
+    DiaryUserDto findById(Long id);
 
     /**
      * 创建
      *
      * @param resources /
-     * @return BlogDto
+     * @return DiaryUserDto
      */
-    BlogDto create(Blog resources);
+    DiaryUserDto create(DiaryUser resources);
 
     /**
      * 编辑
      *
      * @param resources /
      */
-    void update(Blog resources);
+    void update(DiaryUser resources);
 
     /**
      * 多选删除
@@ -92,5 +92,5 @@ public interface BlogService {
      * @throws IOException /
      */
     void download(List
-                          <BlogDto> all, HttpServletResponse response) throws IOException;
-            }
+                          <DiaryUserDto> all, HttpServletResponse response) throws IOException;
+}

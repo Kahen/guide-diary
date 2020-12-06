@@ -16,51 +16,25 @@
 package me.zhengjie.modules.blog.service.dto;
 
 import lombok.Data;
-
-import java.io.Serializable;
-import java.sql.Timestamp;
+import me.zhengjie.annotation.Query;
 
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @description /
  * @date 2020-12-06
  **/
 @Data
-public class BlogDto implements Serializable {
+public class DiaryUserQueryCriteria {
 
     /**
-     * 博客ID
+     * 精确
      */
-    private Long blogId;
+    @Query
+    private Long id;
 
     /**
-     * 用户ID
+     * 模糊
      */
-    private Long userId;
-
-    /**
-     * 内容
-     */
-    private String content;
-
-    /**
-     * 视频URL
-     */
-    private String videoUrl;
-
-    /**
-     * 创建时间
-     */
-    private Timestamp createTime;
-
-    /**
-     * 发布时间
-     */
-    private Timestamp publishTime;
-
-    /**
-     * 是否原创
-     */
-    private String isOriginal;
+    @Query(type = Query.Type.INNER_LIKE)
+    private String uid;
 }

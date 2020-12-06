@@ -13,54 +13,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package me.zhengjie.modules.blog.service.dto;
+package me.zhengjie.modules.blog.repository;
 
-import lombok.Data;
-
-import java.io.Serializable;
-import java.sql.Timestamp;
+import me.zhengjie.modules.blog.domain.DiaryUser;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @description /
  * @date 2020-12-06
  **/
-@Data
-public class BlogDto implements Serializable {
-
-    /**
-     * 博客ID
-     */
-    private Long blogId;
-
-    /**
-     * 用户ID
-     */
-    private Long userId;
-
-    /**
-     * 内容
-     */
-    private String content;
-
-    /**
-     * 视频URL
-     */
-    private String videoUrl;
-
-    /**
-     * 创建时间
-     */
-    private Timestamp createTime;
-
-    /**
-     * 发布时间
-     */
-    private Timestamp publishTime;
-
-    /**
-     * 是否原创
-     */
-    private String isOriginal;
+public interface DiaryUserRepository extends JpaRepository<DiaryUser, Long>, JpaSpecificationExecutor<DiaryUser> {
 }

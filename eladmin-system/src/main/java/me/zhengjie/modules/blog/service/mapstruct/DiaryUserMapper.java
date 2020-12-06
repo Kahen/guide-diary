@@ -13,54 +13,21 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package me.zhengjie.modules.blog.service.dto;
+package me.zhengjie.modules.blog.service.mapstruct;
 
-import lombok.Data;
-
-import java.io.Serializable;
-import java.sql.Timestamp;
+import me.zhengjie.base.BaseMapper;
+import me.zhengjie.modules.blog.domain.DiaryUser;
+import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @description /
  * @date 2020-12-06
  **/
-@Data
-public class BlogDto implements Serializable {
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface DiaryUserMapper extends BaseMapper
+        <DiaryUserDto, DiaryUser> {
 
-    /**
-     * 博客ID
-     */
-    private Long blogId;
-
-    /**
-     * 用户ID
-     */
-    private Long userId;
-
-    /**
-     * 内容
-     */
-    private String content;
-
-    /**
-     * 视频URL
-     */
-    private String videoUrl;
-
-    /**
-     * 创建时间
-     */
-    private Timestamp createTime;
-
-    /**
-     * 发布时间
-     */
-    private Timestamp publishTime;
-
-    /**
-     * 是否原创
-     */
-    private String isOriginal;
 }

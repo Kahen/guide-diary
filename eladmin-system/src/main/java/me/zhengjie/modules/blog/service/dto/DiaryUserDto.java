@@ -27,27 +27,47 @@ import java.sql.Timestamp;
  * @date 2020-12-06
  **/
 @Data
-public class BlogDto implements Serializable {
+public class DiaryUserDto implements Serializable {
 
     /**
-     * 博客ID
+     * 自增id
      */
-    private Long blogId;
+    private Long id;
 
     /**
-     * 用户ID
+     * uid
      */
-    private Long userId;
+    private String uid;
 
     /**
-     * 内容
+     * 用户名
      */
-    private String content;
+    private String name;
 
     /**
-     * 视频URL
+     * 昵称
      */
-    private String videoUrl;
+    private String nickname;
+
+    /**
+     * 用户介绍
+     */
+    private String description;
+
+    /**
+     * 粉丝数
+     */
+    private Long followersCount;
+
+    /**
+     * 关注数
+     */
+    private Long friendsCount;
+
+    /**
+     * 博客数
+     */
+    private Long statusesCount;
 
     /**
      * 创建时间
@@ -55,12 +75,12 @@ public class BlogDto implements Serializable {
     private Timestamp createTime;
 
     /**
-     * 发布时间
+     * 头像链接
      */
-    private Timestamp publishTime;
+    private String avatarUrl;
 
     /**
-     * 是否原创
+     * 密码哈希
      */
-    private String isOriginal;
+    private String password;
 }

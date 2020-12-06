@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-06
  **/
 @Data
 public class BlogQueryCriteria {
