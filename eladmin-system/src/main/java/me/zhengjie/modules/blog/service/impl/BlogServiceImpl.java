@@ -15,11 +15,12 @@
  */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.http.HttpUtil;
 import lombok.RequiredArgsConstructor;
+import me.zhengjie.modules.blog.constant.BlogConstants;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.service.BlogService;
-import me.zhengjie.modules.blog.service.CommentLikeService;
 import me.zhengjie.modules.blog.service.CommentService;
 import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
@@ -51,11 +52,14 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BlogServiceImpl implements BlogService {
 
+    private static final String BASE_URL = "https://api.weibo.com/2/statuses/public_timeline.json?";
+    private static final String HOME_BASE_URL = "https://api.weibo.com/2/statuses/home_timeline.json?";
+
+
     private final BlogRepository blogRepository;
     private final BlogMapper blogMapper;
     private final DiaryUserService diaryUserService;
     private final CommentService commentService;
-    private final CommentLikeService commentLikeService;
 
     @Override
     public Map
@@ -123,6 +127,8 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void buildBlog() {
+        String blogs = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken());
+        // todo: build blog and build user and comment
 
     }
 }
