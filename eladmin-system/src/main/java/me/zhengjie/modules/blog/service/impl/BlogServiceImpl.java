@@ -16,9 +16,14 @@
 package me.zhengjie.modules.blog.service.impl;
 
 import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.constant.BlogConstants;
 import me.zhengjie.modules.blog.domain.Blog;
+import me.zhengjie.modules.blog.domain.Comment;
+import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.service.BlogService;
 import me.zhengjie.modules.blog.service.CommentService;
@@ -32,11 +37,14 @@ import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,6 +62,7 @@ public class BlogServiceImpl implements BlogService {
 
     private static final String BASE_URL = "https://api.weibo.com/2/statuses/public_timeline.json?";
     private static final String HOME_BASE_URL = "https://api.weibo.com/2/statuses/home_timeline.json?";
+    private static final String COMMENT_URL = "https://api.weibo.com/2/comments/show.json?";
 
 
     private final BlogRepository blogRepository;
@@ -127,8 +136,38 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void buildBlog() {
-        String blogs = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken());
+        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken());
         // todo: build blog and build user and comment
+        // todo add comment fetch
+        JSONObject blogsObject = JSON.parseObject(blogStr);
+        List<Blog> blogs = new ArrayList<>();
+        List<Comment> comments = new ArrayList<>();
+        List<DiaryUser> diaryUsers = new ArrayList<>();
+        JSONArray statuses = blogsObject.getJSONArray("statuses");
+        for (Object status : statuses) {
+            JSONObject statusObject = (JSONObject) status;
+            blogs.add(
+                    new Blog()
+                            .setBlogId(statusObject.getLong("id"))
+                            .setContent(statusObject.getString("text"))
+                            .setCreateTime(new Timestamp(System.currentTimeMillis()))
+                            // .setPublishTime(new Timestamp(LocalDateTimeUtil.parse(statusObject.getString
+                            // ("created_at")).toEpochSecond(ZoneOffset.UTC)))
+                            .setIsOriginal("是")
+            );
+            JSONObject userObject = statusObject.getJSONObject("user");
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            diaryUsers.add(new DiaryUser()
+                    .setId(userObject.getLong("id"))
+                    .setName(userObject.getString("name"))
+                    .setAvatarUrl("profile_image_url")
+                    .setDescription(userObject.getString("description"))
+                    .setFollowersCount(userObject.getLong("followers_count"))
+                    .setFriendsCount(userObject.getLong("friends_count"))
+                    .setPassword(passwordEncoder.encode("123456"))
+                    .setStatusesCount(userObject.getLong("statuses_count"))
+            );
+        }
 
     }
 }
