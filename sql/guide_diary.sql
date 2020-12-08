@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localmysql
- Source Server Type    : MySQL
- Source Server Version : 80019
+ Source Server         : maria
+ Source Server Type    : MariaDB
+ Source Server Version : 100505
  Source Host           : localhost:3306
  Source Schema         : guide_diary
 
- Target Server Type    : MySQL
- Target Server Version : 80019
+ Target Server Type    : MariaDB
+ Target Server Version : 100505
  File Encoding         : 65001
 
- Date: 07/12/2020 00:03:29
+ Date: 08/12/2020 18:03:27
 */
 
 SET NAMES utf8mb4;
@@ -23,17 +23,18 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `blog`;
 CREATE TABLE `blog`
 (
-    `blog_id`      bigint(0)                                                     NOT NULL AUTO_INCREMENT COMMENT '博客ID',
-    `user_id`      bigint(0)                                                     NOT NULL COMMENT '用户ID',
+    `id`           bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `blog_id`      bigint(20)                                                    NOT NULL COMMENT '博客ID',
+    `user_id`      bigint(20)                                                    NOT NULL COMMENT '用户ID',
     `content`      longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '内容',
     `video_url`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '视频URL',
     `create_time`  datetime(0)                                                   NOT NULL COMMENT '创建时间',
     `publish_time` datetime(0)                                                   NOT NULL COMMENT '发布时间',
     `is_original`  varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT 'true' COMMENT '是否原创',
-    PRIMARY KEY (`blog_id`) USING BTREE,
+    PRIMARY KEY (`id`, `blog_id`) USING BTREE,
     INDEX `user_id` (`user_id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 1
+  AUTO_INCREMENT = 4579909328441402
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '博客表'
   ROW_FORMAT = Dynamic;
@@ -42,7 +43,75 @@ CREATE TABLE `blog`
 -- Records of blog
 -- ----------------------------
 INSERT INTO `blog`
-VALUES (1, 1, '1', '1', '2020-12-05 21:46:28', '2020-12-06 15:10:12', '1');
+VALUES (4579909328441383, 4579900672181877, 1638781994, '#国安将战蔚山现代#', NULL, '2020-12-08 17:16:15',
+        '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441384, 4579901129359859, 1638781994,
+        '【经典回顾】#体育星力量#新浪体育20年颁奖盛典高光时刻！盛典邀请到杨扬、邓亚萍、潘晓婷、柯洁、惠若琪等百余位文体明星，作为体育运动的榜样，向同样热爱体育的你们传递体育力量，致敬体育精神！#2020体育初心图鉴#  http://t.cn/A6qAilkZ ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441385, 4579901888008139, 2011075080,
+        '#景区回应拦截自驾游客买票# 【#游客自驾路过遭景区拦截买票# 景区：要签承诺书不停车不下车[费解]】12月7日，福建漳州，游客孙先生爆料称，在南靖县云水谣景区旁307县道自驾游时，遭到疑似景区工作人员拦截称要买景区票才能通过，据理力争后，工作人员答应放行，但是禁止3公里内停车，并派了一辆摩托...全文： http://m.weibo.cn/2011075080/4579901888008139 ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441386, 4579901901121228, 3808007273, '路过小米售后给小米10至尊版贴了个膜，免费的，只要他有货的都免费贴[吃瓜]这个服务还行吧。 ​', NULL,
+        '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441387, 4579902052108457, 1878335471,
+        '#赵丽颖说王一博新歌好听#今日#王一博新歌熹微#上线引发热议。刚刚@赵丽颖 发文“好！听！”，力挺@UNIQ-王一博 。 ​', NULL, '2020-12-08 17:16:15',
+        '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441388, 4579902378482865, 6732352798,
+        '#小米11# \n鬼故事[草泥马]\n\n12.5貌似就是把现有的开发内测版功能全弄好再发布一遍[奥特曼][奥特曼][奥特曼]【基于安卓11】\n\n不出意外在11发布会，会讲[猪头]#miui12# ​', NULL,
+        '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441389, 4579903880043547, 3808007273,
+        '珠穆朗玛峰最新高程公布:8848.86米，8848这个数字是不是很熟悉？[允悲]你们知道珠穆朗玛峰是怎么长高的吗？地理课代表出来[doge] ​', NULL, '2020-12-08 17:16:15',
+        '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441390, 4579904232362024, 2803301701,
+        '【春夏之约！#北京环球主题公园半年后开园#[憧憬]】功夫熊猫、变形金刚、小黄人、哈利波特、侏罗纪世界…12月8日，北京召开新闻发布会宣布，环球影城主题公园进入设备调试阶段，预计明年5月开园。在春夏之交的5月，约上你的小伙伴，一起“回到童年”吧！ ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441391, 4579904911312093, 6601131493,
+        '#军事分享官# 【SpaceX 将\"货运龙\"号航天器发射到国际空间站】美国东部时间2020年12月6日，一枚 “猎鹰9号 ”火箭从位于佛罗里达州的NASA肯尼迪航天中心的39A航天发射场升空，搭载 “货运龙 ”飞船进入低地球轨道。这是SpaceX根据NASA的第二份商业补给服务合同执行的第21次货运任务（CRS-21），向国际...全文： http://m.weibo.cn/6601131493/4579904911312093 ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441392, 4579905704048545, 1878335471,
+        '#沙溢点评撒贝宁尼格买提##了不起的挑战回忆杀#《你好生活》本期@沙溢 先来做客，上来考验友情的时刻到了：跟撒尼谁的关系好？\n沙溢：必须是小尼呀，小尼这孩子多厚道。\n沙溢眼中的撒贝宁：智慧、幽默、烦人\n沙溢眼中的@尼格买提 尼格买提 ：善良、帅气\n来来，留言说一下你们眼中的撒尼  ...全文： http://m.weibo.cn/1878335471/4579905704048545 ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441393, 4579906501485615, 2022252207, '今天下午#华为首款商用台式机发布#，举行了专门的发布会，但由于是面向企业采购，所以售价依然待揭晓~', NULL,
+        '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441394, 4579906866644982, 6732352798,
+        '#小米11# \n\n（*⃣️仅支持865机型及以上无很多阉割\n     *⃣️ 体验最好的效果请购买11pro u）#小米# ​', NULL, '2020-12-08 17:16:15',
+        '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441395, 4579907701047450, 3306388887, 'Reno5这次请了5个代言人啊，那Reno6岂不是要请6个？\n不过这宣传图拍的是真漂亮，顶级制作 ​', NULL,
+        '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441396, 4579907927019559, 1638781994,
+        '#国安将战蔚山现代# 亚冠抽签后，北京中赫国安抽到了蔚山现代，这也是球迷们认为的最差一签。\n有意思的是，北京中赫国安与蔚山现代在小组赛都是5胜1平，国安进12求失4球；蔚山现代则在K联赛和韩足总杯拿到了双亚王，在亚冠小组赛中打进了14个进球，丢了5球。\n两队曾经在亚冠遭遇四次，国安全败。 ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441397, 4579907957687133, 6732352798,
+        '#高考# 你敢信吗？ 亲戚家的孩子。高考英语102。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。\n\n结果因为偏科滑到了专科[草泥马]\n好好学数学吧#高考数学# \n\n[猪头]也不知道阿姨的粉丝里有没有高中生。举个手[鼓掌] ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441398, 4579908163210812, 6440885166, '青少年的第一块智能手表——Redmi 手表开箱。#新机来了#  http://t.cn/A6qAXXs4 ​', NULL,
+        '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441399, 4579908431645963, 2011075080,
+        '【#老人买十个墓穴投资被套牢20年#，当事人：一个都没卖出去】近日，湖北武汉，81岁的吕婆婆90年代退休，之后在广东惠州惠阳打工，经人介绍先后同惠阳唐京灵塔园开发有限公司签合同，买了一些墓穴和牌位用来投资。吕婆婆说，当时公司告诉他们，投资的这些墓穴和牌位后期可以转让，价值翻倍。可是二十多...全文： http://m.weibo.cn/2011075080/4579908431645963 ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441400, 4579908589723859, 3808007273, '金立是真他nainai的秀啊，搞了个历史代言人，hhhhhhhh 薛之谦，刘涛看了都一脸懵逼吧hhh ​', NULL,
+        '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
+INSERT INTO `blog`
+VALUES (4579909328441401, 4579909328441382, 2803301701,
+        '【转发提醒！#成都娱乐场所消费人数不超75%#】据红星新闻报道，成都市娱乐行业协会于12月8日下发通知，要求各娱乐行业企业，坚持合法合规经营的同时，坚决做到进入场所佩戴口罩、查验健康码、检测体温，加强场所消毒工作，确保场所消费人数不超过75%。 ​',
+        NULL, '2020-12-08 17:16:15', '2020-12-08 17:16:15', '是');
 
 -- ----------------------------
 -- Table structure for blog_collect
@@ -50,15 +119,16 @@ VALUES (1, 1, '1', '1', '2020-12-05 21:46:28', '2020-12-06 15:10:12', '1');
 DROP TABLE IF EXISTS `blog_collect`;
 CREATE TABLE `blog_collect`
 (
-    `collect_id`  bigint(0)   NOT NULL AUTO_INCREMENT COMMENT '转发ID',
-    `blog_id`     bigint(0)   NOT NULL COMMENT '博客ID',
-    `user_id`     bigint(0)   NOT NULL COMMENT '收藏用户ID',
+    `id`          bigint(20)  NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `collect_id`  bigint(20)  NOT NULL COMMENT '转发ID',
+    `blog_id`     bigint(20)  NOT NULL COMMENT '博客ID',
+    `user_id`     bigint(20)  NOT NULL COMMENT '收藏用户ID',
     `create_time` datetime(0) NOT NULL COMMENT '创建时间',
-    PRIMARY KEY (`collect_id`) USING BTREE,
+    PRIMARY KEY (`id`, `collect_id`) USING BTREE,
     INDEX `blog_id` (`blog_id`) USING BTREE,
     INDEX `user_id` (`user_id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 1
+  AUTO_INCREMENT = 3
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '博客收藏表'
   ROW_FORMAT = Dynamic;
@@ -67,7 +137,7 @@ CREATE TABLE `blog_collect`
 -- Records of blog_collect
 -- ----------------------------
 INSERT INTO `blog_collect`
-VALUES (1, 1, 1, '2020-12-06 15:17:42');
+VALUES (2, 1, 1, 1, '2020-12-06 15:17:42');
 
 -- ----------------------------
 -- Table structure for blog_comment
@@ -75,17 +145,19 @@ VALUES (1, 1, 1, '2020-12-06 15:17:42');
 DROP TABLE IF EXISTS `blog_comment`;
 CREATE TABLE `blog_comment`
 (
-    `id`           bigint(0)                                             NOT NULL AUTO_INCREMENT COMMENT '评论ID',
-    `blog_id`      bigint(0)                                             NOT NULL COMMENT '博客ID',
-    `user_id`      bigint(0)                                             NOT NULL COMMENT '评论用户ID',
-    `pid`          bigint(0)                                             NULL DEFAULT 0 COMMENT '该评论所在的父级ID',
-    `reply_id`     bigint(0)                                             NULL DEFAULT 0 COMMENT '该评论回复的评论ID,没有则为0',
+    `id`           bigint(20)                                            NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `comment_id`   bigint(20)                                            NOT NULL COMMENT '评论ID',
+    `blog_id`      bigint(20)                                            NOT NULL COMMENT '博客ID',
+    `user_id`      bigint(20)                                            NOT NULL COMMENT '评论用户ID',
+    `pid`          bigint(20)                                            NULL DEFAULT 0 COMMENT '该评论所在的父级ID',
+    `reply_id`     bigint(20)                                            NULL DEFAULT 0 COMMENT '该评论回复的评论ID,没有则为0',
     `content`      text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
     `publish_time` datetime(0)                                           NOT NULL COMMENT '发布时间',
-    PRIMARY KEY (`id`) USING BTREE,
+    PRIMARY KEY (`id`, `comment_id`) USING BTREE,
     INDEX `blog_id` (`blog_id`) USING BTREE,
     INDEX `user_id` (`user_id`) USING BTREE
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '博客评论表'
   ROW_FORMAT = Dynamic;
@@ -100,12 +172,14 @@ CREATE TABLE `blog_comment`
 DROP TABLE IF EXISTS `blog_img`;
 CREATE TABLE `blog_img`
 (
-    `img_id`  bigint(0)                                                     NOT NULL AUTO_INCREMENT COMMENT '图片ID',
-    `blog_id` bigint(0)                                                     NOT NULL COMMENT '博客ID',
+    `id`      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `img_id`  bigint(20)                                                    NOT NULL COMMENT '图片ID',
+    `blog_id` bigint(20)                                                    NOT NULL COMMENT '博客ID',
     `img_url` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '图片URL',
-    PRIMARY KEY (`img_id`) USING BTREE,
+    PRIMARY KEY (`id`, `img_id`) USING BTREE,
     INDEX `blog_id` (`blog_id`) USING BTREE
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '博客图片表'
   ROW_FORMAT = Dynamic;
@@ -120,14 +194,16 @@ CREATE TABLE `blog_img`
 DROP TABLE IF EXISTS `blog_like`;
 CREATE TABLE `blog_like`
 (
-    `like_id`     bigint(0)   NOT NULL AUTO_INCREMENT COMMENT '点赞ID',
-    `blog_id`     bigint(0)   NOT NULL COMMENT '博客ID',
-    `user_id`     bigint(0)   NOT NULL COMMENT '点赞用户ID',
+    `id`          bigint(20)  NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `like_id`     bigint(20)  NOT NULL COMMENT '点赞ID',
+    `blog_id`     bigint(20)  NOT NULL COMMENT '博客ID',
+    `user_id`     bigint(20)  NOT NULL COMMENT '点赞用户ID',
     `create_time` datetime(0) NOT NULL COMMENT '创建时间',
-    PRIMARY KEY (`like_id`) USING BTREE,
+    PRIMARY KEY (`id`, `like_id`) USING BTREE,
     INDEX `blog_id` (`blog_id`) USING BTREE,
     INDEX `user_id` (`user_id`) USING BTREE
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '博客点赞表'
   ROW_FORMAT = Dynamic;
@@ -142,15 +218,17 @@ CREATE TABLE `blog_like`
 DROP TABLE IF EXISTS `blog_repost`;
 CREATE TABLE `blog_repost`
 (
-    `repost_id`   bigint(0)                                             NOT NULL AUTO_INCREMENT COMMENT '转发ID',
-    `blog_id`     bigint(0)                                             NOT NULL COMMENT '博客ID',
-    `user_id`     bigint(0)                                             NOT NULL COMMENT '转发用户ID',
+    `id`          bigint(20)                                            NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `repost_id`   bigint(20)                                            NOT NULL COMMENT '转发ID',
+    `blog_id`     bigint(20)                                            NOT NULL COMMENT '博客ID',
+    `user_id`     bigint(20)                                            NOT NULL COMMENT '转发用户ID',
     `content`     text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
     `create_time` datetime(0)                                           NOT NULL COMMENT '创建时间',
-    PRIMARY KEY (`repost_id`) USING BTREE,
+    PRIMARY KEY (`id`, `repost_id`) USING BTREE,
     INDEX `blog_id` (`blog_id`) USING BTREE,
     INDEX `user_id` (`user_id`) USING BTREE
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '博客转发表'
   ROW_FORMAT = Dynamic;
@@ -165,7 +243,7 @@ CREATE TABLE `blog_repost`
 DROP TABLE IF EXISTS `code_column_config`;
 CREATE TABLE `code_column_config`
 (
-    `column_id`       bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `column_id`       bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `table_name`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `column_name`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `column_type`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -182,16 +260,16 @@ CREATE TABLE `code_column_config`
     PRIMARY KEY (`column_id`) USING BTREE,
     INDEX `idx_table_name` (`table_name`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 253
+  AUTO_INCREMENT = 270
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '代码生成字段信息存储'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of code_column_config
 -- ----------------------------
 INSERT INTO `code_column_config`
-VALUES (191, 'blog', 'blog_id', 'bigint', NULL, 'auto_increment', b'1', '', 'PRI', b'1', b'0', NULL, '博客ID', NULL);
+VALUES (191, 'blog', 'blog_id', 'bigint', NULL, '', b'1', '', 'PRI', b'1', b'0', NULL, '博客ID', NULL);
 INSERT INTO `code_column_config`
 VALUES (192, 'blog', 'user_id', 'bigint', NULL, '', b'1', '', 'MUL', b'1', b'0', NULL, '用户ID', NULL);
 INSERT INTO `code_column_config`
@@ -205,31 +283,28 @@ INSERT INTO `code_column_config`
 VALUES (196, 'blog', 'publish_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', '=', '发布时间',
         'UpdateTimestamp');
 INSERT INTO `code_column_config`
-VALUES (197, 'blog', 'is_original', 'varchar', 'is_original', '', b'1', 'Radio', '', b'1', b'1', '=', '是否原创', NULL);
+VALUES (197, 'blog', 'is_original', 'varchar', 'is_original', '', b'1', 'Radio', '', b'1', b'0', '=', '是否原创', NULL);
 INSERT INTO `code_column_config`
-VALUES (198, 'blog_like', 'like_id', 'bigint', NULL, 'auto_increment', b'1', NULL, 'PRI', b'1', b'1', NULL, '点赞ID',
-        NULL);
+VALUES (198, 'blog_like', 'like_id', 'bigint', NULL, '', b'1', NULL, 'PRI', b'1', b'0', 'Like', '点赞ID', NULL);
 INSERT INTO `code_column_config`
-VALUES (199, 'blog_like', 'blog_id', 'bigint', NULL, '', b'1', NULL, 'MUL', b'1', b'1', NULL, '博客ID', NULL);
+VALUES (199, 'blog_like', 'blog_id', 'bigint', NULL, '', b'1', NULL, 'MUL', b'1', b'0', 'Like', '博客ID', NULL);
 INSERT INTO `code_column_config`
-VALUES (200, 'blog_like', 'user_id', 'bigint', NULL, '', b'1', NULL, 'MUL', b'1', b'1', NULL, '点赞用户ID', NULL);
+VALUES (200, 'blog_like', 'user_id', 'bigint', NULL, '', b'1', NULL, 'MUL', b'1', b'0', 'Like', '点赞用户ID', NULL);
 INSERT INTO `code_column_config`
-VALUES (201, 'blog_like', 'create_time', 'datetime', NULL, '', b'1', NULL, '', b'1', b'1', NULL, '创建时间', NULL);
+VALUES (201, 'blog_like', 'create_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', '=', '创建时间', NULL);
 INSERT INTO `code_column_config`
-VALUES (202, 'blog_repost', 'repost_id', 'bigint', NULL, 'auto_increment', b'1', 'Input', 'PRI', b'1', b'0', NULL,
-        '转发ID', NULL);
+VALUES (202, 'blog_repost', 'repost_id', 'bigint', NULL, '', b'1', 'Input', 'PRI', b'1', b'0', '', '转发ID', NULL);
 INSERT INTO `code_column_config`
-VALUES (203, 'blog_repost', 'blog_id', 'bigint', NULL, '', b'1', 'Input', 'MUL', b'1', b'0', NULL, '博客ID', NULL);
+VALUES (203, 'blog_repost', 'blog_id', 'bigint', NULL, '', b'1', 'Input', 'MUL', b'1', b'0', 'Like', '博客ID', NULL);
 INSERT INTO `code_column_config`
-VALUES (204, 'blog_repost', 'user_id', 'bigint', NULL, '', b'1', 'Input', 'MUL', b'1', b'0', NULL, '转发用户ID', NULL);
+VALUES (204, 'blog_repost', 'user_id', 'bigint', NULL, '', b'1', 'Input', 'MUL', b'1', b'0', 'Like', '转发用户ID', NULL);
 INSERT INTO `code_column_config`
-VALUES (205, 'blog_repost', 'content', 'text', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容', NULL);
+VALUES (205, 'blog_repost', 'content', 'text', NULL, '', b'1', 'Textarea', '', b'1', b'1', 'Like', '内容', NULL);
 INSERT INTO `code_column_config`
-VALUES (206, 'blog_repost', 'create_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', NULL, '创建时间',
+VALUES (206, 'blog_repost', 'create_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', '=', '创建时间',
         'CreationTimestamp');
 INSERT INTO `code_column_config`
-VALUES (207, 'blog_collect', 'collect_id', 'bigint', NULL, 'auto_increment', b'1', 'Input', 'PRI', b'1', b'0', NULL,
-        '转发ID', NULL);
+VALUES (207, 'blog_collect', 'collect_id', 'bigint', NULL, '', b'1', 'Input', 'PRI', b'1', b'0', NULL, '转发ID', NULL);
 INSERT INTO `code_column_config`
 VALUES (208, 'blog_collect', 'blog_id', 'bigint', NULL, '', b'1', 'Input', 'MUL', b'1', b'0', NULL, '博客ID', NULL);
 INSERT INTO `code_column_config`
@@ -260,13 +335,12 @@ INSERT INTO `code_column_config`
 VALUES (219, 'blog_comment', 'reply_id', 'bigint', NULL, '', b'1', 'Input', '', b'1', b'0', NULL, '该评论回复的评论ID,没有则为0',
         NULL);
 INSERT INTO `code_column_config`
-VALUES (220, 'blog_comment', 'content', 'text', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容', NULL);
+VALUES (220, 'blog_comment', 'content', 'text', NULL, '', b'1', 'Textarea', '', b'1', b'1', 'Like', '内容', NULL);
 INSERT INTO `code_column_config`
 VALUES (221, 'blog_comment', 'publish_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', NULL, '发布时间',
         'CreationTimestamp');
 INSERT INTO `code_column_config`
-VALUES (222, 'blog_img', 'img_id', 'bigint', NULL, 'auto_increment', b'1', 'Input', 'PRI', b'1', b'0', '=', '图片ID',
-        NULL);
+VALUES (222, 'blog_img', 'img_id', 'bigint', NULL, '', b'1', 'Input', 'PRI', b'1', b'0', '=', '图片ID', NULL);
 INSERT INTO `code_column_config`
 VALUES (223, 'blog_img', 'blog_id', 'bigint', NULL, '', b'1', 'Input', 'MUL', b'1', b'0', '=', '博客ID', NULL);
 INSERT INTO `code_column_config`
@@ -352,6 +426,18 @@ INSERT INTO `code_column_config`
 VALUES (262, 'diary_user', 'avatar_url', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'1', NULL, '头像链接', NULL);
 INSERT INTO `code_column_config`
 VALUES (263, 'diary_user', 'password', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', NULL, '密码哈希', NULL);
+INSERT INTO `code_column_config`
+VALUES (264, 'blog_repost', 'id', 'bigint', NULL, 'auto_increment', b'1', NULL, 'PRI', b'1', b'0', '=', '自增id', NULL);
+INSERT INTO `code_column_config`
+VALUES (265, 'blog_like', 'id', 'bigint', NULL, 'auto_increment', b'1', NULL, 'PRI', b'1', b'0', NULL, '自增id', NULL);
+INSERT INTO `code_column_config`
+VALUES (266, 'blog_img', 'id', 'bigint', NULL, 'auto_increment', b'1', NULL, 'PRI', b'1', b'0', NULL, '自增id', NULL);
+INSERT INTO `code_column_config`
+VALUES (267, 'blog', 'id', 'bigint', NULL, 'auto_increment', b'1', NULL, 'PRI', b'1', b'0', NULL, '自增id', NULL);
+INSERT INTO `code_column_config`
+VALUES (268, 'blog_comment', 'comment_id', 'bigint', NULL, '', b'1', NULL, 'PRI', b'1', b'0', NULL, '评论ID', NULL);
+INSERT INTO `code_column_config`
+VALUES (269, 'blog_collect', 'id', 'bigint', NULL, 'auto_increment', b'1', NULL, 'PRI', b'1', b'0', NULL, '自增id', NULL);
 
 -- ----------------------------
 -- Table structure for code_gen_config
@@ -359,7 +445,7 @@ VALUES (263, 'diary_user', 'password', 'varchar', NULL, '', b'1', NULL, '', b'1'
 DROP TABLE IF EXISTS `code_gen_config`;
 CREATE TABLE `code_gen_config`
 (
-    `config_id`   bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `config_id`   bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `table_name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表名',
     `author`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者',
     `cover`       bit(1)                                                  NULL DEFAULT NULL COMMENT '是否覆盖',
@@ -372,10 +458,10 @@ CREATE TABLE `code_gen_config`
     PRIMARY KEY (`config_id`) USING BTREE,
     INDEX `idx_table_name` (`table_name`(100)) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 14
+  AUTO_INCREMENT = 15
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '代码生成器配置'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of code_gen_config
@@ -383,22 +469,22 @@ CREATE TABLE `code_gen_config`
 INSERT INTO `code_gen_config`
 VALUES (7, 'blog', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog', 'blog\\', NULL, 'blog');
 INSERT INTO `code_gen_config`
-VALUES (8, 'blog_like', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_like', 'blog_like\\',
+VALUES (8, 'blog_like', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_like', 'blog_like\\',
         'blog_', 'blog-like');
 INSERT INTO `code_gen_config`
-VALUES (9, 'blog_repost', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_repost', 'blog_repost\\',
+VALUES (9, 'blog_repost', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_repost', 'blog_repost\\',
         'blog_', 'blog_repost');
 INSERT INTO `code_gen_config`
-VALUES (10, 'blog_collect', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_collect',
+VALUES (10, 'blog_collect', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_collect',
         'blog_collect\\', 'blog_', 'blog_collect');
 INSERT INTO `code_gen_config`
 VALUES (11, 'comment_like', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'comment_like',
         'comment_like\\', '', 'comment_like');
 INSERT INTO `code_gen_config`
-VALUES (12, 'blog_comment', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_comment',
+VALUES (12, 'blog_comment', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_comment',
         'blog_comment\\', 'blog_', 'blog_comment');
 INSERT INTO `code_gen_config`
-VALUES (13, 'blog_img', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_img', 'blog_img\\', 'blog_',
+VALUES (13, 'blog_img', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_img', 'blog_img\\', 'blog_',
         'blog_img');
 INSERT INTO `code_gen_config`
 VALUES (14, 'diary_user', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'diary_user', 'diary_user\\',
@@ -410,14 +496,15 @@ VALUES (14, 'diary_user', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.
 DROP TABLE IF EXISTS `comment_like`;
 CREATE TABLE `comment_like`
 (
-    `like_id`     bigint(0)   NOT NULL AUTO_INCREMENT COMMENT '点赞ID',
-    `comment_id`  bigint(0)   NULL DEFAULT NULL COMMENT '评论ID',
-    `user_id`     bigint(0)   NULL DEFAULT NULL COMMENT '点赞用户ID',
+    `like_id`     bigint(20)  NOT NULL AUTO_INCREMENT COMMENT '点赞ID',
+    `comment_id`  bigint(20)  NULL DEFAULT NULL COMMENT '评论ID',
+    `user_id`     bigint(20)  NULL DEFAULT NULL COMMENT '点赞用户ID',
     `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
     PRIMARY KEY (`like_id`) USING BTREE,
     INDEX `comment_id` (`comment_id`) USING BTREE,
     INDEX `user_id` (`user_id`) USING BTREE
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '评论点赞表'
   ROW_FORMAT = Dynamic;
@@ -432,19 +519,20 @@ CREATE TABLE `comment_like`
 DROP TABLE IF EXISTS `diary_user`;
 CREATE TABLE `diary_user`
 (
-    `id`              bigint(0)                                                      NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `id`              bigint(20)                                                     NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `uid`             varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT 'uid',
     `name`            varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '用户名',
     `nickname`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '昵称',
     `description`     varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户介绍',
-    `followers_count` bigint(0)                                                      NOT NULL DEFAULT 0 COMMENT '粉丝数',
-    `friends_count`   bigint(0)                                                      NOT NULL DEFAULT 0 COMMENT '关注数',
-    `statuses_count`  bigint(0)                                                      NOT NULL DEFAULT 0 COMMENT '博客数',
+    `followers_count` bigint(20)                                                     NOT NULL DEFAULT 0 COMMENT '粉丝数',
+    `friends_count`   bigint(20)                                                     NOT NULL DEFAULT 0 COMMENT '关注数',
+    `statuses_count`  bigint(20)                                                     NOT NULL DEFAULT 0 COMMENT '博客数',
     `create_time`     datetime(0)                                                    NOT NULL COMMENT '创建时间',
     `avatar_url`      varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '头像链接',
     `password`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '密码哈希',
-    PRIMARY KEY (`id`) USING BTREE
+    PRIMARY KEY (`id`, `uid`) USING BTREE
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 105
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci COMMENT = '用户表'
   ROW_FORMAT = Dynamic;
@@ -452,6 +540,176 @@ CREATE TABLE `diary_user`
 -- ----------------------------
 -- Records of diary_user
 -- ----------------------------
+INSERT INTO `diary_user`
+VALUES (58, '98a91d78fe004def8057f26d690b3b8d', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$psI7L1Gt3fhVLCq0/TPk9Oq1MFaaszV2vw7b4xukY90wdP2x1EC/G');
+INSERT INTO `diary_user`
+VALUES (59, '789dea62acb9417da92e46c95c0c5972', '小白测评', '小白测评', '不客观 真体验', 2695627, 204, 24453, '2011-03-13 10:00:50',
+        'profile_image_url', '$2a$10$L.qvdaIcVp4IflWvhKTlE.LrPu1Q4VMdc.7z2ioAW7jVAm7/4PcEq');
+INSERT INTO `diary_user`
+VALUES (60, '4a7c5552e48c41e5b8d4ae2197adae30', '新浪综艺', '新浪综艺',
+        '精选最新、最全、最热门的综艺资讯、视频！每天给你好看！欢迎报料、投稿！请发私信或者邮件（videotv@sina.cn）。', 12408296, 1865, 60762, '2010-11-30 15:11:19',
+        'profile_image_url', '$2a$10$BqIor73rmljGPp98wHDHWeKs0AumMFNxQ9GovRVNtdENRFUGBU1B6');
+INSERT INTO `diary_user`
+VALUES (61, '047e5087f5154e739cc6b75e9ff51e68', '微博军事头条', '微博军事头条', '微博军事头条官方账号', 863570, 174, 7607,
+        '2018-07-15 09:34:01', 'profile_image_url', '$2a$10$N2mQTDvSjDdEWxXpXEvEnOkacwCi3U3Vui.8YDJgs5suRAFsKgauq');
+INSERT INTO `diary_user`
+VALUES (62, '922d8d1d1a3c4d38afcae1520cd9c1c7', '人民日报', '人民日报', '人民日报法人微博。参与、沟通、记录时代。', 122617660, 3057, 126371,
+        '2012-07-22 02:28:35', 'profile_image_url', '$2a$10$JTDyzYAChlOY0BrlcrJkzOdwRsclr6.AGZsgUdxmH7NXXjisMwQ1q');
+INSERT INTO `diary_user`
+VALUES (63, '25982a8be6094775af3cd031df2db209', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$n3QbxxK7bjDSnfYmdTT0P.WjU4m6lXruyrdN1Ffv3kwib6bMMjaIW');
+INSERT INTO `diary_user`
+VALUES (64, 'adaba47212da4222a6b0a9c5e28e6df3', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$eak5VEPAa3BwhqEt1zqyweq6jIr4fvcQqFHEv2//XJ0ksBdhmHa.G');
+INSERT INTO `diary_user`
+VALUES (65, 'c1e55bf308d44204bf10808193a7c0b6', '新浪综艺', '新浪综艺',
+        '精选最新、最全、最热门的综艺资讯、视频！每天给你好看！欢迎报料、投稿！请发私信或者邮件（videotv@sina.cn）。', 12408296, 1865, 60762, '2010-11-30 15:11:19',
+        'profile_image_url', '$2a$10$VjsoudMXzoGx319ZaHVIE.XAN.BW0be3HN/ND4eW5ng21Vhye3MCi');
+INSERT INTO `diary_user`
+VALUES (66, 'b751c39ddf034da1b928dc9d59eb7593', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$.Wu8356i5APOW8118XcsK.blXlSt7RXqUFJpJiCQtyXztWGGL5yOW');
+INSERT INTO `diary_user`
+VALUES (67, '092bf066c9214370a01a17802b49373d', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$QDKjzYebXt/T96c7pgdeteUEAtyaSgTbH/XvkvwTL0pndfm70tWSS');
+INSERT INTO `diary_user`
+VALUES (68, '50523123f1d640cf8c7b8fab3c02c8a2', '齐鲁晚报', '齐鲁晚报',
+        '办主流大报，树百年品牌，齐鲁晚报是山东省发行量和社会影响力最大的都市报。目前齐鲁晚报构建的“一报两微一端一网”融媒矩阵，全媒覆盖人群超过1000万。2016年，齐鲁晚报荣膺“全国晚报二十强”并排名第二，同时入选亚洲品牌500强。线索爆料与媒体合作请发送至qlwb2011@sina.com。',
+        11597756, 1638, 131121, '2011-03-15 18:44:02', 'profile_image_url',
+        '$2a$10$fqSPfx6lvQtxC7J281xQHe9A6zwCu66XTn2k3KeorVhphvobH99eu');
+INSERT INTO `diary_user`
+VALUES (69, '183ca9b9c4814c7ca02d46fa578d0e9c', '我是恐龙君', '我是恐龙君', '商务评测V微：18435122791', 755126, 198, 1944,
+        '2017-12-21 14:16:07', 'profile_image_url', '$2a$10$WpKIamcAEAA0hKb6z07Vyu5lNPTQBrFGGdNE0g7HvCXWR01OUjcFC');
+INSERT INTO `diary_user`
+VALUES (70, 'c6875d947ea040a99bf9f9f364bd577a', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$9dgBSdy9BdM/V36RvKYB/e/6T1XFBHnOe./XgGfQ09MuDRHPQ5G4a');
+INSERT INTO `diary_user`
+VALUES (71, '6c182594af7446ed83cd633d0cd6bb1c', '新浪体育', '新浪体育',
+        '24小时滚动播报最新的体育快讯，趣闻和视频。新浪记者团带来独家图文报道。欢迎爆料、投稿，请发私信或者邮件： sports2009@vip.sina.com', 24220036, 2056, 260839,
+        '2009-08-28 16:34:39', 'profile_image_url', '$2a$10$gLIJLJu2z/rrTFfoOdSKVu8EpiAv2E5zsxSpFE7YFHyMfRhRbMwzC');
+INSERT INTO `diary_user`
+VALUES (72, '2555f5f1672441e1be6395deb544cfd4', '新评科技', '新评科技', '手机数码达人，专业跌落测试。', 55340, 232, 2431,
+        '2013-03-12 15:58:19', 'profile_image_url', '$2a$10$TgY0lCgBZj4uUUNQ1VvjQ.XO2dqcSNwwmCz33tT5Na17DxywGi9CG');
+INSERT INTO `diary_user`
+VALUES (73, '4ae7a3dd313546b38828272b5466cde7', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$lsMLnCNc3gpJJVgr4jEbWugjxPIHkdIaxLrk04SsTB6ZIWmZtidZe');
+INSERT INTO `diary_user`
+VALUES (74, '8cf0b3b6fe154cd5ac9ed0e005663c30', '小白测评', '小白测评', '不客观 真体验', 2695627, 204, 24453, '2011-03-13 10:00:50',
+        'profile_image_url', '$2a$10$vBdi0fGFfeUoz/xuyAmsR.B0TNkR5gKJpORt3vXod/35/6SHFnHLa');
+INSERT INTO `diary_user`
+VALUES (75, '4261832a53bf48aba59df41584d9d02a', '新浪综艺', '新浪综艺',
+        '精选最新、最全、最热门的综艺资讯、视频！每天给你好看！欢迎报料、投稿！请发私信或者邮件（videotv@sina.cn）。', 12408296, 1865, 60762, '2010-11-30 15:11:19',
+        'profile_image_url', '$2a$10$lmqorvws6kZinCu6.Uqp4.tEwFKRc3vdhUgCSjvUxCbrVtyzz6yJa');
+INSERT INTO `diary_user`
+VALUES (76, '8095c849351c4ae7a24420a33fb8f9c6', '微博军事头条', '微博军事头条', '微博军事头条官方账号', 863570, 174, 7607,
+        '2018-07-15 09:34:01', 'profile_image_url', '$2a$10$Mt1FUQPGF4.VgtEm4IN/BOciF9D5G/RxIGoFU0K00.nxlL7hLK.CK');
+INSERT INTO `diary_user`
+VALUES (77, '1f29ca7b3c6349abad9f74c0c4cc587a', '人民日报', '人民日报', '人民日报法人微博。参与、沟通、记录时代。', 122617660, 3057, 126371,
+        '2012-07-22 02:28:35', 'profile_image_url', '$2a$10$zLM6aM4YjPsU8tBufmbOSeM/qbfffZOiza4A1lmfWhivK2i2ytfYS');
+INSERT INTO `diary_user`
+VALUES (78, '0b57c3bb76dc431791c2029cbce90c51', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$J5457gy3uCAMLKc1e7il9eLmskJZ5rqtzuISXJCanrQXffKFjc3X.');
+INSERT INTO `diary_user`
+VALUES (79, 'b5f593688360473fa450020913a4940a', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$g63qTJwzO9UBHZhTLamA6un/q0j2GvRB129V.YQKaPWiIew0d/3ri');
+INSERT INTO `diary_user`
+VALUES (80, '33abf1259aa142a284d46bea2b2f54f7', '新浪综艺', '新浪综艺',
+        '精选最新、最全、最热门的综艺资讯、视频！每天给你好看！欢迎报料、投稿！请发私信或者邮件（videotv@sina.cn）。', 12408296, 1865, 60762, '2010-11-30 15:11:19',
+        'profile_image_url', '$2a$10$TTAI5kZ9ZagrXdXZZpp.kuGhPw9FnbMsBDZw8PENdBUphLHvbZ2m2');
+INSERT INTO `diary_user`
+VALUES (81, '18e552e5950841c4a3aebb500942d14f', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$BXVmHNMQh5Xf3x7K73AybekyYbMyoA1sc5bSXF51ijgWJhckT5sAu');
+INSERT INTO `diary_user`
+VALUES (82, '3774eda935784e0c8485b401ebbaf3c7', '齐鲁晚报', '齐鲁晚报',
+        '办主流大报，树百年品牌，齐鲁晚报是山东省发行量和社会影响力最大的都市报。目前齐鲁晚报构建的“一报两微一端一网”融媒矩阵，全媒覆盖人群超过1000万。2016年，齐鲁晚报荣膺“全国晚报二十强”并排名第二，同时入选亚洲品牌500强。线索爆料与媒体合作请发送至qlwb2011@sina.com。',
+        11597756, 1638, 131121, '2011-03-15 18:44:02', 'profile_image_url',
+        '$2a$10$uuSeTuBGErTyAq.Ph4BTheYgL/qSwETSidxQazbCdXqQXwx7hbBpa');
+INSERT INTO `diary_user`
+VALUES (83, '3839c54940494c58a896205b34ee1f66', '新浪体育', '新浪体育',
+        '24小时滚动播报最新的体育快讯，趣闻和视频。新浪记者团带来独家图文报道。欢迎爆料、投稿，请发私信或者邮件： sports2009@vip.sina.com', 24220036, 2056, 260839,
+        '2009-08-28 16:34:39', 'profile_image_url', '$2a$10$SfgyeLyi1PO8g7/KrS4FxuWLg98JWyLhN4Q44/QIYh7UjWDBcSifW');
+INSERT INTO `diary_user`
+VALUES (84, '4d8d5b108af24e1bbeaa9c2ae71e6c52', '新浪体育', '新浪体育',
+        '24小时滚动播报最新的体育快讯，趣闻和视频。新浪记者团带来独家图文报道。欢迎爆料、投稿，请发私信或者邮件： sports2009@vip.sina.com', 24220036, 2056, 260839,
+        '2009-08-28 16:34:39', 'profile_image_url', '$2a$10$yK7wVBBbjU6cjAGGOZGSX.h4kWNaErMUNr2zmJ0YpRFTrYYgCkJ6i');
+INSERT INTO `diary_user`
+VALUES (85, '9fd1c4fd263240568bdb91956ddb9a7d', '小米智能生活', '小米智能生活', '小米智能生活通过手机和AIoT技术,赋能智能硬件互联互通,提供衣食住行全场景智能解决方案。',
+        2056606, 304, 7286, '2016-01-22 13:26:20', 'profile_image_url',
+        '$2a$10$RExcdsmToDtxvgSjdhcoIOg.DykArL/B.6b5PejozjYFFZunyg2IS');
+INSERT INTO `diary_user`
+VALUES (86, 'b55cb566b11047f8b10675effafdaea2', '人民日报', '人民日报', '人民日报法人微博。参与、沟通、记录时代。', 122617660, 3057, 126371,
+        '2012-07-22 02:28:35', 'profile_image_url', '$2a$10$QMWkDG60EHa9hMRKc6rOrexDOQuJ8avR6CYk.QU8V47g4MFDV/Riy');
+INSERT INTO `diary_user`
+VALUES (87, '6287ea4bf52b4431a1caa9a17dd26953', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$LtltzpLdMSYZgKRDWLmKVe5TpSpKOi8jXnOWQMEtYkiva/3OohbEy');
+INSERT INTO `diary_user`
+VALUES (88, '82eec03109ce4b0db34f1c738e81131a', '齐鲁晚报', '齐鲁晚报',
+        '办主流大报，树百年品牌，齐鲁晚报是山东省发行量和社会影响力最大的都市报。目前齐鲁晚报构建的“一报两微一端一网”融媒矩阵，全媒覆盖人群超过1000万。2016年，齐鲁晚报荣膺“全国晚报二十强”并排名第二，同时入选亚洲品牌500强。线索爆料与媒体合作请发送至qlwb2011@sina.com。',
+        11597756, 1638, 131121, '2011-03-15 18:44:02', 'profile_image_url',
+        '$2a$10$tIyeA3MnPNorg6u1FdbvTuAV.y.EPZPZoc.LkGb/0Ets8Sg5UL3pa');
+INSERT INTO `diary_user`
+VALUES (89, '920cbe0c0fcb472a864c763154ff152c', '我是恐龙君', '我是恐龙君', '商务评测V微：18435122791', 755126, 198, 1944,
+        '2017-12-21 14:16:07', 'profile_image_url', '$2a$10$CAQwx5txyjcwIFSOegYYrOZvF7SkHZzuRMfQIJhEGB/Qx/XnVXt4.');
+INSERT INTO `diary_user`
+VALUES (90, 'e23d8a23636b4ce2af4d6eabb8e7bf77', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$a2DEkybnLk2dKEhyrg/RkeY4fnIWP6cmWwP6cBxx7Wn.0jODf8TPG');
+INSERT INTO `diary_user`
+VALUES (91, 'c3d1dbf2c6814febac37c785a6988bb4', '新浪体育', '新浪体育',
+        '24小时滚动播报最新的体育快讯，趣闻和视频。新浪记者团带来独家图文报道。欢迎爆料、投稿，请发私信或者邮件： sports2009@vip.sina.com', 24220036, 2056, 260839,
+        '2009-08-28 16:34:39', 'profile_image_url', '$2a$10$cjIthIFV/vMYFUCV1uSocu98Su7icxiecyIM.yGIPgYx1wSPahT1i');
+INSERT INTO `diary_user`
+VALUES (92, 'aa28a386719d4dbeaf991d7572522a04', '新评科技', '新评科技', '手机数码达人，专业跌落测试。', 55340, 232, 2431,
+        '2013-03-12 15:58:19', 'profile_image_url', '$2a$10$WG6PBsxgb9MtxwaemultNeVl3CLUTnXDhAOviqb0jwGQfMdut4mwa');
+INSERT INTO `diary_user`
+VALUES (93, '4c2a68f9c10249c7a4874a0ff8b73008', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$rx4LeQLKOY4j1l5c5hlTWuoZ6ahNH2S/a0qRV9SiFacDwhr7ZP54K');
+INSERT INTO `diary_user`
+VALUES (94, '475054b7d7aa405e96ec0d45846c1890', '小白测评', '小白测评', '不客观 真体验', 2695627, 204, 24453, '2011-03-13 10:00:50',
+        'profile_image_url', '$2a$10$2MrYd9gLQuPZ2AXKMLmNNOj6tepFb7/xozMgqQ2.rZsCtI0O905FG');
+INSERT INTO `diary_user`
+VALUES (95, '53a1f0ef1a73478297e4ecdf6e5dcdc4', '新浪综艺', '新浪综艺',
+        '精选最新、最全、最热门的综艺资讯、视频！每天给你好看！欢迎报料、投稿！请发私信或者邮件（videotv@sina.cn）。', 12408296, 1865, 60762, '2010-11-30 15:11:19',
+        'profile_image_url', '$2a$10$jpfGAkXzZZW0LLRXQfkziu1V.vAbgIurTfnP3p10V79d89nOtX4MC');
+INSERT INTO `diary_user`
+VALUES (96, '766e9bac3e5647c999e3cdc6b979d70a', '微博军事头条', '微博军事头条', '微博军事头条官方账号', 863570, 174, 7607,
+        '2018-07-15 09:34:01', 'profile_image_url', '$2a$10$ab2SrqM8E3q9PofkoWsyDeQ0TO.obCE8nJtZZWiiz63cDgujv8HHi');
+INSERT INTO `diary_user`
+VALUES (97, '168b4fc9e32c4b6b91f207fd2116ebb2', '人民日报', '人民日报', '人民日报法人微博。参与、沟通、记录时代。', 122617660, 3057, 126371,
+        '2012-07-22 02:28:35', 'profile_image_url', '$2a$10$ZMLc.QllPILP64C/YKd2L.Ck1y0.3Xjl294WaT.OogyfGdORtMWmC');
+INSERT INTO `diary_user`
+VALUES (98, '970dbaaddac84a31ac0058bfba46c5d1', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$otRv31coCJ/Y25.Y.y0wgOjzKY3bwG8W1QwnGBMh76PR/iqKIKdei');
+INSERT INTO `diary_user`
+VALUES (99, '3bef269886e749f1b4f49bd7e53ada08', '官方的暗示', '官方的暗示', '一支来自官方暗示的账号', 15043, 849, 1539,
+        '2018-09-29 17:07:38', 'profile_image_url', '$2a$10$co/Zm.bf3eWfQaSFPjHTa.o7r.DKg0mvqPbilSPjZHkvSh67pMOuq');
+INSERT INTO `diary_user`
+VALUES (100, '97e24b2a90b5486082f7f8d071bc0906', '新浪综艺', '新浪综艺',
+        '精选最新、最全、最热门的综艺资讯、视频！每天给你好看！欢迎报料、投稿！请发私信或者邮件（videotv@sina.cn）。', 12408296, 1865, 60762, '2010-11-30 15:11:19',
+        'profile_image_url', '$2a$10$aFaIbFPZilvS65Jp8G0bw.8xBy5PGuUeAwMzGm./RRNMRMt7TSp7O');
+INSERT INTO `diary_user`
+VALUES (101, '864d721db9fb42f6a5d45addd34bcc5f', '搞机圈的那些事', '搞机圈的那些事',
+        '全球最新手机数码咨询，直播，开箱图文评测，视频制作等，微博商务合作QQ：2579349049 17600842753 imsocial@inmyshow.com', 4230737, 1626, 46463,
+        '2013-09-20 18:12:41', 'profile_image_url', '$2a$10$.fwus6NzCyLr7hnevOT/7.tOZtasWasJHlAIm9jmvEMfY58ZYrDiS');
+INSERT INTO `diary_user`
+VALUES (102, 'f6585a5c5944447f936de256db139320', '齐鲁晚报', '齐鲁晚报',
+        '办主流大报，树百年品牌，齐鲁晚报是山东省发行量和社会影响力最大的都市报。目前齐鲁晚报构建的“一报两微一端一网”融媒矩阵，全媒覆盖人群超过1000万。2016年，齐鲁晚报荣膺“全国晚报二十强”并排名第二，同时入选亚洲品牌500强。线索爆料与媒体合作请发送至qlwb2011@sina.com。',
+        11597756, 1638, 131121, '2011-03-15 18:44:02', 'profile_image_url',
+        '$2a$10$kxvwEDV8JKoxQoecDXpw9etxOiplbIqSm4rOhIqlnc5sBn37UpO2K');
+INSERT INTO `diary_user`
+VALUES (103, 'a3e51cb190804c5796cbd645281159e7', '新浪体育', '新浪体育',
+        '24小时滚动播报最新的体育快讯，趣闻和视频。新浪记者团带来独家图文报道。欢迎爆料、投稿，请发私信或者邮件： sports2009@vip.sina.com', 24220036, 2056, 260839,
+        '2009-08-28 16:34:39', 'profile_image_url', '$2a$10$rr6QNcLGSs.6oI9kJhxaA.fLrfTfySM/RBT6HRkiLVdbMb.skfsoC');
+INSERT INTO `diary_user`
+VALUES (104, '73e3f11004854d5599f236b62fab9c84', '新浪体育', '新浪体育',
+        '24小时滚动播报最新的体育快讯，趣闻和视频。新浪记者团带来独家图文报道。欢迎爆料、投稿，请发私信或者邮件： sports2009@vip.sina.com', 24220036, 2056, 260839,
+        '2009-08-28 16:34:39', 'profile_image_url', '$2a$10$FzQUdukBR1ygMq/MAzfif.EYhYKKv4F/sf1hNkZpn5C2qdEb5YEdy');
 
 -- ----------------------------
 -- Table structure for mnt_app
@@ -459,12 +717,12 @@ CREATE TABLE `diary_user`
 DROP TABLE IF EXISTS `mnt_app`;
 CREATE TABLE `mnt_app`
 (
-    `app_id`        bigint(0)                                                NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `app_id`        bigint(20)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `name`          varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '应用名称',
     `upload_path`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '上传目录',
     `deploy_path`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '部署路径',
     `backup_path`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '备份路径',
-    `port`          int(0)                                                   NULL DEFAULT NULL COMMENT '应用端口',
+    `port`          int(11)                                                  NULL DEFAULT NULL COMMENT '应用端口',
     `start_script`  varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '启动脚本',
     `deploy_script` varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部署脚本',
     `create_by`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '创建者',
@@ -476,7 +734,7 @@ CREATE TABLE `mnt_app`
   AUTO_INCREMENT = 1
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '应用管理'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of mnt_app
@@ -501,7 +759,7 @@ CREATE TABLE `mnt_database`
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '数据库管理'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of mnt_database
@@ -513,8 +771,8 @@ CREATE TABLE `mnt_database`
 DROP TABLE IF EXISTS `mnt_deploy`;
 CREATE TABLE `mnt_deploy`
 (
-    `deploy_id`   bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `app_id`      bigint(0)                                               NULL DEFAULT NULL COMMENT '应用编号',
+    `deploy_id`   bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `app_id`      bigint(20)                                              NULL DEFAULT NULL COMMENT '应用编号',
     `create_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
     `update_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
     `create_time` datetime(0)                                             NULL DEFAULT NULL,
@@ -525,7 +783,7 @@ CREATE TABLE `mnt_deploy`
   AUTO_INCREMENT = 1
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '部署管理'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of mnt_deploy
@@ -542,12 +800,12 @@ CREATE TABLE `mnt_deploy_history`
     `deploy_date` datetime(0)                                             NOT NULL COMMENT '部署日期',
     `deploy_user` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '部署用户',
     `ip`          varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL COMMENT '服务器IP',
-    `deploy_id`   bigint(0)                                               NULL DEFAULT NULL COMMENT '部署编号',
+    `deploy_id`   bigint(20)                                              NULL DEFAULT NULL COMMENT '部署编号',
     PRIMARY KEY (`history_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '部署历史管理'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of mnt_deploy_history
@@ -559,14 +817,14 @@ CREATE TABLE `mnt_deploy_history`
 DROP TABLE IF EXISTS `mnt_deploy_server`;
 CREATE TABLE `mnt_deploy_server`
 (
-    `deploy_id` bigint(0) NOT NULL COMMENT '部署ID',
-    `server_id` bigint(0) NOT NULL COMMENT '服务ID',
+    `deploy_id` bigint(20) NOT NULL COMMENT '部署ID',
+    `server_id` bigint(20) NOT NULL COMMENT '服务ID',
     PRIMARY KEY (`deploy_id`, `server_id`) USING BTREE,
     INDEX `FKeaaha7jew9a02b3bk9ghols53` (`server_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '应用与服务器关联'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of mnt_deploy_server
@@ -578,12 +836,12 @@ CREATE TABLE `mnt_deploy_server`
 DROP TABLE IF EXISTS `mnt_server`;
 CREATE TABLE `mnt_server`
 (
-    `server_id`   bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `server_id`   bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `account`     varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '账号',
     `ip`          varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT 'IP地址',
     `name`        varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
     `password`    varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
-    `port`        int(0)                                                  NULL DEFAULT NULL COMMENT '端口',
+    `port`        int(11)                                                 NULL DEFAULT NULL COMMENT '端口',
     `create_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
     `update_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
     `create_time` datetime(0)                                             NULL DEFAULT NULL COMMENT '创建时间',
@@ -594,7 +852,7 @@ CREATE TABLE `mnt_server`
   AUTO_INCREMENT = 2
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '服务器管理'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of mnt_server
@@ -606,11 +864,11 @@ CREATE TABLE `mnt_server`
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept`
 (
-    `dept_id`     bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `pid`         bigint(0)                                               NULL DEFAULT NULL COMMENT '上级部门',
-    `sub_count`   int(0)                                                  NULL DEFAULT 0 COMMENT '子部门数目',
+    `dept_id`     bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `pid`         bigint(20)                                              NULL DEFAULT NULL COMMENT '上级部门',
+    `sub_count`   int(11)                                                 NULL DEFAULT 0 COMMENT '子部门数目',
     `name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
-    `dept_sort`   int(0)                                                  NULL DEFAULT 999 COMMENT '排序',
+    `dept_sort`   int(11)                                                 NULL DEFAULT 999 COMMENT '排序',
     `enabled`     bit(1)                                                  NOT NULL COMMENT '状态',
     `create_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
     `update_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
@@ -623,7 +881,7 @@ CREATE TABLE `sys_dept`
   AUTO_INCREMENT = 18
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '部门'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_dept
@@ -649,7 +907,7 @@ VALUES (17, 2, 0, '研发一组', 999, b'1', 'admin', 'admin', '2020-08-02 14:49
 DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict`
 (
-    `dict_id`     bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `dict_id`     bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典名称',
     `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
     `create_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
@@ -658,10 +916,10 @@ CREATE TABLE `sys_dict`
     `update_time` datetime(0)                                             NULL DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`dict_id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 6
+  AUTO_INCREMENT = 7
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '数据字典'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_dict
@@ -681,11 +939,11 @@ VALUES (6, 'is_original', '是否原创', 'admin', 'admin', '2020-12-06 14:55:38
 DROP TABLE IF EXISTS `sys_dict_detail`;
 CREATE TABLE `sys_dict_detail`
 (
-    `detail_id`   bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `dict_id`     bigint(0)                                               NULL DEFAULT NULL COMMENT '字典id',
+    `detail_id`   bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `dict_id`     bigint(20)                                              NULL DEFAULT NULL COMMENT '字典id',
     `label`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典标签',
     `value`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典值',
-    `dict_sort`   int(0)                                                  NULL DEFAULT NULL COMMENT '排序',
+    `dict_sort`   int(11)                                                 NULL DEFAULT NULL COMMENT '排序',
     `create_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
     `update_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
     `create_time` datetime(0)                                             NULL DEFAULT NULL COMMENT '创建日期',
@@ -693,10 +951,10 @@ CREATE TABLE `sys_dict_detail`
     PRIMARY KEY (`detail_id`) USING BTREE,
     INDEX `FK5tpkputc6d9nboxojdbgnpmyb` (`dict_id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 7
+  AUTO_INCREMENT = 9
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '数据字典详情'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_dict_detail
@@ -724,10 +982,10 @@ VALUES (8, 6, '转载', '0', 1, 'admin', 'admin', '2020-12-06 14:56:10', '2020-1
 DROP TABLE IF EXISTS `sys_job`;
 CREATE TABLE `sys_job`
 (
-    `job_id`      bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `job_id`      bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '岗位名称',
     `enabled`     bit(1)                                                  NOT NULL COMMENT '岗位状态',
-    `job_sort`    int(0)                                                  NULL DEFAULT NULL COMMENT '排序',
+    `job_sort`    int(11)                                                 NULL DEFAULT NULL COMMENT '排序',
     `create_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
     `update_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者',
     `create_time` datetime(0)                                             NULL DEFAULT NULL COMMENT '创建日期',
@@ -739,7 +997,7 @@ CREATE TABLE `sys_job`
   AUTO_INCREMENT = 13
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '岗位'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_job
@@ -759,26 +1017,26 @@ VALUES (12, '软件测试', b'1', 5, NULL, 'admin', '2019-03-31 13:39:43', '2020
 DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE `sys_log`
 (
-    `log_id`           bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `log_id`           bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `description`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `log_type`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `method`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-    `params`           text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL,
+    `params`           text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL DEFAULT NULL,
     `request_ip`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-    `time`             bigint(0)                                               NULL DEFAULT NULL,
+    `time`             bigint(20)                                              NULL DEFAULT NULL,
     `username`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `address`          varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `browser`          varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-    `exception_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL,
+    `exception_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL DEFAULT NULL,
     `create_time`      datetime(0)                                             NULL DEFAULT NULL,
     PRIMARY KEY (`log_id`) USING BTREE,
     INDEX `log_create_time_index` (`create_time`) USING BTREE,
     INDEX `inx_log_type` (`log_type`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 3552
+  AUTO_INCREMENT = 3611
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '系统日志'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -1060,14 +1318,14 @@ VALUES (3610, '查询diary_user', 'INFO', 'me.zhengjie.modules.blog.rest.DiaryUs
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`
 (
-    `menu_id`     bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `pid`         bigint(0)                                               NULL DEFAULT NULL COMMENT '上级菜单ID',
-    `sub_count`   int(0)                                                  NULL DEFAULT 0 COMMENT '子菜单数目',
-    `type`        int(0)                                                  NULL DEFAULT NULL COMMENT '菜单类型',
+    `menu_id`     bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `pid`         bigint(20)                                              NULL DEFAULT NULL COMMENT '上级菜单ID',
+    `sub_count`   int(11)                                                 NULL DEFAULT 0 COMMENT '子菜单数目',
+    `type`        int(11)                                                 NULL DEFAULT NULL COMMENT '菜单类型',
     `title`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单标题',
     `name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组件名称',
     `component`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组件',
-    `menu_sort`   int(0)                                                  NULL DEFAULT NULL COMMENT '排序',
+    `menu_sort`   int(11)                                                 NULL DEFAULT NULL COMMENT '排序',
     `icon`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
     `path`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '链接地址',
     `i_frame`     bit(1)                                                  NULL DEFAULT NULL COMMENT '是否外链',
@@ -1083,10 +1341,10 @@ CREATE TABLE `sys_menu`
     UNIQUE INDEX `uniq_name` (`name`) USING BTREE,
     INDEX `inx_pid` (`pid`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 120
+  AUTO_INCREMENT = 127
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '系统菜单'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1353,7 +1611,7 @@ VALUES (126, 118, 0, 1, '动态用户管理', 'DiaryUser', 'blog/diary_user/inde
 DROP TABLE IF EXISTS `sys_quartz_job`;
 CREATE TABLE `sys_quartz_job`
 (
-    `job_id`              bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `job_id`              bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `bean_name`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Spring Bean名称',
     `cron_expression`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'cron 表达式',
     `is_pause`            bit(1)                                                  NULL DEFAULT NULL COMMENT '状态：1暂停、0启用',
@@ -1375,7 +1633,7 @@ CREATE TABLE `sys_quartz_job`
   AUTO_INCREMENT = 7
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '定时任务'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_quartz_job
@@ -1399,22 +1657,22 @@ VALUES (6, 'testTask', '0/5 * * * * ?', b'1', '测试3', 'run2', NULL, '测试3'
 DROP TABLE IF EXISTS `sys_quartz_log`;
 CREATE TABLE `sys_quartz_log`
 (
-    `log_id`           bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `log_id`           bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `bean_name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `create_time`      datetime(0)                                             NULL DEFAULT NULL,
     `cron_expression`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-    `exception_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL,
+    `exception_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL DEFAULT NULL,
     `is_success`       bit(1)                                                  NULL DEFAULT NULL,
     `job_name`         varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `method_name`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
     `params`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-    `time`             bigint(0)                                               NULL DEFAULT NULL,
+    `time`             bigint(20)                                              NULL DEFAULT NULL,
     PRIMARY KEY (`log_id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 151
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '定时任务日志'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_quartz_log
@@ -1426,9 +1684,9 @@ CREATE TABLE `sys_quartz_log`
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`
 (
-    `role_id`     bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `role_id`     bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
-    `level`       int(0)                                                  NULL DEFAULT NULL COMMENT '角色级别',
+    `level`       int(11)                                                 NULL DEFAULT NULL COMMENT '角色级别',
     `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
     `data_scope`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数据权限',
     `create_by`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
@@ -1442,7 +1700,7 @@ CREATE TABLE `sys_role`
   AUTO_INCREMENT = 3
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '角色表'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_role
@@ -1458,14 +1716,14 @@ VALUES (2, '普通用户', 2, '-', '本级', NULL, 'admin', '2018-11-23 13:09:06
 DROP TABLE IF EXISTS `sys_roles_depts`;
 CREATE TABLE `sys_roles_depts`
 (
-    `role_id` bigint(0) NOT NULL,
-    `dept_id` bigint(0) NOT NULL,
+    `role_id` bigint(20) NOT NULL,
+    `dept_id` bigint(20) NOT NULL,
     PRIMARY KEY (`role_id`, `dept_id`) USING BTREE,
     INDEX `FK7qg6itn5ajdoa9h9o78v9ksur` (`dept_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '角色部门关联'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_roles_depts
@@ -1477,14 +1735,14 @@ CREATE TABLE `sys_roles_depts`
 DROP TABLE IF EXISTS `sys_roles_menus`;
 CREATE TABLE `sys_roles_menus`
 (
-    `menu_id` bigint(0) NOT NULL COMMENT '菜单ID',
-    `role_id` bigint(0) NOT NULL COMMENT '角色ID',
+    `menu_id` bigint(20) NOT NULL COMMENT '菜单ID',
+    `role_id` bigint(20) NOT NULL COMMENT '角色ID',
     PRIMARY KEY (`menu_id`, `role_id`) USING BTREE,
     INDEX `FKcngg2qadojhi3a651a5adkvbq` (`role_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '角色菜单关联'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_roles_menus
@@ -1492,7 +1750,11 @@ CREATE TABLE `sys_roles_menus`
 INSERT INTO `sys_roles_menus`
 VALUES (1, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (1, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (2, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (2, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (3, 1);
 INSERT INTO `sys_roles_menus`
@@ -1500,45 +1762,81 @@ VALUES (5, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (6, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (6, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (7, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (7, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (9, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (9, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (10, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (10, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (11, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (11, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (14, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (14, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (15, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (15, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (18, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (19, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (19, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (21, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (21, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (22, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (22, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (23, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (23, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (24, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (24, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (27, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (27, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (28, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (30, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (30, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (32, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (32, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (33, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (33, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (34, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (34, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (35, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (36, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (36, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (37, 1);
 INSERT INTO `sys_roles_menus`
@@ -1598,9 +1896,15 @@ VALUES (79, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (80, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (80, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (82, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (82, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (83, 1);
+INSERT INTO `sys_roles_menus`
+VALUES (83, 2);
 INSERT INTO `sys_roles_menus`
 VALUES (90, 1);
 INSERT INTO `sys_roles_menus`
@@ -1642,6 +1946,8 @@ VALUES (114, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (116, 1);
 INSERT INTO `sys_roles_menus`
+VALUES (116, 2);
+INSERT INTO `sys_roles_menus`
 VALUES (118, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (119, 1);
@@ -1659,54 +1965,6 @@ INSERT INTO `sys_roles_menus`
 VALUES (125, 1);
 INSERT INTO `sys_roles_menus`
 VALUES (126, 1);
-INSERT INTO `sys_roles_menus`
-VALUES (1, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (2, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (6, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (7, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (9, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (10, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (11, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (14, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (15, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (19, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (21, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (22, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (23, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (24, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (27, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (30, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (32, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (33, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (34, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (36, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (80, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (82, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (83, 2);
-INSERT INTO `sys_roles_menus`
-VALUES (116, 2);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1714,8 +1972,8 @@ VALUES (116, 2);
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
-    `user_id`        bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `dept_id`        bigint(0)                                               NULL DEFAULT NULL COMMENT '部门名称',
+    `user_id`        bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `dept_id`        bigint(20)                                              NULL DEFAULT NULL COMMENT '部门名称',
     `username`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
     `nick_name`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
     `gender`         varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci   NULL DEFAULT NULL COMMENT '性别',
@@ -1725,7 +1983,7 @@ CREATE TABLE `sys_user`
     `avatar_path`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像真实路径',
     `password`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
     `is_admin`       bit(1)                                                  NULL DEFAULT b'0' COMMENT '是否为admin账号',
-    `enabled`        bigint(0)                                               NULL DEFAULT NULL COMMENT '状态：1启用、0禁用',
+    `enabled`        bigint(20)                                              NULL DEFAULT NULL COMMENT '状态：1启用、0禁用',
     `create_by`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
     `update_by`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新着',
     `pwd_reset_time` datetime(0)                                             NULL DEFAULT NULL COMMENT '修改密码的时间',
@@ -1743,7 +2001,7 @@ CREATE TABLE `sys_user`
   AUTO_INCREMENT = 3
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '系统用户'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_user
@@ -1764,8 +2022,8 @@ VALUES (2, 2, 'test', '测试', '男', '19999999999', '231@qq.com', NULL, NULL,
 DROP TABLE IF EXISTS `sys_users_jobs`;
 CREATE TABLE `sys_users_jobs`
 (
-    `user_id` bigint(0) NOT NULL COMMENT '用户ID',
-    `job_id`  bigint(0) NOT NULL COMMENT '岗位ID',
+    `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+    `job_id`  bigint(20) NOT NULL COMMENT '岗位ID',
     PRIMARY KEY (`user_id`, `job_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
@@ -1786,14 +2044,14 @@ VALUES (2, 12);
 DROP TABLE IF EXISTS `sys_users_roles`;
 CREATE TABLE `sys_users_roles`
 (
-    `user_id` bigint(0) NOT NULL COMMENT '用户ID',
-    `role_id` bigint(0) NOT NULL COMMENT '角色ID',
+    `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+    `role_id` bigint(20) NOT NULL COMMENT '角色ID',
     PRIMARY KEY (`user_id`, `role_id`) USING BTREE,
     INDEX `FKq4eq273l04bpu4efj0jd0jb98` (`role_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '用户角色关联'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_users_roles
@@ -1809,14 +2067,14 @@ VALUES (2, 2);
 DROP TABLE IF EXISTS `tool_alipay_config`;
 CREATE TABLE `tool_alipay_config`
 (
-    `config_id`               bigint(0)                                               NOT NULL COMMENT 'ID',
+    `config_id`               bigint(20)                                              NOT NULL COMMENT 'ID',
     `app_id`                  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用ID',
     `charset`                 varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '编码',
     `format`                  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型 固定格式json',
     `gateway_url`             varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '网关地址',
     `notify_url`              varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '异步回调',
-    `private_key`             text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT '私钥',
-    `public_key`              text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT '公钥',
+    `private_key`             text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL DEFAULT NULL COMMENT '私钥',
+    `public_key`              text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL DEFAULT NULL COMMENT '公钥',
     `return_url`              varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '回调地址',
     `sign_type`               varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '签名方式',
     `sys_service_provider_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商户号',
@@ -1824,7 +2082,7 @@ CREATE TABLE `tool_alipay_config`
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '支付宝配置类'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tool_alipay_config
@@ -1842,7 +2100,7 @@ VALUES (1, '2016091700532697', 'utf-8', 'JSON', 'https://openapi.alipaydev.com/g
 DROP TABLE IF EXISTS `tool_email_config`;
 CREATE TABLE `tool_email_config`
 (
-    `config_id` bigint(0)                                               NOT NULL COMMENT 'ID',
+    `config_id` bigint(20)                                              NOT NULL COMMENT 'ID',
     `from_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收件人',
     `host`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮件服务器SMTP地址',
     `pass`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
@@ -1852,7 +2110,7 @@ CREATE TABLE `tool_email_config`
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '邮箱配置'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tool_email_config
@@ -1864,7 +2122,7 @@ CREATE TABLE `tool_email_config`
 DROP TABLE IF EXISTS `tool_local_storage`;
 CREATE TABLE `tool_local_storage`
 (
-    `storage_id`  bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `storage_id`  bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `real_name`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件真实的名称',
     `name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件名',
     `suffix`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '后缀',
@@ -1880,7 +2138,7 @@ CREATE TABLE `tool_local_storage`
   AUTO_INCREMENT = 10
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '本地存储'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tool_local_storage
@@ -1892,18 +2150,18 @@ CREATE TABLE `tool_local_storage`
 DROP TABLE IF EXISTS `tool_qiniu_config`;
 CREATE TABLE `tool_qiniu_config`
 (
-    `config_id`  bigint(0)                                               NOT NULL COMMENT 'ID',
-    `access_key` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT 'accessKey',
+    `config_id`  bigint(20)                                              NOT NULL COMMENT 'ID',
+    `access_key` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL DEFAULT NULL COMMENT 'accessKey',
     `bucket`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Bucket 识别符',
     `host`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '外链域名',
-    `secret_key` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL COMMENT 'secretKey',
+    `secret_key` text CHARACTER SET utf8 COLLATE utf8_general_ci         NULL DEFAULT NULL COMMENT 'secretKey',
     `type`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '空间类型',
     `zone`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '机房',
     PRIMARY KEY (`config_id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '七牛云配置'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tool_qiniu_config
@@ -1915,7 +2173,7 @@ CREATE TABLE `tool_qiniu_config`
 DROP TABLE IF EXISTS `tool_qiniu_content`;
 CREATE TABLE `tool_qiniu_content`
 (
-    `content_id`  bigint(0)                                               NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `content_id`  bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `bucket`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Bucket 识别符',
     `name`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件名称',
     `size`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件大小',
@@ -1929,7 +2187,7 @@ CREATE TABLE `tool_qiniu_content`
   AUTO_INCREMENT = 1
   CHARACTER SET = utf8
   COLLATE = utf8_general_ci COMMENT = '七牛云文件存储'
-  ROW_FORMAT = COMPACT;
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tool_qiniu_content
