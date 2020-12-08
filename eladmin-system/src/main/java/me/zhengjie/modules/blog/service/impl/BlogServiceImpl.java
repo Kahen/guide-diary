@@ -31,14 +31,13 @@ import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
 import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.BlogMapper;
+import me.zhengjie.modules.blog.utils.DateFormatUtils;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,7 +61,6 @@ public class BlogServiceImpl implements BlogService {
 
     private static final String BASE_URL = "https://api.weibo.com/2/statuses/public_timeline.json?";
     private static final String HOME_BASE_URL = "https://api.weibo.com/2/statuses/home_timeline.json?";
-    private static final String COMMENT_URL = "https://api.weibo.com/2/comments/show.json?";
 
 
     private final BlogRepository blogRepository;
@@ -151,23 +149,20 @@ public class BlogServiceImpl implements BlogService {
                             .setBlogId(statusObject.getLong("id"))
                             .setContent(statusObject.getString("text"))
                             .setCreateTime(new Timestamp(System.currentTimeMillis()))
-                            // .setPublishTime(new Timestamp(LocalDateTimeUtil.parse(statusObject.getString
-                            // ("created_at")).toEpochSecond(ZoneOffset.UTC)))
-                            .setIsOriginal("是")
-            );
-            JSONObject userObject = statusObject.getJSONObject("user");
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            diaryUsers.add(new DiaryUser()
-                    .setId(userObject.getLong("id"))
-                    .setName(userObject.getString("name"))
-                    .setAvatarUrl("profile_image_url")
-                    .setDescription(userObject.getString("description"))
-                    .setFollowersCount(userObject.getLong("followers_count"))
-                    .setFriendsCount(userObject.getLong("friends_count"))
-                    .setPassword(passwordEncoder.encode("123456"))
-                    .setStatusesCount(userObject.getLong("statuses_count"))
-            );
-        }
+                            .setPublishTime(new Timestamp(DateFormatUtils.formatDate(statusObject.getString("created_at"))))
+                            .setUserId(statusObject.getJSONObject("user").getLong("id"))
+                            .setIsOriginal("是"));
 
+
+            JSONObject userObject = statusObject.getJSONObject("user");
+            diaryUsers.add(diaryUserService.buildDiaryUser(userObject));
+        }
+        commentService.fetchAndBuildComments(blogs);
+        blogRepository.saveAll(blogs);
+        diaryUserService.saveAll(diaryUsers);
     }
+
+
+
+
 }

@@ -15,10 +15,12 @@
  */
 package me.zhengjie.modules.blog.service;
 
+import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -88,4 +90,7 @@ public interface CommentService {
      * @throws IOException /
      */
     void download(List<CommentDto> all, HttpServletResponse response) throws IOException;
+
+    @Async
+    void fetchAndBuildComments(List<Blog> blogs);
 }

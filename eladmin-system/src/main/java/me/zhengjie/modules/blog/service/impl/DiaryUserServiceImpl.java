@@ -15,6 +15,8 @@
  */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.DiaryUserRepository;
@@ -22,17 +24,21 @@ import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
 import me.zhengjie.modules.blog.service.dto.DiaryUserQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
+import me.zhengjie.modules.blog.utils.DateFormatUtils;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,8 +58,7 @@ public class DiaryUserServiceImpl implements DiaryUserService {
     private final DiaryUserMapper diaryUserMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable) {
+    public Map<String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable) {
         Page<DiaryUser> page =
                 diaryUserRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
                         criteria, criteriaBuilder), pageable);
@@ -61,8 +66,7 @@ public class DiaryUserServiceImpl implements DiaryUserService {
     }
 
     @Override
-    public List
-            <DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria) {
+    public List<DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria) {
         return diaryUserMapper.toDto(diaryUserRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
                 QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
@@ -70,8 +74,7 @@ public class DiaryUserServiceImpl implements DiaryUserService {
     @Override
     @Transactional
     public DiaryUserDto findById(Long id) {
-        DiaryUser diaryUser = diaryUserRepository.findById(id).orElseGet(DiaryUser
-                ::new);
+        DiaryUser diaryUser = diaryUserRepository.findById(id).orElseGet(DiaryUser::new);
         ValidationUtil.isNull(diaryUser.getId(), "DiaryUser", "id ", id);
         return diaryUserMapper.toDto(diaryUser);
     }
@@ -100,16 +103,10 @@ public class DiaryUserServiceImpl implements DiaryUserService {
     }
 
     @Override
-    public void download(List
-                                 <DiaryUserDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<DiaryUserDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (DiaryUserDto diaryUser : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("uid", diaryUser.getUid());
             map.put("用户名", diaryUser.getName());
             map.put("昵称", diaryUser.getNickname());
@@ -123,5 +120,34 @@ public class DiaryUserServiceImpl implements DiaryUserService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public void saveAll(List<DiaryUser> diaryUsers) {
+        for (DiaryUser diaryUser : diaryUsers) {
+            try {
+                diaryUserRepository.save(diaryUser);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    @Override
+    public DiaryUser buildDiaryUser(JSONObject userObject) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return new DiaryUser()
+                .setId(userObject.getLong("id"))
+                .setUid(IdUtil.fastSimpleUUID())
+                .setName(userObject.getString("name"))
+                .setNickname(userObject.getString("screen_name"))
+                .setCreateTime(new Timestamp(DateFormatUtils.formatDate(userObject.getString("created_at"))))
+                .setAvatarUrl("profile_image_url")
+                .setDescription(userObject.getString("description"))
+                .setFollowersCount(userObject.getLong("followers_count"))
+                .setFriendsCount(userObject.getLong("friends_count"))
+                .setPassword(passwordEncoder.encode("123456"))
+                .setStatusesCount(userObject.getLong("statuses_count"));
     }
 }

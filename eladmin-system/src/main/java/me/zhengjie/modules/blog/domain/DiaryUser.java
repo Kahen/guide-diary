@@ -22,8 +22,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -46,52 +44,42 @@ public class DiaryUser implements Serializable {
     private Long id;
 
     @Column(name = "uid", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "uid")
     private String uid;
 
     @Column(name = "name", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "用户名")
     private String name;
 
     @Column(name = "nickname", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "昵称")
     private String nickname;
 
     @Column(name = "description", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "用户介绍")
     private String description;
 
     @Column(name = "followers_count", nullable = false)
-    @NotNull
     @ApiModelProperty(value = "粉丝数")
     private Long followersCount;
 
     @Column(name = "friends_count", nullable = false)
-    @NotNull
     @ApiModelProperty(value = "关注数")
     private Long friendsCount;
 
     @Column(name = "statuses_count", nullable = false)
-    @NotNull
     @ApiModelProperty(value = "博客数")
     private Long statusesCount;
 
     @Column(name = "create_time", nullable = false)
-    @NotNull
     @ApiModelProperty(value = "创建时间")
     private Timestamp createTime;
 
     @Column(name = "avatar_url", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "头像链接")
     private String avatarUrl;
 
     @Column(name = "password", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "密码哈希")
     private String password;
 

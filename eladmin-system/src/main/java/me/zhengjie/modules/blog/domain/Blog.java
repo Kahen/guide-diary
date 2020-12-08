@@ -24,7 +24,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -51,7 +50,6 @@ public class Blog implements Serializable {
     private Long userId;
 
     @Column(name = "content", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "内容")
     private String content;
 
@@ -70,7 +68,6 @@ public class Blog implements Serializable {
     private Timestamp publishTime;
 
     @Column(name = "is_original", nullable = false)
-    @NotBlank
     @ApiModelProperty(value = "是否原创")
     private String isOriginal;
 
