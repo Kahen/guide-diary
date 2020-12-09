@@ -31,10 +31,10 @@
           style="width: 185px;"
           @keyup.enter.native="crud.toQuery"
         />
-        <rrOperation :crud="crud"/>
+        <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
-      <crudOperation :permission="permission"/>
+      <crudOperation :permission="permission" />
       <!--表单组件-->
       <el-dialog
         :before-close="crud.cancelCU"
@@ -44,14 +44,20 @@
         width="500px"
       >
         <el-form ref="form" :model="form" :rules="rules" label-width="80px" size="small">
-          <el-form-item label="图片ID">
-            <el-input v-model="form.imgId" style="width: 370px;"/>
+          <el-form-item
+            label="图片ID"
+          >
+            <el-input v-model="form.imgId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="博客ID">
-            <el-input v-model="form.blogId" style="width: 370px;"/>
+          <el-form-item
+            label="博客ID"
+          >
+            <el-input v-model="form.blogId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="图片URL">
-            <el-input v-model="form.imgUrl" style="width: 370px;"/>
+          <el-form-item
+            label="图片URL"
+          >
+            <el-input v-model="form.imgUrl" style="width: 370px;" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -68,11 +74,25 @@
         style="width: 100%;"
         @selection-change="crud.selectionChangeHandler"
       >
-        <el-table-column type="selection" width="55"/>
-        <el-table-column label="图片ID" prop="imgId"/>
-        <el-table-column label="博客ID" prop="blogId"/>
-        <el-table-column label="图片URL" prop="imgUrl"/>
-        <el-table-column v-permission="['admin','img:edit','img:del']" align="center" label="操作" width="150px">
+        <el-table-column type="selection" width="55" />
+        <el-table-column
+          label="图片ID"
+          prop="imgId"
+        />
+        <el-table-column
+          label="博客ID"
+          prop="blogId"
+        />
+        <el-table-column
+          label="图片URL"
+          prop="imgUrl"
+        />
+        <el-table-column
+          v-permission="['admin','img:edit','img:del']"
+          align="center"
+          label="操作"
+          width="150px"
+        >
           <template slot-scope="scope">
             <udOperation
               :data="scope.row"
@@ -82,26 +102,32 @@
         </el-table-column>
       </el-table>
       <!--分页组件-->
-      <pagination/>
+      <pagination />
     </div>
   </div>
 </template>
 
 <script>
 import crudImg from '@/api/blog/img'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
 
-const defaultForm = {imgId: null, blogId: null, imgUrl: null}
+const defaultForm = { imgId: null, blogId: null, imgUrl: null }
 export default {
   name: 'Img',
-  components: {pagination, crudOperation, rrOperation, udOperation},
+  components: { pagination, crudOperation, rrOperation, udOperation },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   cruds() {
-    return CRUD({title: 'blog_img', url: 'api/img', idField: 'imgId', sort: 'imgId,desc', crudMethod: {...crudImg}})
+    return CRUD({
+      title: 'blog_img',
+      url: 'api/img',
+      idField: 'imgId',
+      sort: 'imgId,desc',
+      crudMethod: { ...crudImg }
+    })
   },
   data() {
     return {
@@ -112,9 +138,18 @@ export default {
       },
       rules: {},
       queryTypeOptions: [
-        {key: 'imgId', display_name: '图片ID'},
-        {key: 'blogId', display_name: '博客ID'},
-        {key: 'imgUrl', display_name: '图片URL'}
+        {
+          key: 'imgId',
+          display_name: '图片ID'
+        },
+        {
+          key: 'blogId',
+          display_name: '博客ID'
+        },
+        {
+          key: 'imgUrl',
+          display_name: '图片URL'
+        }
       ]
     }
   },
