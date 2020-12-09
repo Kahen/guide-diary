@@ -3,7 +3,7 @@
     <!--工具栏-->
     <div class="head-container">
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
-      <crudOperation :permission="permission"/>
+      <crudOperation :permission="permission" />
       <!--表单组件-->
       <el-dialog
         :before-close="crud.cancelCU"
@@ -13,17 +13,20 @@
         width="500px"
       >
         <el-form ref="form" :model="form" :rules="rules" label-width="80px" size="small">
-          <el-form-item label="转发ID">
-            <el-input v-model="form.collectId" style="width: 370px;"/>
+          <el-form-item
+            label="博客ID"
+          >
+            <el-input v-model="form.blogId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="博客ID">
-            <el-input v-model="form.blogId" style="width: 370px;"/>
+          <el-form-item
+            label="收藏用户ID"
+          >
+            <el-input v-model="form.userId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="收藏用户ID">
-            <el-input v-model="form.userId" style="width: 370px;"/>
-          </el-form-item>
-          <el-form-item label="创建时间">
-            <el-date-picker v-model="form.createTime" style="width: 370px;" type="datetime"/>
+          <el-form-item
+            label="创建时间"
+          >
+            <el-date-picker v-model="form.createTime" style="width: 370px;" type="datetime" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -40,16 +43,29 @@
         style="width: 100%;"
         @selection-change="crud.selectionChangeHandler"
       >
-        <el-table-column type="selection" width="55"/>
-        <el-table-column label="转发ID" prop="collectId"/>
-        <el-table-column label="博客ID" prop="blogId"/>
-        <el-table-column label="收藏用户ID" prop="userId"/>
-        <el-table-column label="创建时间" prop="createTime">
+        <el-table-column type="selection" width="55" />
+        <el-table-column
+          label="博客ID"
+          prop="blogId"
+        />
+        <el-table-column
+          label="收藏用户ID"
+          prop="userId"
+        />
+        <el-table-column
+          label="创建时间"
+          prop="createTime"
+        >
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.createTime) }}</span>
           </template>
         </el-table-column>
-        <el-table-column v-permission="['admin','collect:edit','collect:del']" align="center" label="操作" width="150px">
+        <el-table-column
+          v-permission="['admin','collect:edit','collect:del']"
+          align="center"
+          label="操作"
+          width="150px"
+        >
           <template slot-scope="scope">
             <udOperation
               :data="scope.row"
@@ -59,23 +75,22 @@
         </el-table-column>
       </el-table>
       <!--分页组件-->
-      <pagination/>
+      <pagination />
     </div>
   </div>
 </template>
 
 <script>
 import crudCollect from '@/api/blog/collect'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
-import rrOperation from '@crud/RR.operation'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
 
-const defaultForm = {collectId: null, blogId: null, userId: null, createTime: null}
+const defaultForm = { collectId: null, blogId: null, userId: null, createTime: null }
 export default {
   name: 'Collect',
-  components: {pagination, crudOperation, rrOperation, udOperation},
+  components: { pagination, crudOperation, udOperation },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   cruds() {
     return CRUD({
@@ -83,7 +98,7 @@ export default {
       url: 'api/collect',
       idField: 'collectId',
       sort: 'collectId,desc',
-      crudMethod: {...crudCollect}
+      crudMethod: { ...crudCollect }
     })
   },
   data() {
