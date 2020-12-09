@@ -8,7 +8,6 @@ export function add(data) {
   })
 }
 
-//test
 export function del(ids) {
   return request({
     url: 'api/img/',
@@ -25,4 +24,4 @@ export function edit(data) {
   })
 }
 
-export default {add, edit, del}
+export default { add, edit, del }
