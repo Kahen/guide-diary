@@ -20,6 +20,6 @@ public class BlogServiceImplTest {
 
     @Test
     public void testBuildBlog() {
-//        blogService.buildBlog();
+        blogService.buildBlog();
     }
 }

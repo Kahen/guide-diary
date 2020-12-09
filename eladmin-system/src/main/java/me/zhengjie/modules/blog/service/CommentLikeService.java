@@ -41,8 +41,7 @@ public interface CommentLikeService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(CommentLikeQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(CommentLikeQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -51,8 +50,7 @@ public interface CommentLikeService {
      * @return List
      * <CommentLikeDto>
      */
-    List
-            <CommentLikeDto> queryAll(CommentLikeQueryCriteria criteria);
+    List<CommentLikeDto> queryAll(CommentLikeQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -91,6 +89,5 @@ public interface CommentLikeService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <CommentLikeDto> all, HttpServletResponse response) throws IOException;
+    void download(List<CommentLikeDto> all, HttpServletResponse response) throws IOException;
 }

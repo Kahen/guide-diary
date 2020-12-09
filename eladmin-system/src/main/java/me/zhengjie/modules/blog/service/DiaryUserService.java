@@ -15,6 +15,7 @@
  */
 package me.zhengjie.modules.blog.service;
 
+import com.alibaba.fastjson.JSONObject;
 import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
 import me.zhengjie.modules.blog.service.dto.DiaryUserQueryCriteria;
@@ -41,8 +42,7 @@ public interface DiaryUserService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -51,8 +51,7 @@ public interface DiaryUserService {
      * @return List
      * <DiaryUserDto>
      */
-    List
-            <DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria);
+    List<DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -91,6 +90,9 @@ public interface DiaryUserService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <DiaryUserDto> all, HttpServletResponse response) throws IOException;
+    void download(List<DiaryUserDto> all, HttpServletResponse response) throws IOException;
+
+    public DiaryUser buildDiaryUser(JSONObject userObject);
+
+    void saveAll(List<DiaryUser> diaryUsers);
 }

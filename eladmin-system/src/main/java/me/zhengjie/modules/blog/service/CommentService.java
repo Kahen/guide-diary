@@ -15,6 +15,7 @@
  */
 package me.zhengjie.modules.blog.service;
 
+import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
@@ -41,8 +42,7 @@ public interface CommentService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(CommentQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(CommentQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -51,8 +51,7 @@ public interface CommentService {
      * @return List
      * <CommentDto>
      */
-    List
-            <CommentDto> queryAll(CommentQueryCriteria criteria);
+    List<CommentDto> queryAll(CommentQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -91,6 +90,7 @@ public interface CommentService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <CommentDto> all, HttpServletResponse response) throws IOException;
+    void download(List<CommentDto> all, HttpServletResponse response) throws IOException;
+
+    public void fetchAndBuildComments(List<Blog> blogs);
 }

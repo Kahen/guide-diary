@@ -16,6 +16,7 @@
 package me.zhengjie.modules.blog.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.DiaryUserRepository;
@@ -23,17 +24,21 @@ import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
 import me.zhengjie.modules.blog.service.dto.DiaryUserQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
+import me.zhengjie.modules.blog.utils.DateFormatUtils;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -115,5 +120,26 @@ public class DiaryUserServiceImpl implements DiaryUserService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public DiaryUser buildDiaryUser(JSONObject userObject) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return new DiaryUser()
+                .setUid(userObject.getLong("id").toString())
+                .setName(userObject.getString("name"))
+                .setNickname(userObject.getString("screen_name"))
+                .setCreateTime(new Timestamp(DateFormatUtils.formatDate(userObject.getString("created_at"))))
+                .setAvatarUrl("profile_image_url")
+                .setDescription(userObject.getString("description"))
+                .setFollowersCount(userObject.getLong("followers_count"))
+                .setFriendsCount(userObject.getLong("friends_count"))
+                .setPassword(passwordEncoder.encode("123456"))
+                .setStatusesCount(userObject.getLong("statuses_count"));
+    }
+
+    @Override
+    public void saveAll(List<DiaryUser> diaryUsers) {
+        diaryUserRepository.saveAll(diaryUsers);
     }
 }

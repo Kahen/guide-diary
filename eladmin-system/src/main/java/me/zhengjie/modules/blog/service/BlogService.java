@@ -41,8 +41,7 @@ public interface BlogService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -51,8 +50,7 @@ public interface BlogService {
      * @return List
      * <BlogDto>
      */
-    List
-            <BlogDto> queryAll(BlogQueryCriteria criteria);
+    List<BlogDto> queryAll(BlogQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -91,6 +89,7 @@ public interface BlogService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <BlogDto> all, HttpServletResponse response) throws IOException;
+    void download(List<BlogDto> all, HttpServletResponse response) throws IOException;
+
+    void buildBlog();
 }

@@ -41,8 +41,7 @@ public interface ImgService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(ImgQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(ImgQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -51,8 +50,7 @@ public interface ImgService {
      * @return List
      * <ImgDto>
      */
-    List
-            <ImgDto> queryAll(ImgQueryCriteria criteria);
+    List<ImgDto> queryAll(ImgQueryCriteria criteria);
 
     /**
      * 根据ID查询
