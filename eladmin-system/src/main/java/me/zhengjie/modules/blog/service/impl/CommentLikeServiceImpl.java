@@ -15,6 +15,7 @@
  */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.CommentLike;
 import me.zhengjie.modules.blog.repository.CommentLikeRepository;
@@ -42,7 +43,7 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务实现
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @Service
 @RequiredArgsConstructor
@@ -52,33 +53,30 @@ public class CommentLikeServiceImpl implements CommentLikeService {
     private final CommentLikeMapper commentLikeMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(CommentLikeQueryCriteria criteria, Pageable pageable) {
-        Page<CommentLike> page =
-                commentLikeRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
-                        criteria, criteriaBuilder), pageable);
+    public Map<String, Object> queryAll(CommentLikeQueryCriteria criteria, Pageable pageable) {
+        Page<CommentLike> page = commentLikeRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(commentLikeMapper::toDto));
     }
 
     @Override
-    public List
-            <CommentLikeDto> queryAll(CommentLikeQueryCriteria criteria) {
+    public List<CommentLikeDto> queryAll(CommentLikeQueryCriteria criteria) {
         return commentLikeMapper.toDto(commentLikeRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
                 QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Transactional
-    public CommentLikeDto findById(Long likeId) {
+    public CommentLikeDto findById(String likeId) {
         CommentLike commentLike = commentLikeRepository.findById(likeId).orElseGet(CommentLike
                 ::new);
-        ValidationUtil.isNull(commentLike.getLikeId(), "CommentLike", "likeId ", likeId);
+        ValidationUtil.isNull(commentLike.getLikeId(), "CommentLike", "likeId", likeId);
         return commentLikeMapper.toDto(commentLike);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public CommentLikeDto create(CommentLike resources) {
+        resources.setLikeId(IdUtil.simpleUUID());
         return commentLikeMapper.toDto(commentLikeRepository.save(resources));
     }
 
@@ -93,23 +91,17 @@ public class CommentLikeServiceImpl implements CommentLikeService {
     }
 
     @Override
-    public void deleteAll(Long[] ids) {
-        for (Long likeId : ids) {
+    public void deleteAll(String[] ids) {
+        for (String likeId : ids) {
             commentLikeRepository.deleteById(likeId);
         }
     }
 
     @Override
-    public void download(List
-                                 <CommentLikeDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<CommentLikeDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (CommentLikeDto commentLike : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("评论ID", commentLike.getCommentId());
             map.put("点赞用户ID", commentLike.getUserId());
             map.put("创建时间", commentLike.getCreateTime());

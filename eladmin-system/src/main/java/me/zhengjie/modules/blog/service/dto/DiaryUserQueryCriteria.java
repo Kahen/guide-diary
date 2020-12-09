@@ -19,16 +19,12 @@ import lombok.Data;
 import me.zhengjie.annotation.Query;
 
 /**
-* @website https://el-admin.vip
-* @author Kahen
-* @date 2020-12-06
-**/
+ * @author Kahen
+ * @website https://el-admin.vip
+ * @date 2020-12-09
+ **/
 @Data
 public class DiaryUserQueryCriteria{
-
-            /** 精确 */
-            @Query
-            private Long id;
 
             /** 模糊 */
             @Query(type = Query.Type.INNER_LIKE)

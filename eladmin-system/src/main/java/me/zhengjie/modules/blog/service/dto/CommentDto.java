@@ -24,35 +24,30 @@ import java.sql.Timestamp;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Data
 public class CommentDto implements Serializable {
 
     /**
-     * 评论ID
-     */
-    private Long id;
-
-    /**
      * 博客ID
      */
-    private Long blogId;
+    private String blogId;
 
     /**
      * 评论用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 该评论所在的父级ID
      */
-    private Long pid;
+    private String pid;
 
     /**
      * 该评论回复的评论ID,没有则为0
      */
-    private Long replyId;
+    private String replyId;
 
     /**
      * 内容
@@ -63,4 +58,9 @@ public class CommentDto implements Serializable {
      * 发布时间
      */
     private Timestamp publishTime;
+
+    /**
+     * 评论ID
+     */
+    private String commentId;
 }

@@ -35,7 +35,7 @@ import java.io.IOException;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @RestController
 @RequiredArgsConstructor
@@ -86,7 +86,7 @@ public class BlogController {
     @PreAuthorize("@el.check('blog:del')")
     @DeleteMapping
     public ResponseEntity
-            <Object> delete(@RequestBody Long[] ids) {
+            <Object> delete(@RequestBody String[] ids) {
         blogService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

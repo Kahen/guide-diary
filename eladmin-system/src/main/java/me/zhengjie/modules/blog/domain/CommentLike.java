@@ -21,7 +21,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -29,7 +32,7 @@ import java.sql.Timestamp;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @Entity
 @Data
@@ -37,20 +40,19 @@ import java.sql.Timestamp;
 public class CommentLike implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "like_id")
     @ApiModelProperty(value = "点赞ID")
-    private Long likeId;
+    private String likeId;
 
-    @Column(name = "comment_id")
+    @Column(name = "comment_id", nullable = false)
     @ApiModelProperty(value = "评论ID")
-    private Long commentId;
+    private String commentId;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     @ApiModelProperty(value = "点赞用户ID")
-    private Long userId;
+    private String userId;
 
-    @Column(name = "create_time")
+    @Column(name = "create_time", nullable = false)
     @CreationTimestamp
     @ApiModelProperty(value = "创建时间")
     private Timestamp createTime;

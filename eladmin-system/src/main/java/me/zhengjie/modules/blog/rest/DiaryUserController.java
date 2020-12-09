@@ -35,7 +35,7 @@ import java.io.IOException;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +57,8 @@ public class DiaryUserController {
     @Log("查询diary_user")
     @ApiOperation("查询diary_user")
     @PreAuthorize("@el.check('diaryUser:list')")
-    public ResponseEntity<Object> query(DiaryUserQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity
+            <Object> query(DiaryUserQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(diaryUserService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -65,7 +66,8 @@ public class DiaryUserController {
     @Log("新增diary_user")
     @ApiOperation("新增diary_user")
     @PreAuthorize("@el.check('diaryUser:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody DiaryUser resources) {
+    public ResponseEntity
+            <Object> create(@Validated @RequestBody DiaryUser resources) {
         return new ResponseEntity<>(diaryUserService.create(resources), HttpStatus.CREATED);
     }
 
@@ -73,7 +75,8 @@ public class DiaryUserController {
     @Log("修改diary_user")
     @ApiOperation("修改diary_user")
     @PreAuthorize("@el.check('diaryUser:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody DiaryUser resources) {
+    public ResponseEntity
+            <Object> update(@Validated @RequestBody DiaryUser resources) {
         diaryUserService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -82,7 +85,8 @@ public class DiaryUserController {
     @ApiOperation("删除diary_user")
     @PreAuthorize("@el.check('diaryUser:del')")
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestBody Long[] ids) {
+    public ResponseEntity
+            <Object> delete(@RequestBody String[] ids) {
         diaryUserService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

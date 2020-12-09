@@ -35,7 +35,7 @@ import java.io.IOException;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +57,8 @@ public class CommentController {
     @Log("查询blog_comment")
     @ApiOperation("查询blog_comment")
     @PreAuthorize("@el.check('comment:list')")
-    public ResponseEntity<Object> query(CommentQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity
+            <Object> query(CommentQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(commentService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -65,7 +66,8 @@ public class CommentController {
     @Log("新增blog_comment")
     @ApiOperation("新增blog_comment")
     @PreAuthorize("@el.check('comment:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody Comment resources) {
+    public ResponseEntity
+            <Object> create(@Validated @RequestBody Comment resources) {
         return new ResponseEntity<>(commentService.create(resources), HttpStatus.CREATED);
     }
 
@@ -73,7 +75,8 @@ public class CommentController {
     @Log("修改blog_comment")
     @ApiOperation("修改blog_comment")
     @PreAuthorize("@el.check('comment:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody Comment resources) {
+    public ResponseEntity
+            <Object> update(@Validated @RequestBody Comment resources) {
         commentService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -82,7 +85,8 @@ public class CommentController {
     @ApiOperation("删除blog_comment")
     @PreAuthorize("@el.check('comment:del')")
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestBody Long[] ids) {
+    public ResponseEntity
+            <Object> delete(@RequestBody String[] ids) {
         commentService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

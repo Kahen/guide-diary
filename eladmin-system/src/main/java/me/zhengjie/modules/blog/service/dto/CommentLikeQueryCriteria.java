@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @Data
 public class CommentLikeQueryCriteria {
@@ -32,19 +32,19 @@ public class CommentLikeQueryCriteria {
      * 精确
      */
     @Query
-    private Long likeId;
+    private String likeId;
 
     /**
      * 精确
      */
     @Query
-    private Long commentId;
+    private String commentId;
 
     /**
      * 精确
      */
     @Query
-    private Long userId;
+    private String userId;
 
     /**
      * 精确

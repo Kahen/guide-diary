@@ -35,7 +35,7 @@ import java.io.IOException;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +57,8 @@ public class LikeController {
     @Log("查询blog-like")
     @ApiOperation("查询blog-like")
     @PreAuthorize("@el.check('like:list')")
-    public ResponseEntity<Object> query(LikeQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity
+            <Object> query(LikeQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(likeService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -65,7 +66,8 @@ public class LikeController {
     @Log("新增blog-like")
     @ApiOperation("新增blog-like")
     @PreAuthorize("@el.check('like:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody Like resources) {
+    public ResponseEntity
+            <Object> create(@Validated @RequestBody Like resources) {
         return new ResponseEntity<>(likeService.create(resources), HttpStatus.CREATED);
     }
 
@@ -73,7 +75,8 @@ public class LikeController {
     @Log("修改blog-like")
     @ApiOperation("修改blog-like")
     @PreAuthorize("@el.check('like:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody Like resources) {
+    public ResponseEntity
+            <Object> update(@Validated @RequestBody Like resources) {
         likeService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -82,7 +85,8 @@ public class LikeController {
     @ApiOperation("删除blog-like")
     @PreAuthorize("@el.check('like:del')")
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestBody Long[] ids) {
+    public ResponseEntity
+            <Object> delete(@RequestBody String[] ids) {
         likeService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

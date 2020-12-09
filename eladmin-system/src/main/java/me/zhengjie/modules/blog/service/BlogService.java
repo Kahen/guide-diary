@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务接口
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 public interface BlogService {
 
@@ -41,7 +41,8 @@ public interface BlogService {
      * @return Map
      * <String,Object>
      */
-    Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable);
+    Map
+            <String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -50,7 +51,8 @@ public interface BlogService {
      * @return List
      * <BlogDto>
      */
-    List<BlogDto> queryAll(BlogQueryCriteria criteria);
+    List
+            <BlogDto> queryAll(BlogQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -58,7 +60,7 @@ public interface BlogService {
      * @param blogId ID
      * @return BlogDto
      */
-    BlogDto findById(Long blogId);
+    BlogDto findById(String blogId);
 
     /**
      * 创建
@@ -80,7 +82,7 @@ public interface BlogService {
      *
      * @param ids /
      */
-    void deleteAll(Long[] ids);
+    void deleteAll(String[] ids);
 
     /**
      * 导出数据
@@ -89,8 +91,6 @@ public interface BlogService {
      * @param response /
      * @throws IOException /
      */
-    void download(List<BlogDto> all, HttpServletResponse response) throws IOException;
-
-
-    void buildBlog();
+    void download(List
+                          <BlogDto> all, HttpServletResponse response) throws IOException;
 }

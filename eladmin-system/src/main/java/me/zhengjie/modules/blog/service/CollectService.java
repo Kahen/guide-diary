@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务接口
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 public interface CollectService {
 
@@ -38,17 +38,21 @@ public interface CollectService {
      *
      * @param criteria 条件
      * @param pageable 分页参数
-     * @return Map<String, Object>
+     * @return Map
+     * <String,Object>
      */
-    Map<String, Object> queryAll(CollectQueryCriteria criteria, Pageable pageable);
+    Map
+            <String, Object> queryAll(CollectQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
      *
      * @param criteria 条件参数
-     * @return List<CollectDto>
+     * @return List
+     * <CollectDto>
      */
-    List<CollectDto> queryAll(CollectQueryCriteria criteria);
+    List
+            <CollectDto> queryAll(CollectQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -56,7 +60,7 @@ public interface CollectService {
      * @param collectId ID
      * @return CollectDto
      */
-    CollectDto findById(Long collectId);
+    CollectDto findById(String collectId);
 
     /**
      * 创建
@@ -78,7 +82,7 @@ public interface CollectService {
      *
      * @param ids /
      */
-    void deleteAll(Long[] ids);
+    void deleteAll(String[] ids);
 
     /**
      * 导出数据
@@ -87,5 +91,6 @@ public interface CollectService {
      * @param response /
      * @throws IOException /
      */
-    void download(List<CollectDto> all, HttpServletResponse response) throws IOException;
+    void download(List
+                          <CollectDto> all, HttpServletResponse response) throws IOException;
 }

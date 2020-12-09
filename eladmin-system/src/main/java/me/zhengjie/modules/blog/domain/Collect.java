@@ -21,7 +21,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -29,7 +32,7 @@ import java.sql.Timestamp;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Entity
 @Data
@@ -37,18 +40,17 @@ import java.sql.Timestamp;
 public class Collect implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "collect_id")
     @ApiModelProperty(value = "转发ID")
-    private Long collectId;
+    private String collectId;
 
     @Column(name = "blog_id")
     @ApiModelProperty(value = "博客ID")
-    private Long blogId;
+    private String blogId;
 
     @Column(name = "user_id")
     @ApiModelProperty(value = "收藏用户ID")
-    private Long userId;
+    private String userId;
 
     @Column(name = "create_time")
     @CreationTimestamp

@@ -15,6 +15,7 @@
  */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Like;
 import me.zhengjie.modules.blog.repository.LikeRepository;
@@ -42,7 +43,7 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务实现
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Service
 @RequiredArgsConstructor
@@ -52,44 +53,47 @@ public class LikeServiceImpl implements LikeService {
     private final LikeMapper likeMapper;
 
     @Override
-    public Map<String, Object> queryAll(LikeQueryCriteria criteria, Pageable pageable) {
-        Page<Like> page =
-                likeRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
-                        criteria, criteriaBuilder), pageable);
+    public Map
+            <String, Object> queryAll(LikeQueryCriteria criteria, Pageable pageable) {
+        Page<Like> page = likeRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(likeMapper::toDto));
     }
 
     @Override
-    public List<LikeDto> queryAll(LikeQueryCriteria criteria) {
-        return likeMapper.toDto(likeRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
+    public List
+            <LikeDto> queryAll(LikeQueryCriteria criteria) {
+        return likeMapper.toDto(likeRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
+                QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Transactional
-    public LikeDto findById(Long likeId) {
+    public LikeDto findById(String likeId) {
         Like like = likeRepository.findById(likeId).orElseGet(Like::new);
-        ValidationUtil.isNull(like.getLikeId(), "Like", "likeId", likeId);
+        ValidationUtil.isNull(like.getLikeId(), "Like", "likeId ", likeId);
         return likeMapper.toDto(like);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public LikeDto create(Like resources) {
+        resources.setLikeId(IdUtil.simpleUUID());
         return likeMapper.toDto(likeRepository.save(resources));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(Like resources) {
-        Like like = likeRepository.findById(resources.getLikeId()).orElseGet(Like::new);
+        Like like = likeRepository.findById(resources.getLikeId
+                ()).orElseGet(Like::new);
         ValidationUtil.isNull(like.getLikeId(), "Like", "id", resources.getLikeId());
         like.copy(resources);
         likeRepository.save(like);
     }
 
     @Override
-    public void deleteAll(Long[] ids) {
-        for (Long likeId : ids) {
+    public void deleteAll(String[] ids) {
+        for (String likeId : ids) {
             likeRepository.deleteById(likeId);
         }
     }

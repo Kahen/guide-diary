@@ -29,28 +29,30 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务接口
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
-public interface
-
-ImgService {
+public interface ImgService {
 
     /**
      * 查询数据分页
      *
      * @param criteria 条件
      * @param pageable 分页参数
-     * @return Map<String, Object>
+     * @return Map
+     * <String,Object>
      */
-    Map<String, Object> queryAll(ImgQueryCriteria criteria, Pageable pageable);
+    Map
+            <String, Object> queryAll(ImgQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
      *
      * @param criteria 条件参数
-     * @return List<ImgDto>
+     * @return List
+     * <ImgDto>
      */
-    List<ImgDto> queryAll(ImgQueryCriteria criteria);
+    List
+            <ImgDto> queryAll(ImgQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -58,7 +60,7 @@ ImgService {
      * @param imgId ID
      * @return ImgDto
      */
-    ImgDto findById(Long imgId);
+    ImgDto findById(String imgId);
 
     /**
      * 创建
@@ -80,7 +82,7 @@ ImgService {
      *
      * @param ids /
      */
-    void deleteAll(Long[] ids);
+    void deleteAll(String[] ids);
 
     /**
      * 导出数据
@@ -89,5 +91,6 @@ ImgService {
      * @param response /
      * @throws IOException /
      */
-    void download(List<ImgDto> all, HttpServletResponse response) throws IOException;
+    void download(List
+                          <ImgDto> all, HttpServletResponse response) throws IOException;
 }

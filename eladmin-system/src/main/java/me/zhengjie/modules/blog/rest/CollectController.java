@@ -35,7 +35,7 @@ import java.io.IOException;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +57,8 @@ public class CollectController {
     @Log("查询blog_collect")
     @ApiOperation("查询blog_collect")
     @PreAuthorize("@el.check('collect:list')")
-    public ResponseEntity<Object> query(CollectQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity
+            <Object> query(CollectQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(collectService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -65,7 +66,8 @@ public class CollectController {
     @Log("新增blog_collect")
     @ApiOperation("新增blog_collect")
     @PreAuthorize("@el.check('collect:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody Collect resources) {
+    public ResponseEntity
+            <Object> create(@Validated @RequestBody Collect resources) {
         return new ResponseEntity<>(collectService.create(resources), HttpStatus.CREATED);
     }
 
@@ -73,7 +75,8 @@ public class CollectController {
     @Log("修改blog_collect")
     @ApiOperation("修改blog_collect")
     @PreAuthorize("@el.check('collect:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody Collect resources) {
+    public ResponseEntity
+            <Object> update(@Validated @RequestBody Collect resources) {
         collectService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -82,7 +85,8 @@ public class CollectController {
     @ApiOperation("删除blog_collect")
     @PreAuthorize("@el.check('collect:del')")
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestBody Long[] ids) {
+    public ResponseEntity
+            <Object> delete(@RequestBody String[] ids) {
         collectService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

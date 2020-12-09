@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务接口
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 public interface CommentLikeService {
 
@@ -60,7 +60,7 @@ public interface CommentLikeService {
      * @param likeId ID
      * @return CommentLikeDto
      */
-    CommentLikeDto findById(Long likeId);
+    CommentLikeDto findById(String likeId);
 
     /**
      * 创建
@@ -82,7 +82,7 @@ public interface CommentLikeService {
      *
      * @param ids /
      */
-    void deleteAll(Long[] ids);
+    void deleteAll(String[] ids);
 
     /**
      * 导出数据

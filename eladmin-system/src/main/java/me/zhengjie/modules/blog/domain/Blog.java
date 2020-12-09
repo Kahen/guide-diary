@@ -19,11 +19,14 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -31,25 +34,24 @@ import java.sql.Timestamp;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @Entity
 @Data
 @Table(name = "blog")
-@Accessors(chain = true)
 public class Blog implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "blog_id")
     @ApiModelProperty(value = "博客ID")
-    private Long blogId;
+    private String blogId;
 
     @Column(name = "user_id")
     @ApiModelProperty(value = "用户ID")
-    private Long userId;
+    private String userId;
 
     @Column(name = "content", nullable = false)
+    @NotBlank
     @ApiModelProperty(value = "内容")
     private String content;
 
@@ -67,7 +69,7 @@ public class Blog implements Serializable {
     @ApiModelProperty(value = "发布时间")
     private Timestamp publishTime;
 
-    @Column(name = "is_original", nullable = false)
+    @Column(name = "is_original")
     @ApiModelProperty(value = "是否原创")
     private String isOriginal;
 

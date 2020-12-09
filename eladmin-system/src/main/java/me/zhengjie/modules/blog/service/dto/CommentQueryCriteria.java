@@ -21,7 +21,7 @@ import me.zhengjie.annotation.Query;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Data
 public class CommentQueryCriteria {
@@ -30,17 +30,17 @@ public class CommentQueryCriteria {
      * 精确
      */
     @Query
-    private Long id;
+    private String blogId;
 
     /**
      * 精确
      */
     @Query
-    private Long blogId;
+    private String userId;
 
     /**
-     * 精确
+     * 模糊
      */
-    @Query
-    private Long userId;
+    @Query(type = Query.Type.INNER_LIKE)
+    private String content;
 }

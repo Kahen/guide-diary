@@ -15,7 +15,6 @@
  */
 package me.zhengjie.modules.blog.service;
 
-import com.alibaba.fastjson.JSONObject;
 import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
 import me.zhengjie.modules.blog.service.dto.DiaryUserQueryCriteria;
@@ -28,8 +27,9 @@ import java.util.Map;
 
 /**
  * @author Kahen
+ * @website https://el-admin.vip
  * @description 服务接口
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 public interface DiaryUserService {
 
@@ -41,7 +41,8 @@ public interface DiaryUserService {
      * @return Map
      * <String,Object>
      */
-    Map<String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable);
+    Map
+            <String, Object> queryAll(DiaryUserQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -50,15 +51,16 @@ public interface DiaryUserService {
      * @return List
      * <DiaryUserDto>
      */
-    List<DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria);
+    List
+            <DiaryUserDto> queryAll(DiaryUserQueryCriteria criteria);
 
     /**
      * 根据ID查询
      *
-     * @param id ID
+     * @param uid ID
      * @return DiaryUserDto
      */
-    DiaryUserDto findById(Long id);
+    DiaryUserDto findById(String uid);
 
     /**
      * 创建
@@ -80,7 +82,7 @@ public interface DiaryUserService {
      *
      * @param ids /
      */
-    void deleteAll(Long[] ids);
+    void deleteAll(String[] ids);
 
     /**
      * 导出数据
@@ -89,14 +91,6 @@ public interface DiaryUserService {
      * @param response /
      * @throws IOException /
      */
-    void download(List<DiaryUserDto> all, HttpServletResponse response) throws IOException;
-
-    /**
-     * 存入diaryUser
-     *
-     * @param diaryUsers /
-     */
-    void saveAll(List<DiaryUser> diaryUsers);
-
-    DiaryUser buildDiaryUser(JSONObject jsonObject);
+    void download(List
+                          <DiaryUserDto> all, HttpServletResponse response) throws IOException;
 }

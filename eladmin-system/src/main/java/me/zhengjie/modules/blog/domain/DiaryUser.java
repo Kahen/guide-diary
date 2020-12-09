@@ -19,9 +19,11 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -29,21 +31,15 @@ import java.sql.Timestamp;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @Entity
 @Data
-@Accessors(chain = true)
 @Table(name = "diary_user")
 public class DiaryUser implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @ApiModelProperty(value = "自增id")
-    private Long id;
-
-    @Column(name = "uid", nullable = false)
+    @Column(name = "uid")
     @ApiModelProperty(value = "uid")
     private String uid;
 
@@ -79,7 +75,7 @@ public class DiaryUser implements Serializable {
     @ApiModelProperty(value = "头像链接")
     private String avatarUrl;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     @ApiModelProperty(value = "密码哈希")
     private String password;
 

@@ -24,7 +24,7 @@ import java.sql.Timestamp;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
 @Data
 public class BlogDto implements Serializable {
@@ -32,12 +32,12 @@ public class BlogDto implements Serializable {
     /**
      * 博客ID
      */
-    private Long blogId;
+    private String blogId;
 
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 内容

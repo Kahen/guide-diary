@@ -15,6 +15,7 @@
  */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Repost;
 import me.zhengjie.modules.blog.repository.RepostRepository;
@@ -42,7 +43,7 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务实现
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Service
 @RequiredArgsConstructor
@@ -53,21 +54,21 @@ public class RepostServiceImpl implements RepostService {
 
     @Override
     public Map<String, Object> queryAll(RepostQueryCriteria criteria, Pageable pageable) {
-        Page<Repost> page =
-                repostRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
-                        criteria, criteriaBuilder), pageable);
+        Page<Repost> page = repostRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(repostMapper::toDto));
     }
 
     @Override
     public List<RepostDto> queryAll(RepostQueryCriteria criteria) {
-        return repostMapper.toDto(repostRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
+        return repostMapper.toDto(repostRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
+                QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Transactional
-    public RepostDto findById(Long repostId) {
-        Repost repost = repostRepository.findById(repostId).orElseGet(Repost::new);
+    public RepostDto findById(String repostId) {
+        Repost repost = repostRepository.findById(repostId).orElseGet(Repost
+                ::new);
         ValidationUtil.isNull(repost.getRepostId(), "Repost", "repostId", repostId);
         return repostMapper.toDto(repost);
     }
@@ -75,21 +76,23 @@ public class RepostServiceImpl implements RepostService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public RepostDto create(Repost resources) {
+        resources.setRepostId(IdUtil.simpleUUID());
         return repostMapper.toDto(repostRepository.save(resources));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(Repost resources) {
-        Repost repost = repostRepository.findById(resources.getRepostId()).orElseGet(Repost::new);
+        Repost repost = repostRepository.findById(resources.getRepostId
+                ()).orElseGet(Repost::new);
         ValidationUtil.isNull(repost.getRepostId(), "Repost", "id", resources.getRepostId());
         repost.copy(resources);
         repostRepository.save(repost);
     }
 
     @Override
-    public void deleteAll(Long[] ids) {
-        for (Long repostId : ids) {
+    public void deleteAll(String[] ids) {
+        for (String repostId : ids) {
             repostRepository.deleteById(repostId);
         }
     }

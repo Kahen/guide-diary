@@ -35,7 +35,7 @@ import java.io.IOException;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +57,8 @@ public class RepostController {
     @Log("查询blog_repost")
     @ApiOperation("查询blog_repost")
     @PreAuthorize("@el.check('repost:list')")
-    public ResponseEntity<Object> query(RepostQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity
+            <Object> query(RepostQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(repostService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -65,7 +66,8 @@ public class RepostController {
     @Log("新增blog_repost")
     @ApiOperation("新增blog_repost")
     @PreAuthorize("@el.check('repost:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody Repost resources) {
+    public ResponseEntity
+            <Object> create(@Validated @RequestBody Repost resources) {
         return new ResponseEntity<>(repostService.create(resources), HttpStatus.CREATED);
     }
 
@@ -73,7 +75,8 @@ public class RepostController {
     @Log("修改blog_repost")
     @ApiOperation("修改blog_repost")
     @PreAuthorize("@el.check('repost:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody Repost resources) {
+    public ResponseEntity
+            <Object> update(@Validated @RequestBody Repost resources) {
         repostService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -82,7 +85,8 @@ public class RepostController {
     @ApiOperation("删除blog_repost")
     @PreAuthorize("@el.check('repost:del')")
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestBody Long[] ids) {
+    public ResponseEntity
+            <Object> delete(@RequestBody String[] ids) {
         repostService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

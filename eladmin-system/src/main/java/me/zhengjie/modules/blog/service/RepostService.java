@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务接口
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 public interface RepostService {
 
@@ -38,17 +38,21 @@ public interface RepostService {
      *
      * @param criteria 条件
      * @param pageable 分页参数
-     * @return Map<String, Object>
+     * @return Map
+     * <String,Object>
      */
-    Map<String, Object> queryAll(RepostQueryCriteria criteria, Pageable pageable);
+    Map
+            <String, Object> queryAll(RepostQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
      *
      * @param criteria 条件参数
-     * @return List<RepostDto>
+     * @return List
+     * <RepostDto>
      */
-    List<RepostDto> queryAll(RepostQueryCriteria criteria);
+    List
+            <RepostDto> queryAll(RepostQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -56,7 +60,7 @@ public interface RepostService {
      * @param repostId ID
      * @return RepostDto
      */
-    RepostDto findById(Long repostId);
+    RepostDto findById(String repostId);
 
     /**
      * 创建
@@ -78,7 +82,7 @@ public interface RepostService {
      *
      * @param ids /
      */
-    void deleteAll(Long[] ids);
+    void deleteAll(String[] ids);
 
     /**
      * 导出数据
@@ -87,5 +91,6 @@ public interface RepostService {
      * @param response /
      * @throws IOException /
      */
-    void download(List<RepostDto> all, HttpServletResponse response) throws IOException;
+    void download(List
+                          <RepostDto> all, HttpServletResponse response) throws IOException;
 }

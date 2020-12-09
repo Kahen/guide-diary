@@ -21,7 +21,7 @@ import me.zhengjie.annotation.Query;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Data
 public class ImgQueryCriteria {
@@ -30,13 +30,13 @@ public class ImgQueryCriteria {
      * 精确
      */
     @Query
-    private Long imgId;
+    private String imgId;
 
     /**
      * 精确
      */
     @Query
-    private Long blogId;
+    private String blogId;
 
     /**
      * 模糊

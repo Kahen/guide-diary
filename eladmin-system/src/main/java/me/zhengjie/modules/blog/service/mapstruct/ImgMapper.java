@@ -24,9 +24,10 @@ import org.mapstruct.ReportingPolicy;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface ImgMapper extends BaseMapper<ImgDto, Img> {
+public interface ImgMapper extends BaseMapper
+        <ImgDto, Img> {
 
 }

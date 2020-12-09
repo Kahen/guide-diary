@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Data
 public class ImgDto implements Serializable {
@@ -31,12 +31,12 @@ public class ImgDto implements Serializable {
     /**
      * 图片ID
      */
-    private Long imgId;
+    private String imgId;
 
     /**
      * 博客ID
      */
-    private Long blogId;
+    private String blogId;
 
     /**
      * 图片URL

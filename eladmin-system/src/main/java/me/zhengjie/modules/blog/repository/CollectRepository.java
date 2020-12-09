@@ -22,7 +22,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
-public interface CollectRepository extends JpaRepository<Collect, Long>, JpaSpecificationExecutor<Collect> {
+public interface CollectRepository extends JpaRepository<Collect, String>, JpaSpecificationExecutor<Collect> {
 }

@@ -22,7 +22,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
-public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpecificationExecutor<Comment> {
+public interface CommentRepository extends JpaRepository<Comment, String>, JpaSpecificationExecutor<Comment> {
 }

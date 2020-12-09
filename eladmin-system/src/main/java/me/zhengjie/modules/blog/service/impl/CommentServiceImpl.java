@@ -15,34 +15,25 @@
  */
 package me.zhengjie.modules.blog.service.impl;
 
-import cn.hutool.http.HttpUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
-import me.zhengjie.modules.blog.constant.BlogConstants;
-import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
-import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.CommentRepository;
 import me.zhengjie.modules.blog.service.CommentService;
-import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.CommentMapper;
-import me.zhengjie.modules.blog.utils.DateFormatUtils;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,56 +43,58 @@ import java.util.Map;
  * @author Kahen
  * @website https://el-admin.vip
  * @description 服务实现
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
-    private static final String COMMENT_URL = "https://api.weibo.com/2/comments/show.json?";
+
     private final CommentRepository commentRepository;
     private final CommentMapper commentMapper;
-    private final DiaryUserService diaryUserService;
 
     @Override
     public Map<String, Object> queryAll(CommentQueryCriteria criteria, Pageable pageable) {
-        Page<Comment> page =
-                commentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
-                        criteria, criteriaBuilder), pageable);
+        Page<Comment> page = commentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(commentMapper::toDto));
     }
 
     @Override
-    public List<CommentDto> queryAll(CommentQueryCriteria criteria) {
-        return commentMapper.toDto(commentRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
+    public List
+            <CommentDto> queryAll(CommentQueryCriteria criteria) {
+        return commentMapper.toDto(commentRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
+                QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Transactional
-    public CommentDto findById(Long id) {
-        Comment comment = commentRepository.findById(id).orElseGet(Comment::new);
-        ValidationUtil.isNull(comment.getId(), "Comment", "id", id);
+    public CommentDto findById(String commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseGet(Comment
+                ::new);
+        ValidationUtil.isNull(comment.getCommentId(), "Comment", "commentId", commentId);
         return commentMapper.toDto(comment);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public CommentDto create(Comment resources) {
+        resources.setCommentId(IdUtil.simpleUUID());
         return commentMapper.toDto(commentRepository.save(resources));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(Comment resources) {
-        Comment comment = commentRepository.findById(resources.getId()).orElseGet(Comment::new);
-        ValidationUtil.isNull(comment.getId(), "Comment", "id", resources.getId());
+        Comment comment = commentRepository.findById(resources.getCommentId
+                ()).orElseGet(Comment::new);
+        ValidationUtil.isNull(comment.getCommentId(), "Comment", "id", resources.getCommentId());
         comment.copy(resources);
         commentRepository.save(comment);
     }
 
     @Override
-    public void deleteAll(Long[] ids) {
-        for (Long id : ids) {
-            commentRepository.deleteById(id);
+    public void deleteAll(String[] ids) {
+        for (String commentId : ids) {
+            commentRepository.deleteById(commentId);
         }
     }
 
@@ -119,29 +112,5 @@ public class CommentServiceImpl implements CommentService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
-    }
-
-    @Override
-    @Async
-    public void fetchAndBuildComments(List<Blog> blogs) {
-        ArrayList<Comment> comments = new ArrayList<>();
-        ArrayList<DiaryUser> diaryUsers = new ArrayList<>();
-        for (Blog blog : blogs) {
-            String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&&id=" + blog.getBlogId());
-            JSONObject jsonObject = JSON.parseObject(s);
-            comments.add(
-                    new Comment().setId(jsonObject.getLong("id"))
-                            .setBlogId(blog.getBlogId())
-                            .setPublishTime(new Timestamp(DateFormatUtils.formatDate(jsonObject.getString("created_at"))))
-                            .setPid(jsonObject.getLong("mid"))
-                            .setContent(jsonObject.getString("text"))
-                            .setUserId(jsonObject.getJSONObject("user").getLong("id"))
-                            .setReplyId(jsonObject.getJSONObject("reply_comment") == null ? 0 : jsonObject.getJSONObject("reply_comment").getLong("id"))
-            );
-            DiaryUser user = diaryUserService.buildDiaryUser(jsonObject.getJSONObject("user"));
-            diaryUsers.add(user);
-        }
-        commentRepository.saveAll(comments);
-        diaryUserService.saveAll(diaryUsers);
     }
 }

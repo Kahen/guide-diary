@@ -20,14 +20,17 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
  * @author Kahen
  * @website https://el-admin.vip
  * @description /
- * @date 2020-12-05
+ * @date 2020-12-09
  **/
 @Entity
 @Data
@@ -35,14 +38,13 @@ import java.io.Serializable;
 public class Img implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "img_id")
     @ApiModelProperty(value = "图片ID")
-    private Long imgId;
+    private String imgId;
 
     @Column(name = "blog_id")
     @ApiModelProperty(value = "博客ID")
-    private Long blogId;
+    private String blogId;
 
     @Column(name = "img_url")
     @ApiModelProperty(value = "图片URL")

@@ -22,7 +22,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * @author Kahen
  * @website https://el-admin.vip
- * @date 2020-12-06
+ * @date 2020-12-09
  **/
-public interface DiaryUserRepository extends JpaRepository<DiaryUser, Long>, JpaSpecificationExecutor<DiaryUser> {
+public interface DiaryUserRepository extends JpaRepository<DiaryUser, String>, JpaSpecificationExecutor<DiaryUser> {
 }
