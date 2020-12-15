@@ -53,15 +53,13 @@ public class CollectServiceImpl implements CollectService {
     private final CollectMapper collectMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(CollectQueryCriteria criteria, Pageable pageable) {
+    public Map<String, Object> queryAll(CollectQueryCriteria criteria, Pageable pageable) {
         Page<Collect> page = collectRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(collectMapper::toDto));
     }
 
     @Override
-    public List
-            <CollectDto> queryAll(CollectQueryCriteria criteria) {
+    public List<CollectDto> queryAll(CollectQueryCriteria criteria) {
         return collectMapper.toDto(collectRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
                 QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }

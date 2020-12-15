@@ -15,7 +15,6 @@
  */
 package me.zhengjie.modules.blog.service;
 
-import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
@@ -92,5 +91,4 @@ public interface CommentService {
      */
     void download(List<CommentDto> all, HttpServletResponse response) throws IOException;
 
-    public void fetchAndBuildComments(List<Blog> blogs);
 }

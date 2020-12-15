@@ -91,5 +91,5 @@ public interface BlogService {
      */
     void download(List<BlogDto> all, HttpServletResponse response) throws IOException;
 
-    void buildBlog();
+
 }

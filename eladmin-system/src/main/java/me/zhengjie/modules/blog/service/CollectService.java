@@ -41,8 +41,7 @@ public interface CollectService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(CollectQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(CollectQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -51,8 +50,7 @@ public interface CollectService {
      * @return List
      * <CollectDto>
      */
-    List
-            <CollectDto> queryAll(CollectQueryCriteria criteria);
+    List<CollectDto> queryAll(CollectQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -91,6 +89,5 @@ public interface CollectService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <CollectDto> all, HttpServletResponse response) throws IOException;
+    void download(List<CollectDto> all, HttpServletResponse response) throws IOException;
 }

@@ -16,34 +16,25 @@
 package me.zhengjie.modules.blog.service.impl;
 
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.http.HttpUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
-import me.zhengjie.modules.blog.constant.BlogConstants;
-import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
-import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.CommentRepository;
 import me.zhengjie.modules.blog.service.CommentService;
 import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.CommentMapper;
-import me.zhengjie.modules.blog.utils.DateFormatUtils;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -127,27 +118,4 @@ public class CommentServiceImpl implements CommentService {
         FileUtil.downloadExcel(list, response);
     }
 
-    @Override
-    @Async
-    public void fetchAndBuildComments(List<Blog> blogs) {
-        ArrayList<Comment> comments = new ArrayList<>();
-        ArrayList<DiaryUser> diaryUsers = new ArrayList<>();
-        for (Blog blog : blogs) {
-            String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&&id=" + blog.getBlogId());
-            JSONObject jsonObject = JSON.parseObject(s);
-            comments.add(
-                    new Comment().setCommentId(jsonObject.getLong("id").toString())
-                            .setBlogId(blog.getBlogId())
-                            .setPublishTime(new Timestamp(DateFormatUtils.formatDate(jsonObject.getString("created_at"))))
-                            .setPid(jsonObject.getLong("mid").toString())
-                            .setContent(jsonObject.getString("text"))
-                            .setUserId(jsonObject.getJSONObject("user").getLong("id").toString())
-                            .setReplyId(jsonObject.getJSONObject("reply_comment") == null ? "0" : jsonObject.getJSONObject("reply_comment").getLong("id").toString())
-            );
-            DiaryUser user = diaryUserService.buildDiaryUser(jsonObject.getJSONObject("user"));
-            diaryUsers.add(user);
-        }
-        commentRepository.saveAll(comments);
-        diaryUserService.saveAll(diaryUsers);
-    }
 }
