@@ -4,6 +4,7 @@ import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.modules.blog.constant.BlogConstants;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
@@ -25,6 +26,7 @@ import java.util.List;
  * @date 2020/12/15
  */
 @Service(value = "buildBlogService")
+@Slf4j
 public class BuildBlogServiceImpl implements BuildBlogService {
 
 
@@ -50,6 +52,11 @@ public class BuildBlogServiceImpl implements BuildBlogService {
     public void build() {
         String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken());
         JSONObject blogsObject = JSON.parseObject(blogStr);
+
+        if (blogsObject.containsKey("error")) {
+            log.info(blogsObject.getString("error"));
+            return;
+        }
         List<Blog> blogs = new ArrayList<>();
         List<DiaryUser> diaryUsers = new ArrayList<>();
         JSONArray statuses = blogsObject.getJSONArray("statuses");
@@ -70,8 +77,12 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         for (Blog blog : blogs) {
             String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&&id=" + blog.getBlogId());
             JSONObject jsonObject = JSON.parseObject(s);
-            if (jsonObject.getInteger("total_number") == 0) {
-                continue;
+            try {
+                if (jsonObject.getInteger("total_number") == 0) {
+                    continue;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             JSONArray commentsArray = jsonObject.getJSONArray("comments");
             for (Object o : commentsArray) {
@@ -81,7 +92,8 @@ public class BuildBlogServiceImpl implements BuildBlogService {
                     comments.add(
                             new Comment().setCommentId(commentObject.getLong("id").toString())
                                     .setBlogId(blog.getBlogId())
-                                    .setPublishTime(new Timestamp(DateFormatUtils.formatDate(commentObject.getString("created_at"))))
+                                    .setPublishTime(new Timestamp(DateFormatUtils.formatDate(commentObject.getString(
+                                            "created_at"))))
                                     .setPid(commentObject.getLong("mid").toString())
                                     .setContent(commentObject.getString("text"))
                                     .setUserId(commentObject.getJSONObject("user").getLong("id").toString())

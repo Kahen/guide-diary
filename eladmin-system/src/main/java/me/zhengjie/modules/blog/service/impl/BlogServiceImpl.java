@@ -59,15 +59,15 @@ public class BlogServiceImpl implements BlogService {
     private final CommentService commentService;
 
     @Override
-    public Map
-            <String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable) {
-        Page<Blog> page = blogRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
+    public Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable) {
+        Page<Blog> page =
+                blogRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
+                        criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(blogMapper::toDto));
     }
 
     @Override
-    public List
-            <BlogDto> queryAll(BlogQueryCriteria criteria) {
+    public List<BlogDto> queryAll(BlogQueryCriteria criteria) {
         return blogMapper.toDto(blogRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
                 QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
