@@ -11,9 +11,7 @@ import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.repository.CommentRepository;
 import me.zhengjie.modules.blog.repository.DiaryUserRepository;
-import me.zhengjie.modules.blog.service.BlogService;
 import me.zhengjie.modules.blog.service.BuildBlogService;
-import me.zhengjie.modules.blog.service.CommentService;
 import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.utils.DateFormatUtils;
 import org.springframework.stereotype.Service;
@@ -26,7 +24,7 @@ import java.util.List;
  * @author lijiaxing
  * @date 2020/12/15
  */
-@Service
+@Service(value = "buildBlogService")
 public class BuildBlogServiceImpl implements BuildBlogService {
 
 
@@ -40,7 +38,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
     private final DiaryUserRepository diaryUserRepository;
     private final CommentRepository commentRepository;
 
-    public BuildBlogServiceImpl(BlogService blogService, DiaryUserService diaryUserService, CommentService commentService, BlogRepository blogRepository, DiaryUserRepository diaryUserRepository, CommentRepository commentRepository) {
+    public BuildBlogServiceImpl(DiaryUserService diaryUserService, BlogRepository blogRepository, DiaryUserRepository diaryUserRepository, CommentRepository commentRepository) {
         this.diaryUserService = diaryUserService;
         this.blogRepository = blogRepository;
         this.diaryUserRepository = diaryUserRepository;
