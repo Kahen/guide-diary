@@ -11,7 +11,7 @@
  Target Server Version : 100505
  File Encoding         : 65001
 
- Date: 16/12/2020 16:33:46
+ Date: 16/12/2020 19:06:27
 */
 
 SET NAMES utf8mb4;
@@ -1265,7 +1265,7 @@ CREATE TABLE `code_column_config`  (
   `date_annotation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`column_id`) USING BTREE,
   INDEX `idx_table_name`(`table_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 270 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '代码生成字段信息存储' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 300 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '代码生成字段信息存储' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of code_column_config
@@ -1342,6 +1342,36 @@ INSERT INTO `code_column_config` VALUES (261, 'diary_user', 'create_time', 'date
 INSERT INTO `code_column_config` VALUES (262, 'diary_user', 'avatar_url', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'1', NULL, '头像链接', NULL);
 INSERT INTO `code_column_config` VALUES (263, 'diary_user', 'password', 'varchar', NULL, '', b'0', NULL, '', b'0', b'0', NULL, '密码哈希', NULL);
 INSERT INTO `code_column_config` VALUES (268, 'blog_comment', 'comment_id', 'varchar', NULL, '', b'1', NULL, 'PRI', b'1', b'0', NULL, '评论ID', NULL);
+INSERT INTO `code_column_config` VALUES (270, 'guide_tips', 'id', 'bigint', NULL, 'auto_increment', b'0', NULL, 'PRI', b'0', b'0', NULL, '自增id', NULL);
+INSERT INTO `code_column_config` VALUES (271, 'guide_tips', 'content', 'longtext', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config` VALUES (272, 'guide_tips', 'tip_type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', '=', '提示类型', NULL);
+INSERT INTO `code_column_config` VALUES (273, 'guide_tips', 'period_type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', '=', '提示时间段', NULL);
+INSERT INTO `code_column_config` VALUES (274, 'guide_tag', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'0', b'0', NULL, 'uuid', NULL);
+INSERT INTO `code_column_config` VALUES (275, 'guide_tag', 'text', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config` VALUES (276, 'guide_motto', 'id', 'bigint', NULL, 'auto_increment', b'0', NULL, 'PRI', b'0', b'0', NULL, '自增id', NULL);
+INSERT INTO `code_column_config` VALUES (277, 'guide_motto', 'author', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '作者', NULL);
+INSERT INTO `code_column_config` VALUES (278, 'guide_motto', 'content', 'longtext', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config` VALUES (279, 'guide_motto', 'type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', '=', '格言分类', NULL);
+INSERT INTO `code_column_config` VALUES (280, 'guide_mood', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'0', b'0', '=', 'uuid', NULL);
+INSERT INTO `code_column_config` VALUES (281, 'guide_mood', 'text', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config` VALUES (282, 'diary', 'id', 'bigint', NULL, 'auto_increment', b'0', NULL, 'PRI', b'0', b'0', '=', '自增id', NULL);
+INSERT INTO `code_column_config` VALUES (283, 'diary', 'mood', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', NULL, '心情贴纸', NULL);
+INSERT INTO `code_column_config` VALUES (284, 'diary', 'tag', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', NULL, '标签', NULL);
+INSERT INTO `code_column_config` VALUES (285, 'diary', 'guide_1', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词1', NULL);
+INSERT INTO `code_column_config` VALUES (286, 'diary', 'guide_2', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词2', NULL);
+INSERT INTO `code_column_config` VALUES (287, 'diary', 'guide_3', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词3', NULL);
+INSERT INTO `code_column_config` VALUES (288, 'diary', 'guide_4', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词4', NULL);
+INSERT INTO `code_column_config` VALUES (289, 'diary', 'guide_5', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词5', NULL);
+INSERT INTO `code_column_config` VALUES (290, 'diary', 'guide_6', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词6', NULL);
+INSERT INTO `code_column_config` VALUES (291, 'diary', 'content_1', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容1', NULL);
+INSERT INTO `code_column_config` VALUES (292, 'diary', 'content_2', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容2', NULL);
+INSERT INTO `code_column_config` VALUES (293, 'diary', 'content_3', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容3', NULL);
+INSERT INTO `code_column_config` VALUES (294, 'diary', 'content_4', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容4', NULL);
+INSERT INTO `code_column_config` VALUES (295, 'diary', 'content_5', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容5', NULL);
+INSERT INTO `code_column_config` VALUES (296, 'diary', 'content_6', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容6', NULL);
+INSERT INTO `code_column_config` VALUES (297, 'diary', 'created_date', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', NULL, '创建时间', 'CreationTimestamp');
+INSERT INTO `code_column_config` VALUES (298, 'diary', 'updated_date', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', NULL, '更新时间', 'UpdateTimestamp');
+INSERT INTO `code_column_config` VALUES (299, 'diary', 'period', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', NULL, '时间类型', NULL);
 
 -- ----------------------------
 -- Table structure for code_gen_config
@@ -1360,7 +1390,7 @@ CREATE TABLE `code_gen_config`  (
   `api_alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接口名称',
   PRIMARY KEY (`config_id`) USING BTREE,
   INDEX `idx_table_name`(`table_name`(100)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '代码生成器配置' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '代码生成器配置' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of code_gen_config
@@ -1373,6 +1403,11 @@ INSERT INTO `code_gen_config` VALUES (11, 'comment_like', 'Kahen', b'1', 'eladmi
 INSERT INTO `code_gen_config` VALUES (12, 'blog_comment', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_comment', 'blog_comment\\', 'blog_', 'blog_comment');
 INSERT INTO `code_gen_config` VALUES (13, 'blog_img', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'blog_img', 'blog_img\\', 'blog_', 'blog_img');
 INSERT INTO `code_gen_config` VALUES (14, 'diary_user', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'diary_user', 'diary_user\\', NULL, 'diary_user');
+INSERT INTO `code_gen_config` VALUES (15, 'guide_tips', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'guide_tips', 'guide_tips\\', 'guide_', 'guide_tips');
+INSERT INTO `code_gen_config` VALUES (16, 'guide_tag', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'guide_tag', 'guide_tag\\', 'guide_', 'guide_tag');
+INSERT INTO `code_gen_config` VALUES (17, 'guide_motto', 'Kahen', b'1', 'eladmin-system', 'me.zhengjie.modules.blog', 'guide_motto', 'guide_motto\\', 'guide_', 'guide_motto');
+INSERT INTO `code_gen_config` VALUES (18, 'guide_mood', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'guide_mood', 'guide_mood\\', 'guide_', 'guide_mood');
+INSERT INTO `code_gen_config` VALUES (19, 'diary', 'Kahen', b'0', 'eladmin-system', 'me.zhengjie.modules.blog', 'diary', 'diary\\', NULL, 'diary');
 
 -- ----------------------------
 -- Table structure for comment_like
@@ -1392,6 +1427,36 @@ CREATE TABLE `comment_like`  (
 -- Records of comment_like
 -- ----------------------------
 INSERT INTO `comment_like` VALUES ('c08742a72972424791b3036ac9a0edc7', '1', '11', '2020-12-09 17:24:05');
+
+-- ----------------------------
+-- Table structure for diary
+-- ----------------------------
+DROP TABLE IF EXISTS `diary`;
+CREATE TABLE `diary`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `mood` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '心情贴纸',
+  `tag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签',
+  `guide_1` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词1',
+  `guide_2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词2',
+  `guide_3` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词3',
+  `guide_4` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词4',
+  `guide_5` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词5',
+  `guide_6` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词6',
+  `content_1` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容1',
+  `content_2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容2',
+  `content_3` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容3',
+  `content_4` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容4',
+  `content_5` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容5',
+  `content_6` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容6',
+  `created_date` datetime(0) NOT NULL COMMENT '创建时间',
+  `updated_date` datetime(0) NOT NULL COMMENT '更新时间',
+  `period` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '时间类型',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '日记表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of diary
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for diary_user
@@ -2248,6 +2313,66 @@ INSERT INTO `diary_user` VALUES ('7535892143', '花樱辛', '花樱辛', '', 0, 
 INSERT INTO `diary_user` VALUES ('85597062', '阿哒法法', '阿哒法法', '哪有什么岁月静好，只不过我爹给我钞票', 228, 268, 3296, '2011-05-08 09:44:40', 'profile_image_url', '$2a$10$LEYDSzXr4pslbQEXYLsRYuSIgwR6z16RkMWlrzw1iZkHN6PG/Kd9e');
 
 -- ----------------------------
+-- Table structure for guide_mood
+-- ----------------------------
+DROP TABLE IF EXISTS `guide_mood`;
+CREATE TABLE `guide_mood`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'uuid',
+  `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '心情' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of guide_mood
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for guide_motto
+-- ----------------------------
+DROP TABLE IF EXISTS `guide_motto`;
+CREATE TABLE `guide_motto`  (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `author` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '作者',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  `type` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '格言分类',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '名言警句' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of guide_motto
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for guide_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `guide_tag`;
+CREATE TABLE `guide_tag`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'uuid',
+  `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '标签' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of guide_tag
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for guide_tips
+-- ----------------------------
+DROP TABLE IF EXISTS `guide_tips`;
+CREATE TABLE `guide_tips`  (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  `tip_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示类型',
+  `period_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示时间段',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '引导词' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of guide_tips
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for mnt_app
 -- ----------------------------
 DROP TABLE IF EXISTS `mnt_app`;
@@ -2497,7 +2622,7 @@ CREATE TABLE `sys_log`  (
   PRIMARY KEY (`log_id`) USING BTREE,
   INDEX `log_create_time_index`(`create_time`) USING BTREE,
   INDEX `inx_log_type`(`log_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3696 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3709 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -2661,6 +2786,19 @@ INSERT INTO `sys_log` VALUES (3692, '执行定时任务', 'INFO', 'me.zhengjie.m
 INSERT INTO `sys_log` VALUES (3693, '更改定时任务状态', 'INFO', 'me.zhengjie.modules.quartz.rest.QuartzJobController.update()', '', '192.168.2.112', 7144, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 14:01:06');
 INSERT INTO `sys_log` VALUES (3694, '更改定时任务状态', 'INFO', 'me.zhengjie.modules.quartz.rest.QuartzJobController.update()', '', '192.168.2.112', 7, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 14:01:17');
 INSERT INTO `sys_log` VALUES (3695, '删除定时任务', 'INFO', 'me.zhengjie.modules.quartz.rest.QuartzJobController.delete()', '[6]', '192.168.2.112', 15, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 14:01:33');
+INSERT INTO `sys_log` VALUES (3696, '新增菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.create()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"education\",\"updateTime\":1608114447281,\"title\":\"日记管理\",\"type\":0,\"subCount\":0,\"path\":\"diary\",\"createBy\":\"admin\",\"createTime\":1608114447281,\"iFrame\":false,\"id\":127,\"menuSort\":999}', '192.168.2.112', 206, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:27:27');
+INSERT INTO `sys_log` VALUES (3697, '修改角色菜单', 'INFO', 'me.zhengjie.modules.system.rest.RoleController.updateMenu()', '{\"level\":3,\"dataScope\":\"本级\",\"id\":1,\"menus\":[{\"subCount\":0,\"id\":97,\"menuSort\":999},{\"subCount\":0,\"id\":98,\"menuSort\":999},{\"subCount\":0,\"id\":102,\"menuSort\":999},{\"subCount\":0,\"id\":103,\"menuSort\":999},{\"subCount\":0,\"id\":104,\"menuSort\":999},{\"subCount\":0,\"id\":105,\"menuSort\":999},{\"subCount\":0,\"id\":106,\"menuSort\":999},{\"subCount\":0,\"id\":107,\"menuSort\":999},{\"subCount\":0,\"id\":108,\"menuSort\":999},{\"subCount\":0,\"id\":109,\"menuSort\":999},{\"subCount\":0,\"id\":110,\"menuSort\":999},{\"subCount\":0,\"id\":111,\"menuSort\":999},{\"subCount\":0,\"id\":112,\"menuSort\":999},{\"subCount\":0,\"id\":113,\"menuSort\":999},{\"subCount\":0,\"id\":114,\"menuSort\":999},{\"subCount\":0,\"id\":116,\"menuSort\":999},{\"subCount\":0,\"id\":118,\"menuSort\":999},{\"subCount\":0,\"id\":119,\"menuSort\":999},{\"subCount\":0,\"id\":120,\"menuSort\":999},{\"subCount\":0,\"id\":121,\"menuSort\":999},{\"subCount\":0,\"id\":122,\"menuSort\":999},{\"subCount\":0,\"id\":123,\"menuSort\":999},{\"subCount\":0,\"id\":124,\"menuSort\":999},{\"subCount\":0,\"id\":125,\"menuSort\":999},{\"subCount\":0,\"id\":126,\"menuSort\":999},{\"subCount\":0,\"id\":127,\"menuSort\":999},{\"subCount\":0,\"id\":1,\"menuSort\":999},{\"subCount\":0,\"id\":2,\"menuSort\":999},{\"subCount\":0,\"id\":3,\"menuSort\":999},{\"subCount\":0,\"id\":5,\"menuSort\":999},{\"subCount\":0,\"id\":6,\"menuSort\":999},{\"subCount\":0,\"id\":7,\"menuSort\":999},{\"subCount\":0,\"id\":9,\"menuSort\":999},{\"subCount\":0,\"id\":10,\"menuSort\":999},{\"subCount\":0,\"id\":11,\"menuSort\":999},{\"subCount\":0,\"id\":14,\"menuSort\":999},{\"subCount\":0,\"id\":15,\"menuSort\":999},{\"subCount\":0,\"id\":18,\"menuSort\":999},{\"subCount\":0,\"id\":19,\"menuSort\":999},{\"subCount\":0,\"id\":21,\"menuSort\":999},{\"subCount\":0,\"id\":22,\"menuSort\":999},{\"subCount\":0,\"id\":23,\"menuSort\":999},{\"subCount\":0,\"id\":24,\"menuSort\":999},{\"subCount\":0,\"id\":27,\"menuSort\":999},{\"subCount\":0,\"id\":28,\"menuSort\":999},{\"subCount\":0,\"id\":30,\"menuSort\":999},{\"subCount\":0,\"id\":32,\"menuSort\":999},{\"subCount\":0,\"id\":33,\"menuSort\":999},{\"subCount\":0,\"id\":34,\"menuSort\":999},{\"subCount\":0,\"id\":35,\"menuSort\":999},{\"subCount\":0,\"id\":36,\"menuSort\":999},{\"subCount\":0,\"id\":37,\"menuSort\":999},{\"subCount\":0,\"id\":38,\"menuSort\":999},{\"subCount\":0,\"id\":39,\"menuSort\":999},{\"subCount\":0,\"id\":41,\"menuSort\":999},{\"subCount\":0,\"id\":44,\"menuSort\":999},{\"subCount\":0,\"id\":45,\"menuSort\":999},{\"subCount\":0,\"id\":46,\"menuSort\":999},{\"subCount\":0,\"id\":48,\"menuSort\":999},{\"subCount\":0,\"id\":49,\"menuSort\":999},{\"subCount\":0,\"id\":50,\"menuSort\":999},{\"subCount\":0,\"id\":52,\"menuSort\":999},{\"subCount\":0,\"id\":53,\"menuSort\":999},{\"subCount\":0,\"id\":54,\"menuSort\":999},{\"subCount\":0,\"id\":56,\"menuSort\":999},{\"subCount\":0,\"id\":57,\"menuSort\":999},{\"subCount\":0,\"id\":58,\"menuSort\":999},{\"subCount\":0,\"id\":60,\"menuSort\":999},{\"subCount\":0,\"id\":61,\"menuSort\":999},{\"subCount\":0,\"id\":62,\"menuSort\":999},{\"subCount\":0,\"id\":64,\"menuSort\":999},{\"subCount\":0,\"id\":65,\"menuSort\":999},{\"subCount\":0,\"id\":66,\"menuSort\":999},{\"subCount\":0,\"id\":73,\"menuSort\":999},{\"subCount\":0,\"id\":74,\"menuSort\":999},{\"subCount\":0,\"id\":75,\"menuSort\":999},{\"subCount\":0,\"id\":77,\"menuSort\":999},{\"subCount\":0,\"id\":78,\"menuSort\":999},{\"subCount\":0,\"id\":79,\"menuSort\":999},{\"subCount\":0,\"id\":80,\"menuSort\":999},{\"subCount\":0,\"id\":82,\"menuSort\":999},{\"subCount\":0,\"id\":83,\"menuSort\":999},{\"subCount\":0,\"id\":90,\"menuSort\":999},{\"subCount\":0,\"id\":92,\"menuSort\":999},{\"subCount\":0,\"id\":93,\"menuSort\":999},{\"subCount\":0,\"id\":94,\"menuSort\":999}]}', '192.168.2.112', 86, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:27:43');
+INSERT INTO `sys_log` VALUES (3698, '修改角色菜单', 'INFO', 'me.zhengjie.modules.system.rest.RoleController.updateMenu()', '{\"level\":3,\"dataScope\":\"本级\",\"id\":1,\"menus\":[{\"subCount\":0,\"id\":97,\"menuSort\":999},{\"subCount\":0,\"id\":98,\"menuSort\":999},{\"subCount\":0,\"id\":102,\"menuSort\":999},{\"subCount\":0,\"id\":103,\"menuSort\":999},{\"subCount\":0,\"id\":104,\"menuSort\":999},{\"subCount\":0,\"id\":105,\"menuSort\":999},{\"subCount\":0,\"id\":106,\"menuSort\":999},{\"subCount\":0,\"id\":107,\"menuSort\":999},{\"subCount\":0,\"id\":108,\"menuSort\":999},{\"subCount\":0,\"id\":109,\"menuSort\":999},{\"subCount\":0,\"id\":110,\"menuSort\":999},{\"subCount\":0,\"id\":111,\"menuSort\":999},{\"subCount\":0,\"id\":112,\"menuSort\":999},{\"subCount\":0,\"id\":113,\"menuSort\":999},{\"subCount\":0,\"id\":114,\"menuSort\":999},{\"subCount\":0,\"id\":116,\"menuSort\":999},{\"subCount\":0,\"id\":118,\"menuSort\":999},{\"subCount\":0,\"id\":119,\"menuSort\":999},{\"subCount\":0,\"id\":120,\"menuSort\":999},{\"subCount\":0,\"id\":121,\"menuSort\":999},{\"subCount\":0,\"id\":122,\"menuSort\":999},{\"subCount\":0,\"id\":123,\"menuSort\":999},{\"subCount\":0,\"id\":124,\"menuSort\":999},{\"subCount\":0,\"id\":125,\"menuSort\":999},{\"subCount\":0,\"id\":126,\"menuSort\":999},{\"subCount\":0,\"id\":127,\"menuSort\":999},{\"subCount\":0,\"id\":1,\"menuSort\":999},{\"subCount\":0,\"id\":2,\"menuSort\":999},{\"subCount\":0,\"id\":3,\"menuSort\":999},{\"subCount\":0,\"id\":5,\"menuSort\":999},{\"subCount\":0,\"id\":6,\"menuSort\":999},{\"subCount\":0,\"id\":7,\"menuSort\":999},{\"subCount\":0,\"id\":9,\"menuSort\":999},{\"subCount\":0,\"id\":10,\"menuSort\":999},{\"subCount\":0,\"id\":11,\"menuSort\":999},{\"subCount\":0,\"id\":14,\"menuSort\":999},{\"subCount\":0,\"id\":15,\"menuSort\":999},{\"subCount\":0,\"id\":18,\"menuSort\":999},{\"subCount\":0,\"id\":19,\"menuSort\":999},{\"subCount\":0,\"id\":21,\"menuSort\":999},{\"subCount\":0,\"id\":22,\"menuSort\":999},{\"subCount\":0,\"id\":23,\"menuSort\":999},{\"subCount\":0,\"id\":24,\"menuSort\":999},{\"subCount\":0,\"id\":27,\"menuSort\":999},{\"subCount\":0,\"id\":28,\"menuSort\":999},{\"subCount\":0,\"id\":30,\"menuSort\":999},{\"subCount\":0,\"id\":32,\"menuSort\":999},{\"subCount\":0,\"id\":33,\"menuSort\":999},{\"subCount\":0,\"id\":34,\"menuSort\":999},{\"subCount\":0,\"id\":35,\"menuSort\":999},{\"subCount\":0,\"id\":36,\"menuSort\":999},{\"subCount\":0,\"id\":37,\"menuSort\":999},{\"subCount\":0,\"id\":38,\"menuSort\":999},{\"subCount\":0,\"id\":39,\"menuSort\":999},{\"subCount\":0,\"id\":41,\"menuSort\":999},{\"subCount\":0,\"id\":44,\"menuSort\":999},{\"subCount\":0,\"id\":45,\"menuSort\":999},{\"subCount\":0,\"id\":46,\"menuSort\":999},{\"subCount\":0,\"id\":48,\"menuSort\":999},{\"subCount\":0,\"id\":49,\"menuSort\":999},{\"subCount\":0,\"id\":50,\"menuSort\":999},{\"subCount\":0,\"id\":52,\"menuSort\":999},{\"subCount\":0,\"id\":53,\"menuSort\":999},{\"subCount\":0,\"id\":54,\"menuSort\":999},{\"subCount\":0,\"id\":56,\"menuSort\":999},{\"subCount\":0,\"id\":57,\"menuSort\":999},{\"subCount\":0,\"id\":58,\"menuSort\":999},{\"subCount\":0,\"id\":60,\"menuSort\":999},{\"subCount\":0,\"id\":61,\"menuSort\":999},{\"subCount\":0,\"id\":62,\"menuSort\":999},{\"subCount\":0,\"id\":64,\"menuSort\":999},{\"subCount\":0,\"id\":65,\"menuSort\":999},{\"subCount\":0,\"id\":66,\"menuSort\":999},{\"subCount\":0,\"id\":73,\"menuSort\":999},{\"subCount\":0,\"id\":74,\"menuSort\":999},{\"subCount\":0,\"id\":75,\"menuSort\":999},{\"subCount\":0,\"id\":77,\"menuSort\":999},{\"subCount\":0,\"id\":78,\"menuSort\":999},{\"subCount\":0,\"id\":79,\"menuSort\":999},{\"subCount\":0,\"id\":80,\"menuSort\":999},{\"subCount\":0,\"id\":82,\"menuSort\":999},{\"subCount\":0,\"id\":83,\"menuSort\":999},{\"subCount\":0,\"id\":90,\"menuSort\":999},{\"subCount\":0,\"id\":92,\"menuSort\":999},{\"subCount\":0,\"id\":93,\"menuSort\":999},{\"subCount\":0,\"id\":94,\"menuSort\":999}]}', '192.168.2.112', 25, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:27:44');
+INSERT INTO `sys_log` VALUES (3699, '修改菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.update()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"education\",\"updateTime\":1608114447000,\"title\":\"日记管理\",\"type\":0,\"subCount\":0,\"path\":\"diary\",\"createBy\":\"admin\",\"createTime\":1608114447000,\"iFrame\":false,\"id\":127,\"menuSort\":3}', '192.168.2.112', 19, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:28:55');
+INSERT INTO `sys_log` VALUES (3700, '新增菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.create()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"education\",\"pid\":127,\"updateTime\":1608114712295,\"title\":\"日记本\",\"type\":1,\"subCount\":0,\"path\":\"blog/diary\",\"component\":\"blog/diary/index\",\"createBy\":\"admin\",\"createTime\":1608114712295,\"iFrame\":false,\"id\":128,\"componentName\":\"Diary\",\"menuSort\":0}', '192.168.2.112', 34, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:31:52');
+INSERT INTO `sys_log` VALUES (3701, '修改角色菜单', 'INFO', 'me.zhengjie.modules.system.rest.RoleController.updateMenu()', '{\"level\":3,\"dataScope\":\"本级\",\"id\":1,\"menus\":[{\"subCount\":0,\"id\":97,\"menuSort\":999},{\"subCount\":0,\"id\":98,\"menuSort\":999},{\"subCount\":0,\"id\":102,\"menuSort\":999},{\"subCount\":0,\"id\":103,\"menuSort\":999},{\"subCount\":0,\"id\":104,\"menuSort\":999},{\"subCount\":0,\"id\":105,\"menuSort\":999},{\"subCount\":0,\"id\":106,\"menuSort\":999},{\"subCount\":0,\"id\":107,\"menuSort\":999},{\"subCount\":0,\"id\":108,\"menuSort\":999},{\"subCount\":0,\"id\":109,\"menuSort\":999},{\"subCount\":0,\"id\":110,\"menuSort\":999},{\"subCount\":0,\"id\":111,\"menuSort\":999},{\"subCount\":0,\"id\":112,\"menuSort\":999},{\"subCount\":0,\"id\":113,\"menuSort\":999},{\"subCount\":0,\"id\":114,\"menuSort\":999},{\"subCount\":0,\"id\":116,\"menuSort\":999},{\"subCount\":0,\"id\":118,\"menuSort\":999},{\"subCount\":0,\"id\":119,\"menuSort\":999},{\"subCount\":0,\"id\":120,\"menuSort\":999},{\"subCount\":0,\"id\":121,\"menuSort\":999},{\"subCount\":0,\"id\":122,\"menuSort\":999},{\"subCount\":0,\"id\":123,\"menuSort\":999},{\"subCount\":0,\"id\":124,\"menuSort\":999},{\"subCount\":0,\"id\":125,\"menuSort\":999},{\"subCount\":0,\"id\":126,\"menuSort\":999},{\"subCount\":0,\"id\":127,\"menuSort\":999},{\"subCount\":0,\"id\":128,\"menuSort\":999},{\"subCount\":0,\"id\":1,\"menuSort\":999},{\"subCount\":0,\"id\":2,\"menuSort\":999},{\"subCount\":0,\"id\":3,\"menuSort\":999},{\"subCount\":0,\"id\":5,\"menuSort\":999},{\"subCount\":0,\"id\":6,\"menuSort\":999},{\"subCount\":0,\"id\":7,\"menuSort\":999},{\"subCount\":0,\"id\":9,\"menuSort\":999},{\"subCount\":0,\"id\":10,\"menuSort\":999},{\"subCount\":0,\"id\":11,\"menuSort\":999},{\"subCount\":0,\"id\":14,\"menuSort\":999},{\"subCount\":0,\"id\":15,\"menuSort\":999},{\"subCount\":0,\"id\":18,\"menuSort\":999},{\"subCount\":0,\"id\":19,\"menuSort\":999},{\"subCount\":0,\"id\":21,\"menuSort\":999},{\"subCount\":0,\"id\":22,\"menuSort\":999},{\"subCount\":0,\"id\":23,\"menuSort\":999},{\"subCount\":0,\"id\":24,\"menuSort\":999},{\"subCount\":0,\"id\":27,\"menuSort\":999},{\"subCount\":0,\"id\":28,\"menuSort\":999},{\"subCount\":0,\"id\":30,\"menuSort\":999},{\"subCount\":0,\"id\":32,\"menuSort\":999},{\"subCount\":0,\"id\":33,\"menuSort\":999},{\"subCount\":0,\"id\":34,\"menuSort\":999},{\"subCount\":0,\"id\":35,\"menuSort\":999},{\"subCount\":0,\"id\":36,\"menuSort\":999},{\"subCount\":0,\"id\":37,\"menuSort\":999},{\"subCount\":0,\"id\":38,\"menuSort\":999},{\"subCount\":0,\"id\":39,\"menuSort\":999},{\"subCount\":0,\"id\":41,\"menuSort\":999},{\"subCount\":0,\"id\":44,\"menuSort\":999},{\"subCount\":0,\"id\":45,\"menuSort\":999},{\"subCount\":0,\"id\":46,\"menuSort\":999},{\"subCount\":0,\"id\":48,\"menuSort\":999},{\"subCount\":0,\"id\":49,\"menuSort\":999},{\"subCount\":0,\"id\":50,\"menuSort\":999},{\"subCount\":0,\"id\":52,\"menuSort\":999},{\"subCount\":0,\"id\":53,\"menuSort\":999},{\"subCount\":0,\"id\":54,\"menuSort\":999},{\"subCount\":0,\"id\":56,\"menuSort\":999},{\"subCount\":0,\"id\":57,\"menuSort\":999},{\"subCount\":0,\"id\":58,\"menuSort\":999},{\"subCount\":0,\"id\":60,\"menuSort\":999},{\"subCount\":0,\"id\":61,\"menuSort\":999},{\"subCount\":0,\"id\":62,\"menuSort\":999},{\"subCount\":0,\"id\":64,\"menuSort\":999},{\"subCount\":0,\"id\":65,\"menuSort\":999},{\"subCount\":0,\"id\":66,\"menuSort\":999},{\"subCount\":0,\"id\":73,\"menuSort\":999},{\"subCount\":0,\"id\":74,\"menuSort\":999},{\"subCount\":0,\"id\":75,\"menuSort\":999},{\"subCount\":0,\"id\":77,\"menuSort\":999},{\"subCount\":0,\"id\":78,\"menuSort\":999},{\"subCount\":0,\"id\":79,\"menuSort\":999},{\"subCount\":0,\"id\":80,\"menuSort\":999},{\"subCount\":0,\"id\":82,\"menuSort\":999},{\"subCount\":0,\"id\":83,\"menuSort\":999},{\"subCount\":0,\"id\":90,\"menuSort\":999},{\"subCount\":0,\"id\":92,\"menuSort\":999},{\"subCount\":0,\"id\":93,\"menuSort\":999},{\"subCount\":0,\"id\":94,\"menuSort\":999}]}', '192.168.2.112', 24, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:32:03');
+INSERT INTO `sys_log` VALUES (3702, '新增菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.create()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"people\",\"pid\":127,\"updateTime\":1608114812778,\"title\":\"状态\",\"type\":0,\"subCount\":0,\"path\":\"blog/guide_mood\",\"createBy\":\"admin\",\"createTime\":1608114812778,\"iFrame\":false,\"id\":129,\"menuSort\":1}', '192.168.2.112', 9, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:33:32');
+INSERT INTO `sys_log` VALUES (3703, '修改菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.update()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"people\",\"pid\":127,\"updateTime\":1608114812000,\"title\":\"状态管理\",\"type\":0,\"subCount\":0,\"path\":\"blog/guide_mood\",\"createBy\":\"admin\",\"createTime\":1608114812000,\"iFrame\":false,\"id\":129,\"menuSort\":1}', '192.168.2.112', 20, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 18:59:12');
+INSERT INTO `sys_log` VALUES (3704, '新增菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.create()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"fwb\",\"pid\":127,\"updateTime\":1608116445846,\"title\":\"名言管理\",\"type\":1,\"subCount\":0,\"path\":\"blog/guide_motto\",\"component\":\"blog/guide_motto/index\",\"createBy\":\"admin\",\"createTime\":1608116445846,\"iFrame\":false,\"id\":130,\"componentName\":\"GuideMotto\",\"menuSort\":2}', '192.168.2.112', 10, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 19:00:45');
+INSERT INTO `sys_log` VALUES (3705, '新增菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.create()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"tab\",\"pid\":127,\"updateTime\":1608116552934,\"title\":\"标签管理\",\"type\":1,\"subCount\":0,\"path\":\"blog/guide_tag\",\"component\":\"blog/guide_tag/index\",\"createBy\":\"admin\",\"createTime\":1608116552934,\"iFrame\":false,\"id\":131,\"componentName\":\"GuideTag\",\"menuSort\":3}', '192.168.2.112', 10, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 19:02:32');
+INSERT INTO `sys_log` VALUES (3706, '修改菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.update()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"people\",\"pid\":127,\"updateTime\":1608116352000,\"title\":\"状态管理\",\"type\":1,\"subCount\":0,\"path\":\"blog/guide_mood\",\"component\":\"blog/guide_mood/index\",\"createBy\":\"admin\",\"createTime\":1608114812000,\"iFrame\":false,\"id\":129,\"componentName\":\"GuideMood\",\"menuSort\":1}', '192.168.2.112', 24, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 19:03:10');
+INSERT INTO `sys_log` VALUES (3707, '新增菜单', 'INFO', 'me.zhengjie.modules.system.rest.MenuController.create()', '{\"cache\":false,\"updatedBy\":\"admin\",\"hidden\":false,\"icon\":\"swagger\",\"pid\":127,\"updateTime\":1608116662718,\"title\":\"引导词管理\",\"type\":1,\"subCount\":0,\"path\":\"blog/guide_tips\",\"component\":\"blog/guide_tips/index\",\"createBy\":\"admin\",\"createTime\":1608116662717,\"iFrame\":false,\"id\":132,\"componentName\":\"GuideTips\",\"menuSort\":4}', '192.168.2.112', 9, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 19:04:22');
+INSERT INTO `sys_log` VALUES (3708, '修改角色菜单', 'INFO', 'me.zhengjie.modules.system.rest.RoleController.updateMenu()', '{\"level\":3,\"dataScope\":\"本级\",\"id\":1,\"menus\":[{\"subCount\":0,\"id\":97,\"menuSort\":999},{\"subCount\":0,\"id\":98,\"menuSort\":999},{\"subCount\":0,\"id\":102,\"menuSort\":999},{\"subCount\":0,\"id\":103,\"menuSort\":999},{\"subCount\":0,\"id\":104,\"menuSort\":999},{\"subCount\":0,\"id\":105,\"menuSort\":999},{\"subCount\":0,\"id\":106,\"menuSort\":999},{\"subCount\":0,\"id\":107,\"menuSort\":999},{\"subCount\":0,\"id\":108,\"menuSort\":999},{\"subCount\":0,\"id\":109,\"menuSort\":999},{\"subCount\":0,\"id\":110,\"menuSort\":999},{\"subCount\":0,\"id\":111,\"menuSort\":999},{\"subCount\":0,\"id\":112,\"menuSort\":999},{\"subCount\":0,\"id\":113,\"menuSort\":999},{\"subCount\":0,\"id\":114,\"menuSort\":999},{\"subCount\":0,\"id\":116,\"menuSort\":999},{\"subCount\":0,\"id\":118,\"menuSort\":999},{\"subCount\":0,\"id\":119,\"menuSort\":999},{\"subCount\":0,\"id\":120,\"menuSort\":999},{\"subCount\":0,\"id\":121,\"menuSort\":999},{\"subCount\":0,\"id\":122,\"menuSort\":999},{\"subCount\":0,\"id\":123,\"menuSort\":999},{\"subCount\":0,\"id\":124,\"menuSort\":999},{\"subCount\":0,\"id\":125,\"menuSort\":999},{\"subCount\":0,\"id\":126,\"menuSort\":999},{\"subCount\":0,\"id\":127,\"menuSort\":999},{\"subCount\":0,\"id\":128,\"menuSort\":999},{\"subCount\":0,\"id\":1,\"menuSort\":999},{\"subCount\":0,\"id\":129,\"menuSort\":999},{\"subCount\":0,\"id\":2,\"menuSort\":999},{\"subCount\":0,\"id\":130,\"menuSort\":999},{\"subCount\":0,\"id\":3,\"menuSort\":999},{\"subCount\":0,\"id\":131,\"menuSort\":999},{\"subCount\":0,\"id\":132,\"menuSort\":999},{\"subCount\":0,\"id\":5,\"menuSort\":999},{\"subCount\":0,\"id\":6,\"menuSort\":999},{\"subCount\":0,\"id\":7,\"menuSort\":999},{\"subCount\":0,\"id\":9,\"menuSort\":999},{\"subCount\":0,\"id\":10,\"menuSort\":999},{\"subCount\":0,\"id\":11,\"menuSort\":999},{\"subCount\":0,\"id\":14,\"menuSort\":999},{\"subCount\":0,\"id\":15,\"menuSort\":999},{\"subCount\":0,\"id\":18,\"menuSort\":999},{\"subCount\":0,\"id\":19,\"menuSort\":999},{\"subCount\":0,\"id\":21,\"menuSort\":999},{\"subCount\":0,\"id\":22,\"menuSort\":999},{\"subCount\":0,\"id\":23,\"menuSort\":999},{\"subCount\":0,\"id\":24,\"menuSort\":999},{\"subCount\":0,\"id\":27,\"menuSort\":999},{\"subCount\":0,\"id\":28,\"menuSort\":999},{\"subCount\":0,\"id\":30,\"menuSort\":999},{\"subCount\":0,\"id\":32,\"menuSort\":999},{\"subCount\":0,\"id\":33,\"menuSort\":999},{\"subCount\":0,\"id\":34,\"menuSort\":999},{\"subCount\":0,\"id\":35,\"menuSort\":999},{\"subCount\":0,\"id\":36,\"menuSort\":999},{\"subCount\":0,\"id\":37,\"menuSort\":999},{\"subCount\":0,\"id\":38,\"menuSort\":999},{\"subCount\":0,\"id\":39,\"menuSort\":999},{\"subCount\":0,\"id\":41,\"menuSort\":999},{\"subCount\":0,\"id\":44,\"menuSort\":999},{\"subCount\":0,\"id\":45,\"menuSort\":999},{\"subCount\":0,\"id\":46,\"menuSort\":999},{\"subCount\":0,\"id\":48,\"menuSort\":999},{\"subCount\":0,\"id\":49,\"menuSort\":999},{\"subCount\":0,\"id\":50,\"menuSort\":999},{\"subCount\":0,\"id\":52,\"menuSort\":999},{\"subCount\":0,\"id\":53,\"menuSort\":999},{\"subCount\":0,\"id\":54,\"menuSort\":999},{\"subCount\":0,\"id\":56,\"menuSort\":999},{\"subCount\":0,\"id\":57,\"menuSort\":999},{\"subCount\":0,\"id\":58,\"menuSort\":999},{\"subCount\":0,\"id\":60,\"menuSort\":999},{\"subCount\":0,\"id\":61,\"menuSort\":999},{\"subCount\":0,\"id\":62,\"menuSort\":999},{\"subCount\":0,\"id\":64,\"menuSort\":999},{\"subCount\":0,\"id\":65,\"menuSort\":999},{\"subCount\":0,\"id\":66,\"menuSort\":999},{\"subCount\":0,\"id\":73,\"menuSort\":999},{\"subCount\":0,\"id\":74,\"menuSort\":999},{\"subCount\":0,\"id\":75,\"menuSort\":999},{\"subCount\":0,\"id\":77,\"menuSort\":999},{\"subCount\":0,\"id\":78,\"menuSort\":999},{\"subCount\":0,\"id\":79,\"menuSort\":999},{\"subCount\":0,\"id\":80,\"menuSort\":999},{\"subCount\":0,\"id\":82,\"menuSort\":999},{\"subCount\":0,\"id\":83,\"menuSort\":999},{\"subCount\":0,\"id\":90,\"menuSort\":999},{\"subCount\":0,\"id\":92,\"menuSort\":999},{\"subCount\":0,\"id\":93,\"menuSort\":999},{\"subCount\":0,\"id\":94,\"menuSort\":999}]}', '192.168.2.112', 29, 'admin', '内网IP', 'Chrome 8', NULL, '2020-12-16 19:04:35');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -2689,7 +2827,7 @@ CREATE TABLE `sys_menu`  (
   UNIQUE INDEX `uniq_title`(`title`) USING BTREE,
   UNIQUE INDEX `uniq_name`(`name`) USING BTREE,
   INDEX `inx_pid`(`pid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 127 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统菜单' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 133 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统菜单' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -2779,6 +2917,12 @@ INSERT INTO `sys_menu` VALUES (123, 118, 0, 1, '点赞管理', 'Like', 'blog/blo
 INSERT INTO `sys_menu` VALUES (124, 118, 0, 1, '转发管理', 'Repost', 'blog/blog_repost/index', 6, 'link', 'blog/blog_repost', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-06 15:30:11', '2020-12-06 15:30:11');
 INSERT INTO `sys_menu` VALUES (125, 118, 0, 1, '评论点赞', 'CommentLike', 'blog/comment_like/index', 7, 'nested', 'blog/comment_like', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-06 15:32:48', '2020-12-09 17:27:04');
 INSERT INTO `sys_menu` VALUES (126, 118, 0, 1, '动态用户管理', 'DiaryUser', 'blog/diary_user/index', 0, 'Steve-Jobs', 'blog/diary_user', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-06 20:17:06', '2020-12-06 20:17:06');
+INSERT INTO `sys_menu` VALUES (127, NULL, 5, 0, '日记管理', NULL, NULL, 3, 'education', 'diary', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-16 18:27:27', '2020-12-16 18:28:55');
+INSERT INTO `sys_menu` VALUES (128, 127, 0, 1, '日记本', 'Diary', 'blog/diary/index', 0, 'education', 'blog/diary', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-16 18:31:52', '2020-12-16 18:31:52');
+INSERT INTO `sys_menu` VALUES (129, 127, 0, 1, '状态管理', 'GuideMood', 'blog/guide_mood/index', 1, 'people', 'blog/guide_mood', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-16 18:33:32', '2020-12-16 19:03:10');
+INSERT INTO `sys_menu` VALUES (130, 127, 0, 1, '名言管理', 'GuideMotto', 'blog/guide_motto/index', 2, 'fwb', 'blog/guide_motto', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-16 19:00:45', '2020-12-16 19:00:45');
+INSERT INTO `sys_menu` VALUES (131, 127, 0, 1, '标签管理', 'GuideTag', 'blog/guide_tag/index', 3, 'tab', 'blog/guide_tag', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-16 19:02:32', '2020-12-16 19:02:32');
+INSERT INTO `sys_menu` VALUES (132, 127, 0, 1, '引导词管理', 'GuideTips', 'blog/guide_tips/index', 4, 'swagger', 'blog/guide_tips', b'0', b'0', b'0', NULL, 'admin', 'admin', '2020-12-16 19:04:22', '2020-12-16 19:04:22');
 
 -- ----------------------------
 -- Table structure for sys_quartz_job
@@ -2995,7 +3139,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '超级管理员', 1, '-', '全部', NULL, 'admin', '2018-11-23 11:04:37', '2020-12-06 20:17:17');
+INSERT INTO `sys_role` VALUES (1, '超级管理员', 1, '-', '全部', NULL, 'admin', '2018-11-23 11:04:37', '2020-12-16 19:04:35');
 INSERT INTO `sys_role` VALUES (2, '普通用户', 2, '-', '本级', NULL, 'admin', '2018-11-23 13:09:06', '2020-09-05 10:45:12');
 
 -- ----------------------------
@@ -3136,6 +3280,12 @@ INSERT INTO `sys_roles_menus` VALUES (123, 1);
 INSERT INTO `sys_roles_menus` VALUES (124, 1);
 INSERT INTO `sys_roles_menus` VALUES (125, 1);
 INSERT INTO `sys_roles_menus` VALUES (126, 1);
+INSERT INTO `sys_roles_menus` VALUES (127, 1);
+INSERT INTO `sys_roles_menus` VALUES (128, 1);
+INSERT INTO `sys_roles_menus` VALUES (129, 1);
+INSERT INTO `sys_roles_menus` VALUES (130, 1);
+INSERT INTO `sys_roles_menus` VALUES (131, 1);
+INSERT INTO `sys_roles_menus` VALUES (132, 1);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -3312,79 +3462,5 @@ CREATE TABLE `tool_qiniu_content`  (
 -- ----------------------------
 -- Records of tool_qiniu_content
 -- ----------------------------
-
-SET FOREIGN_KEY_CHECKS = 1;
-
-
-
--- ----------------------------
--- Table structure for diary
--- ----------------------------
-DROP TABLE IF EXISTS `diary`;
-CREATE TABLE `diary`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `mood` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '心情贴纸',
-  `tag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签',
-  `guide_1` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词1',
-  `guide_2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词2',
-  `guide_3` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词3',
-  `guide_4` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词4',
-  `guide_5` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词5',
-  `guide_6` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词6',
-  `content_1` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容1',
-  `content_2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容2',
-  `content_3` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容3',
-  `content_4` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容4',
-  `content_5` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容5',
-  `content_6` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容6',
-  `created_date` datetime(0) NOT NULL COMMENT '创建时间',
-  `updated_date` datetime(0) NOT NULL COMMENT '更新时间',
-  `period` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '时间类型',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '日记表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for guide_mood
--- ----------------------------
-DROP TABLE IF EXISTS `guide_mood`;
-CREATE TABLE `guide_mood`  (
-  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'uuid',
-  `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '心情' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for guide_motto
--- ----------------------------
-DROP TABLE IF EXISTS `guide_motto`;
-CREATE TABLE `guide_motto`  (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `author` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '作者',
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
-  `type` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '格言分类',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '名言警句' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for guide_tag
--- ----------------------------
-DROP TABLE IF EXISTS `guide_tag`;
-CREATE TABLE `guide_tag`  (
-  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'uuid',
-  `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '标签' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for guide_tips
--- ----------------------------
-DROP TABLE IF EXISTS `guide_tips`;
-CREATE TABLE `guide_tips`  (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
-  `tip_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示类型',
-  `period_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示时间段',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '引导词' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
