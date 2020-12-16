@@ -36,7 +36,6 @@ import java.io.Serializable;
 @Entity
 @Data
 @Accessors(chain = true)
-
 @Table(name = "blog_img")
 public class Img implements Serializable {
 

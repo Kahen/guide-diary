@@ -20,8 +20,6 @@ import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.service.BlogService;
-import me.zhengjie.modules.blog.service.CommentService;
-import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
 import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.BlogMapper;
@@ -55,8 +53,6 @@ public class BlogServiceImpl implements BlogService {
 
     private final BlogRepository blogRepository;
     private final BlogMapper blogMapper;
-    private final DiaryUserService diaryUserService;
-    private final CommentService commentService;
 
     @Override
     public Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable) {

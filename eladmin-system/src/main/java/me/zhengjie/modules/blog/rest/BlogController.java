@@ -57,8 +57,7 @@ public class BlogController {
     @Log("查询blog")
     @ApiOperation("查询blog")
     @PreAuthorize("@el.check('blog:list')")
-    public ResponseEntity
-            <Object> query(BlogQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity<Object> query(BlogQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(blogService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -66,8 +65,7 @@ public class BlogController {
     @Log("新增blog")
     @ApiOperation("新增blog")
     @PreAuthorize("@el.check('blog:add')")
-    public ResponseEntity
-            <Object> create(@Validated @RequestBody Blog resources) {
+    public ResponseEntity<Object> create(@Validated @RequestBody Blog resources) {
         return new ResponseEntity<>(blogService.create(resources), HttpStatus.CREATED);
     }
 
@@ -75,8 +73,7 @@ public class BlogController {
     @Log("修改blog")
     @ApiOperation("修改blog")
     @PreAuthorize("@el.check('blog:edit')")
-    public ResponseEntity
-            <Object> update(@Validated @RequestBody Blog resources) {
+    public ResponseEntity<Object> update(@Validated @RequestBody Blog resources) {
         blogService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -85,8 +82,7 @@ public class BlogController {
     @ApiOperation("删除blog")
     @PreAuthorize("@el.check('blog:del')")
     @DeleteMapping
-    public ResponseEntity
-            <Object> delete(@RequestBody String[] ids) {
+    public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         blogService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -9,9 +10,11 @@ import me.zhengjie.modules.blog.constant.BlogConstants;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.domain.DiaryUser;
+import me.zhengjie.modules.blog.domain.Img;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.repository.CommentRepository;
 import me.zhengjie.modules.blog.repository.DiaryUserRepository;
+import me.zhengjie.modules.blog.repository.ImgRepository;
 import me.zhengjie.modules.blog.service.BuildBlogService;
 import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.utils.DateFormatUtils;
@@ -39,18 +42,20 @@ public class BuildBlogServiceImpl implements BuildBlogService {
     private final BlogRepository blogRepository;
     private final DiaryUserRepository diaryUserRepository;
     private final CommentRepository commentRepository;
+    private final ImgRepository imgRepository;
 
-    public BuildBlogServiceImpl(DiaryUserService diaryUserService, BlogRepository blogRepository, DiaryUserRepository diaryUserRepository, CommentRepository commentRepository) {
+    public BuildBlogServiceImpl(DiaryUserService diaryUserService, BlogRepository blogRepository, DiaryUserRepository diaryUserRepository, CommentRepository commentRepository, ImgRepository imgRepository) {
         this.diaryUserService = diaryUserService;
         this.blogRepository = blogRepository;
         this.diaryUserRepository = diaryUserRepository;
         this.commentRepository = commentRepository;
+        this.imgRepository = imgRepository;
     }
 
 
     @Override
     public void build() {
-        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=1");
+        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken());
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
@@ -59,6 +64,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         }
         List<Blog> blogs = new ArrayList<>();
         List<DiaryUser> diaryUsers = new ArrayList<>();
+        List<Img> images = new ArrayList<>();
         JSONArray statuses = blogsObject.getJSONArray("statuses");
         for (Object status : statuses) {
             JSONObject statusObject = (JSONObject) status;
@@ -72,6 +78,19 @@ public class BuildBlogServiceImpl implements BuildBlogService {
                             .setIsOriginal("是"));
             JSONObject userObject = statusObject.getJSONObject("user");
             diaryUsers.add(diaryUserService.buildDiaryUser(userObject));
+            if (statusObject.containsKey("pic_urls")) {
+                JSONArray picUrls = statusObject.getJSONArray("pic_urls");
+                if (picUrls.size() > 0) {
+                    for (Object picUrl : picUrls) {
+                        JSONObject jsonObject = (JSONObject) picUrl;
+                        images.add(
+                                new Img().setImgId(IdUtil.simpleUUID())
+                                        .setBlogId(statusObject.getLong("id").toString())
+                                        .setImgUrl(jsonObject.getString("thumbnail_pic"))
+                        );
+                    }
+                }
+            }
         }
         ArrayList<Comment> comments = new ArrayList<>();
         for (Blog blog : blogs) {
@@ -111,6 +130,6 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         blogRepository.saveAll(blogs);
         diaryUserRepository.saveAll(diaryUsers);
         commentRepository.saveAll(comments);
-
+        imgRepository.saveAll(images);
     }
 }
