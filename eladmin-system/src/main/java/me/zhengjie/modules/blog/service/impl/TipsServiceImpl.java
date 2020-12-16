@@ -70,8 +70,7 @@ public class TipsServiceImpl implements TipsService {
     public TipsDto findById(Long id) {
         Tips tips = tipsRepository.findById(id).orElseGet(Tips
                 ::new);
-        ValidationUtil.isNull(tips.getId(), "Tips", "id
-                ",id);
+        ValidationUtil.isNull(tips.getId(), "Tips", "id", id);
         return tipsMapper.toDto(tips);
     }
 
@@ -86,9 +85,8 @@ public class TipsServiceImpl implements TipsService {
     public void update(Tips resources) {
         Tips tips = tipsRepository.findById(resources.getId
                 ()).orElseGet(Tips::new);
-        ValidationUtil.isNull(tips.getId(), "Tips
-                ","id",resources.getId());
-                tips.copy(resources);
+        ValidationUtil.isNull(tips.getId(), "Tips", "id", resources.getId());
+        tips.copy(resources);
         tipsRepository.save(tips);
     }
 
@@ -100,16 +98,10 @@ public class TipsServiceImpl implements TipsService {
     }
 
     @Override
-    public void download(List
-                                 <TipsDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<TipsDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (TipsDto tips : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("内容", tips.getContent());
             map.put("提示类型", tips.getTipType());
             map.put("提示时间段", tips.getPeriodType());

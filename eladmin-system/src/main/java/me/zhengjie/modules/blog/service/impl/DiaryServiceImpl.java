@@ -70,8 +70,7 @@ public class DiaryServiceImpl implements DiaryService {
     public DiaryDto findById(Long id) {
         Diary diary = diaryRepository.findById(id).orElseGet(Diary
                 ::new);
-        ValidationUtil.isNull(diary.getId(), "Diary", "id
-                ",id);
+        ValidationUtil.isNull(diary.getId(), "Diary", "id", id);
         return diaryMapper.toDto(diary);
     }
 
@@ -86,9 +85,8 @@ public class DiaryServiceImpl implements DiaryService {
     public void update(Diary resources) {
         Diary diary = diaryRepository.findById(resources.getId
                 ()).orElseGet(Diary::new);
-        ValidationUtil.isNull(diary.getId(), "Diary
-                ","id",resources.getId());
-                diary.copy(resources);
+        ValidationUtil.isNull(diary.getId(), "Diary", "id", resources.getId());
+        diary.copy(resources);
         diaryRepository.save(diary);
     }
 
@@ -100,16 +98,10 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public void download(List
-                                 <DiaryDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<DiaryDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (DiaryDto diary : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("心情贴纸", diary.getMood());
             map.put("标签", diary.getTag());
             map.put("引导词1", diary.getGuide1());

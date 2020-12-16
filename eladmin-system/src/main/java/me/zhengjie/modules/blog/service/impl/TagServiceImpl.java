@@ -71,8 +71,7 @@ public class TagServiceImpl implements TagService {
     public TagDto findById(String id) {
         Tag tag = tagRepository.findById(id).orElseGet(Tag
                 ::new);
-        ValidationUtil.isNull(tag.getId(), "Tag", "id
-                ",id);
+        ValidationUtil.isNull(tag.getId(), "Tag", "id", id);
         return tagMapper.toDto(tag);
     }
 
@@ -88,9 +87,8 @@ public class TagServiceImpl implements TagService {
     public void update(Tag resources) {
         Tag tag = tagRepository.findById(resources.getId
                 ()).orElseGet(Tag::new);
-        ValidationUtil.isNull(tag.getId(), "Tag
-                ","id",resources.getId());
-                tag.copy(resources);
+        ValidationUtil.isNull(tag.getId(), "Tag", "id", resources.getId());
+        tag.copy(resources);
         tagRepository.save(tag);
     }
 
@@ -102,16 +100,10 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void download(List
-                                 <TagDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<TagDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (TagDto tag : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("内容", tag.getText());
             list.add(map);
         }

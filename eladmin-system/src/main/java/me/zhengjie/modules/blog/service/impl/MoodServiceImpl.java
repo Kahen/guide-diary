@@ -71,8 +71,7 @@ public class MoodServiceImpl implements MoodService {
     public MoodDto findById(String id) {
         Mood mood = moodRepository.findById(id).orElseGet(Mood
                 ::new);
-        ValidationUtil.isNull(mood.getId(), "Mood", "id
-                ",id);
+        ValidationUtil.isNull(mood.getId(), "Mood", "id", id);
         return moodMapper.toDto(mood);
     }
 
@@ -88,9 +87,8 @@ public class MoodServiceImpl implements MoodService {
     public void update(Mood resources) {
         Mood mood = moodRepository.findById(resources.getId
                 ()).orElseGet(Mood::new);
-        ValidationUtil.isNull(mood.getId(), "Mood
-                ","id",resources.getId());
-                mood.copy(resources);
+        ValidationUtil.isNull(mood.getId(), "Mood", "id", resources.getId());
+        mood.copy(resources);
         moodRepository.save(mood);
     }
 
@@ -102,16 +100,10 @@ public class MoodServiceImpl implements MoodService {
     }
 
     @Override
-    public void download(List
-                                 <MoodDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<MoodDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (MoodDto mood : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("内容", mood.getText());
             list.add(map);
         }

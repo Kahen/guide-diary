@@ -70,8 +70,7 @@ public class MottoServiceImpl implements MottoService {
     public MottoDto findById(Long id) {
         Motto motto = mottoRepository.findById(id).orElseGet(Motto
                 ::new);
-        ValidationUtil.isNull(motto.getId(), "Motto", "id
-                ",id);
+        ValidationUtil.isNull(motto.getId(), "Motto", "id", id);
         return mottoMapper.toDto(motto);
     }
 
@@ -86,9 +85,8 @@ public class MottoServiceImpl implements MottoService {
     public void update(Motto resources) {
         Motto motto = mottoRepository.findById(resources.getId
                 ()).orElseGet(Motto::new);
-        ValidationUtil.isNull(motto.getId(), "Motto
-                ","id",resources.getId());
-                motto.copy(resources);
+        ValidationUtil.isNull(motto.getId(), "Motto", "id", resources.getId());
+        motto.copy(resources);
         mottoRepository.save(motto);
     }
 
@@ -100,16 +98,10 @@ public class MottoServiceImpl implements MottoService {
     }
 
     @Override
-    public void download(List
-                                 <MottoDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<MottoDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (MottoDto motto : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("作者", motto.getAuthor());
             map.put("内容", motto.getContent());
             map.put("格言分类", motto.getType());
