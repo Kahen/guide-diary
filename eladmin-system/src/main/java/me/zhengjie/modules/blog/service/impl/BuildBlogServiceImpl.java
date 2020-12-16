@@ -50,7 +50,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
     @Override
     public void build() {
-        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken());
+        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=1");
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
@@ -75,7 +75,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         }
         ArrayList<Comment> comments = new ArrayList<>();
         for (Blog blog : blogs) {
-            String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&&id=" + blog.getBlogId());
+            String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&id=" + blog.getBlogId() + "&count=1");
             JSONObject jsonObject = JSON.parseObject(s);
             try {
                 if (jsonObject.getInteger("total_number") == 0) {
