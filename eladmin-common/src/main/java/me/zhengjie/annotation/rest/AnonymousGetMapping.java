@@ -29,7 +29,7 @@ import java.lang.annotation.*;
  * <p>
  * 支持匿名访问   GetMapping
  *
- * @author liaojinlong
+ * @author Kahen
  * @see RequestMapping
  */
 @AnonymousAccess
