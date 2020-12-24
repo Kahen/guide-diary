@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * @author Kahen
- * @website https://el-admin.vip
+ *
  * @date 2020-12-16
  **/
 public interface MoodRepository extends JpaRepository<Mood, String>, JpaSpecificationExecutor<Mood> {

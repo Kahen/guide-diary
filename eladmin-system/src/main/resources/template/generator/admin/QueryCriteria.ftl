@@ -16,7 +16,7 @@ import lombok.Data;
 </#if>
 
 /**
-* @website https://el-admin.vip
+*
 * @author ${author}
 * @date ${date}
 **/

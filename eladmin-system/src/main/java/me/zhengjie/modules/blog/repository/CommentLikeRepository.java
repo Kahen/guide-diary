@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * @author Kahen
- * @website https://el-admin.vip
+ *
  * @date 2020-12-09
  **/
 public interface CommentLikeRepository extends JpaRepository<CommentLike, String>, JpaSpecificationExecutor<CommentLike> {

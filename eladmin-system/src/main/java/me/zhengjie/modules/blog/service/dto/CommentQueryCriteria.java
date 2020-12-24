@@ -6,7 +6,7 @@ import me.zhengjie.annotation.Query;
 
 /**
  * @author Kahen
- * @website https://el-admin.vip
+ *
  * @date 2020-12-09
  **/
 @Data

@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * </p>
  *
  * @author Kahen
- * @website https://el-admin.vip
+ *
  * @date 2020-05-07
  **/
 @Target(ElementType.TYPE)

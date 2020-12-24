@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 /**
-* @website https://el-admin.vip
+*
 * @author ${author}
 * @date ${date}
 **/

@@ -15,7 +15,7 @@ import java.io.Serializable;
 </#if>
 
 /**
-* @website https://el-admin.vip
+*
 * @description /
 * @author ${author}
 * @date ${date}

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Kahen
- * @website https://el-admin.vip
+ *
  * @description
  * @date 2020-05-18
  **/

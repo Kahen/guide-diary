@@ -6,7 +6,7 @@ import lombok.Getter;
 
 /**
  * @author Kahen
- * @website https://el-admin.vip
+ *
  * @description
  * @date 2020-06-10
  **/
