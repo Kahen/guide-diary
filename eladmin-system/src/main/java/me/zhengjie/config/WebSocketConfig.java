@@ -1,4 +1,3 @@
-
 package me.zhengjie.config;
 
 import org.springframework.context.annotation.Bean;

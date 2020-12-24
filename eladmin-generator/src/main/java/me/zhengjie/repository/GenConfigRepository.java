@@ -1,4 +1,3 @@
-
 package me.zhengjie.repository;
 
 import me.zhengjie.domain.GenConfig;

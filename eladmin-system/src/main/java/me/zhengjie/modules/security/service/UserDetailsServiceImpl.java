@@ -26,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserDetailsServiceImpl implements UserDetailsService {
     /**
      * 用户信息缓存
+     * 验证用户
      *
      * @see {@link UserCacheClean}
      */

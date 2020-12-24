@@ -1,4 +1,3 @@
-
 package me.zhengjie.domain.vo;
 
 import lombok.AllArgsConstructor;

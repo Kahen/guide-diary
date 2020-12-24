@@ -1,4 +1,3 @@
-
 package me.zhengjie.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
@@ -37,11 +36,14 @@ import java.util.stream.Collectors;
  * @author Kahen
  * @date 2019-01-02
  */
+
 @Service
 @RequiredArgsConstructor
 public class GeneratorServiceImpl implements GeneratorService {
+
     private static final Logger log = LoggerFactory.getLogger(GeneratorServiceImpl.class);
     private final ColumnInfoRepository columnInfoRepository;
+
     @PersistenceContext
     private EntityManager em;
 

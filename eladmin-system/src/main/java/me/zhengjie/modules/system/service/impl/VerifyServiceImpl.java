@@ -27,6 +27,7 @@ import java.util.Collections;
 public class VerifyServiceImpl implements VerifyService {
 
     private final RedisUtils redisUtils;
+
     @Value("${code.expiration}")
     private Long expiration;
 

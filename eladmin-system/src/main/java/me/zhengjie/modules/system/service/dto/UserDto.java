@@ -4,6 +4,7 @@ package me.zhengjie.modules.system.service.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import me.zhengjie.base.BaseDTO;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class UserDto extends BaseDTO implements Serializable {
 
     private Long id;

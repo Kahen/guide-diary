@@ -27,8 +27,7 @@ public interface TipsService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(TipsQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(TipsQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -37,8 +36,7 @@ public interface TipsService {
      * @return List
      * <TipsDto>
      */
-    List
-            <TipsDto> queryAll(TipsQueryCriteria criteria);
+    List<TipsDto> queryAll(TipsQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -77,6 +75,5 @@ public interface TipsService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <TipsDto> all, HttpServletResponse response) throws IOException;
+    void download(List<TipsDto> all, HttpServletResponse response) throws IOException;
 }

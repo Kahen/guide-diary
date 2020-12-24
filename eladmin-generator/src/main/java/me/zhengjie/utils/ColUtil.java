@@ -1,4 +1,3 @@
-
 package me.zhengjie.utils;
 
 import org.apache.commons.configuration.Configuration;

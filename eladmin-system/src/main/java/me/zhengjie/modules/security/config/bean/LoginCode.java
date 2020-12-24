@@ -20,7 +20,7 @@ import lombok.Data;
 /**
  * 登录验证码配置信息
  *
- * @author: liaojinlong
+ * @author: lijiaxing
  * @date: 2020/6/10 18:53
  */
 @Data

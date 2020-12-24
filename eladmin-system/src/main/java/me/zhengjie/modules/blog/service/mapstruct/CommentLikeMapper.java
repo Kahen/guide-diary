@@ -9,11 +9,9 @@ import org.mapstruct.ReportingPolicy;
 
 /**
  * @author Kahen
- *
  * @date 2020-12-09
  **/
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface CommentLikeMapper extends BaseMapper
-        <CommentLikeDto, CommentLike> {
+public interface CommentLikeMapper extends BaseMapper<CommentLikeDto, CommentLike> {
 
 }

@@ -2,6 +2,9 @@
 package me.zhengjie.modules.blog.service.dto;
 
 import lombok.Data;
+import me.zhengjie.modules.blog.domain.DiaryUser;
+import me.zhengjie.modules.system.service.dto.DeptSmallDto;
+import me.zhengjie.modules.system.service.dto.UserDto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -64,4 +67,17 @@ public class DiaryUserDto implements Serializable {
      * 密码哈希
      */
     private String password;
+
+
+    public static UserDto toUserDto(DiaryUser user) {
+        if (user == null) {
+            return null;
+        }
+
+        return new UserDto().setEnabled(true)
+                .setUsername(user.getName())
+                .setPassword(user.getPassword())
+                .setDept(new DeptSmallDto().setId(System.currentTimeMillis()).setName("用户"));
+
+    }
 }

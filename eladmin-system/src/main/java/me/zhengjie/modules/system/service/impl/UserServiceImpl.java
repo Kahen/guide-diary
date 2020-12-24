@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import me.zhengjie.config.FileProperties;
 import me.zhengjie.exception.EntityExistException;
 import me.zhengjie.exception.EntityNotFoundException;
+import me.zhengjie.modules.blog.domain.DiaryUser;
+import me.zhengjie.modules.blog.repository.DiaryUserRepository;
+import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
 import me.zhengjie.modules.security.service.OnlineUserService;
 import me.zhengjie.modules.security.service.UserCacheClean;
 import me.zhengjie.modules.system.domain.User;
@@ -41,6 +44,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final DiaryUserRepository diaryUserRepository;
     private final UserMapper userMapper;
     private final FileProperties properties;
     private final RedisUtils redisUtils;
@@ -164,7 +168,12 @@ public class UserServiceImpl implements UserService {
     public UserDto findByName(String userName) {
         User user = userRepository.findByUsername(userName);
         if (user == null) {
-            throw new EntityNotFoundException(User.class, "name", userName);
+            DiaryUser diaryUser = diaryUserRepository.findDiaryUserByName(userName);
+            if (diaryUser == null) {
+                throw new EntityNotFoundException(User.class, "name", userName);
+            } else {
+                return DiaryUserDto.toUserDto(diaryUser);
+            }
         } else {
             return userMapper.toDto(user);
         }
