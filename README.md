@@ -126,3 +126,13 @@
 
 #### 反馈交流
 - QQ交流群：一群：<strike>891137268</strike> 已满、二群：947578238
+
+#### 部署到docker 
+- 修改dockerHost
+```shell script
+mvn clean package docker:build -DpushImage
+docker run -p 58000:8000 --name diary-xxxx \
+--link mysql:db \
+--link redis:redis
+-d diary/eladmin-system
+```
