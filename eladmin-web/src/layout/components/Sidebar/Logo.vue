@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      title: 'ELADMIN-后台管理',
+      title: '格子日志-后台管理',
       logo: Logo
     }
   }

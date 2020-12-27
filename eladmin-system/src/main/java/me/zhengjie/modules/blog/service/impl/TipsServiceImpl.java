@@ -1,6 +1,21 @@
-
+/*
+ *  Copyright 2019-2020 Zheng Jie
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Tips;
 import me.zhengjie.modules.blog.repository.TipsRepository;
@@ -26,9 +41,9 @@ import java.util.Map;
 
 /**
  * @author Kahen
- *
+ * @website https://el-admin.vip
  * @description 服务实现
- * @date 2020-12-16
+ * @date 2020-12-27
  **/
 @Service
 @RequiredArgsConstructor
@@ -38,24 +53,22 @@ public class TipsServiceImpl implements TipsService {
     private final TipsMapper tipsMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(TipsQueryCriteria criteria, Pageable pageable) {
-        Page<Tips> page = tipsRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
+    public Map<String, Object> queryAll(TipsQueryCriteria criteria, Pageable pageable) {
+        Page<Tips> page =
+                tipsRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
+                        criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(tipsMapper::toDto));
     }
 
     @Override
-    public List
-            <TipsDto> queryAll(TipsQueryCriteria criteria) {
-        return tipsMapper.toDto(tipsRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
-                QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
+    public List<TipsDto> queryAll(TipsQueryCriteria criteria) {
+        return tipsMapper.toDto(tipsRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Transactional
-    public TipsDto findById(Long id) {
-        Tips tips = tipsRepository.findById(id).orElseGet(Tips
-                ::new);
+    public TipsDto findById(String id) {
+        Tips tips = tipsRepository.findById(id).orElseGet(Tips::new);
         ValidationUtil.isNull(tips.getId(), "Tips", "id", id);
         return tipsMapper.toDto(tips);
     }
@@ -63,22 +76,22 @@ public class TipsServiceImpl implements TipsService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public TipsDto create(Tips resources) {
+        resources.setId(IdUtil.simpleUUID());
         return tipsMapper.toDto(tipsRepository.save(resources));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(Tips resources) {
-        Tips tips = tipsRepository.findById(resources.getId
-                ()).orElseGet(Tips::new);
+        Tips tips = tipsRepository.findById(resources.getId()).orElseGet(Tips::new);
         ValidationUtil.isNull(tips.getId(), "Tips", "id", resources.getId());
         tips.copy(resources);
         tipsRepository.save(tips);
     }
 
     @Override
-    public void deleteAll(Long[] ids) {
-        for (Long id : ids) {
+    public void deleteAll(String[] ids) {
+        for (String id : ids) {
             tipsRepository.deleteById(id);
         }
     }

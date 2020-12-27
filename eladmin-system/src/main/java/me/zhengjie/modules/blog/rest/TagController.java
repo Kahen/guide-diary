@@ -1,4 +1,18 @@
-
+/*
+ *  Copyright 2019-2020 Zheng Jie
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package me.zhengjie.modules.blog.rest;
 
 import io.swagger.annotations.Api;
@@ -20,8 +34,8 @@ import java.io.IOException;
 
 /**
  * @author Kahen
- *
- * @date 2020-12-16
+ * @website https://el-admin.vip
+ * @date 2020-12-27
  **/
 @RestController
 @RequiredArgsConstructor
@@ -43,8 +57,7 @@ public class TagController {
     @Log("查询guide_tag")
     @ApiOperation("查询guide_tag")
     @PreAuthorize("@el.check('tag:list')")
-    public ResponseEntity
-            <Object> query(TagQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity<Object> query(TagQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(tagService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -52,8 +65,7 @@ public class TagController {
     @Log("新增guide_tag")
     @ApiOperation("新增guide_tag")
     @PreAuthorize("@el.check('tag:add')")
-    public ResponseEntity
-            <Object> create(@Validated @RequestBody Tag resources) {
+    public ResponseEntity<Object> create(@Validated @RequestBody Tag resources) {
         return new ResponseEntity<>(tagService.create(resources), HttpStatus.CREATED);
     }
 
@@ -61,8 +73,7 @@ public class TagController {
     @Log("修改guide_tag")
     @ApiOperation("修改guide_tag")
     @PreAuthorize("@el.check('tag:edit')")
-    public ResponseEntity
-            <Object> update(@Validated @RequestBody Tag resources) {
+    public ResponseEntity<Object> update(@Validated @RequestBody Tag resources) {
         tagService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -71,8 +82,7 @@ public class TagController {
     @ApiOperation("删除guide_tag")
     @PreAuthorize("@el.check('tag:del')")
     @DeleteMapping
-    public ResponseEntity
-            <Object> delete(@RequestBody String[] ids) {
+    public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         tagService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
 export function add(data) {
-  return request({
-    url: 'api/tips',
-    method: 'post',
-    data
-  })
+return request({
+  url: 'api/tips',
+  method: 'post',
+  data
+})
 }
 
 export function del(ids) {

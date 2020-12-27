@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : maria
+ Source Server         : docker maria
  Source Server Type    : MariaDB
- Source Server Version : 100505
- Source Host           : localhost:3306
+ Source Server Version : 100508
+ Source Host           : localhost:3307
  Source Schema         : guide_diary
 
  Target Server Type    : MariaDB
- Target Server Version : 100505
+ Target Server Version : 100508
  File Encoding         : 65001
 
- Date: 16/12/2020 19:06:27
+ Date: 27/12/2020 22:36:35
 */
 
 SET NAMES utf8mb4;
@@ -1249,33 +1249,45 @@ CREATE TABLE `blog_repost`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `code_column_config`;
 CREATE TABLE `code_column_config`  (
-  `column_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `table_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `column_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `column_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dict_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `extra` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `form_show` bit(1) NULL DEFAULT NULL,
-  `form_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `key_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `list_show` bit(1) NULL DEFAULT NULL,
-  `not_null` bit(1) NULL DEFAULT NULL,
-  `query_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `date_annotation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`column_id`) USING BTREE,
-  INDEX `idx_table_name`(`table_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 300 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '代码生成字段信息存储' ROW_FORMAT = Compact;
+                                       `column_id`       bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
+                                       `table_name`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `column_name`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `column_type`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `dict_name`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `extra`           varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `form_show`       bit(1)                                                  NULL DEFAULT NULL,
+                                       `form_type`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `key_type`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `list_show`       bit(1)                                                  NULL DEFAULT NULL,
+                                       `not_null`        bit(1)                                                  NULL DEFAULT NULL,
+                                       `query_type`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `remark`          varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       `date_annotation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                       PRIMARY KEY (`column_id`) USING BTREE,
+                                       INDEX `idx_table_name` (`table_name`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 302
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci COMMENT = '代码生成字段信息存储'
+  ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of code_column_config
 -- ----------------------------
-INSERT INTO `code_column_config` VALUES (191, 'blog', 'blog_id', 'varchar', NULL, '', b'1', '', 'PRI', b'1', b'0', NULL, '博客ID', NULL);
-INSERT INTO `code_column_config` VALUES (192, 'blog', 'user_id', 'varchar', NULL, '', b'1', '', 'MUL', b'1', b'0', NULL, '用户ID', NULL);
-INSERT INTO `code_column_config` VALUES (193, 'blog', 'content', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', 'Like', '内容', '');
-INSERT INTO `code_column_config` VALUES (194, 'blog', 'video_url', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', '=', '视频URL', NULL);
-INSERT INTO `code_column_config` VALUES (195, 'blog', 'create_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', '=', '创建时间', 'CreationTimestamp');
-INSERT INTO `code_column_config` VALUES (196, 'blog', 'publish_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', '=', '发布时间', 'UpdateTimestamp');
+INSERT INTO `code_column_config`
+VALUES (191, 'blog', 'blog_id', 'varchar', NULL, '', b'1', '', 'PRI', b'1', b'0', NULL, '博客ID', NULL);
+INSERT INTO `code_column_config`
+VALUES (192, 'blog', 'user_id', 'varchar', NULL, '', b'1', '', 'MUL', b'1', b'0', NULL, '用户ID', NULL);
+INSERT INTO `code_column_config`
+VALUES (193, 'blog', 'content', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', 'Like', '内容', '');
+INSERT INTO `code_column_config`
+VALUES (194, 'blog', 'video_url', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', '=', '视频URL', NULL);
+INSERT INTO `code_column_config`
+VALUES (195, 'blog', 'create_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', '=', '创建时间',
+        'CreationTimestamp');
+INSERT INTO `code_column_config`
+VALUES (196, 'blog', 'publish_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'0', '=', '发布时间',
+        'UpdateTimestamp');
 INSERT INTO `code_column_config` VALUES (197, 'blog', 'is_original', 'varchar', 'is_original', '', b'1', 'Radio', '', b'1', b'0', '=', '是否原创', NULL);
 INSERT INTO `code_column_config` VALUES (198, 'blog_like', 'like_id', 'varchar', NULL, '', b'1', NULL, 'PRI', b'1', b'0', 'Like', '点赞ID', NULL);
 INSERT INTO `code_column_config` VALUES (199, 'blog_like', 'blog_id', 'varchar', NULL, '', b'1', NULL, 'MUL', b'1', b'0', 'Like', '博客ID', NULL);
@@ -1339,49 +1351,89 @@ INSERT INTO `code_column_config` VALUES (258, 'diary_user', 'followers_count', '
 INSERT INTO `code_column_config` VALUES (259, 'diary_user', 'friends_count', 'bigint', NULL, '', b'1', NULL, '', b'1', b'1', NULL, '关注数', NULL);
 INSERT INTO `code_column_config` VALUES (260, 'diary_user', 'statuses_count', 'bigint', NULL, '', b'1', NULL, '', b'1', b'1', NULL, '博客数', NULL);
 INSERT INTO `code_column_config` VALUES (261, 'diary_user', 'create_time', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', NULL, '创建时间', NULL);
-INSERT INTO `code_column_config` VALUES (262, 'diary_user', 'avatar_url', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'1', NULL, '头像链接', NULL);
-INSERT INTO `code_column_config` VALUES (263, 'diary_user', 'password', 'varchar', NULL, '', b'0', NULL, '', b'0', b'0', NULL, '密码哈希', NULL);
-INSERT INTO `code_column_config` VALUES (268, 'blog_comment', 'comment_id', 'varchar', NULL, '', b'1', NULL, 'PRI', b'1', b'0', NULL, '评论ID', NULL);
-INSERT INTO `code_column_config` VALUES (270, 'guide_tips', 'id', 'bigint', NULL, 'auto_increment', b'0', NULL, 'PRI', b'0', b'0', NULL, '自增id', NULL);
-INSERT INTO `code_column_config` VALUES (271, 'guide_tips', 'content', 'longtext', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
-INSERT INTO `code_column_config` VALUES (272, 'guide_tips', 'tip_type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', '=', '提示类型', NULL);
-INSERT INTO `code_column_config` VALUES (273, 'guide_tips', 'period_type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', '=', '提示时间段', NULL);
-INSERT INTO `code_column_config` VALUES (274, 'guide_tag', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'0', b'0', NULL, 'uuid', NULL);
-INSERT INTO `code_column_config` VALUES (275, 'guide_tag', 'text', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
-INSERT INTO `code_column_config` VALUES (276, 'guide_motto', 'id', 'bigint', NULL, 'auto_increment', b'0', NULL, 'PRI', b'0', b'0', NULL, '自增id', NULL);
-INSERT INTO `code_column_config` VALUES (277, 'guide_motto', 'author', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '作者', NULL);
-INSERT INTO `code_column_config` VALUES (278, 'guide_motto', 'content', 'longtext', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
-INSERT INTO `code_column_config` VALUES (279, 'guide_motto', 'type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', '=', '格言分类', NULL);
-INSERT INTO `code_column_config` VALUES (280, 'guide_mood', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'0', b'0', '=', 'uuid', NULL);
-INSERT INTO `code_column_config` VALUES (281, 'guide_mood', 'text', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
-INSERT INTO `code_column_config` VALUES (282, 'diary', 'id', 'bigint', NULL, 'auto_increment', b'0', NULL, 'PRI', b'0', b'0', '=', '自增id', NULL);
-INSERT INTO `code_column_config` VALUES (283, 'diary', 'mood', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', NULL, '心情贴纸', NULL);
-INSERT INTO `code_column_config` VALUES (284, 'diary', 'tag', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', NULL, '标签', NULL);
-INSERT INTO `code_column_config` VALUES (285, 'diary', 'guide_1', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词1', NULL);
-INSERT INTO `code_column_config` VALUES (286, 'diary', 'guide_2', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词2', NULL);
-INSERT INTO `code_column_config` VALUES (287, 'diary', 'guide_3', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词3', NULL);
-INSERT INTO `code_column_config` VALUES (288, 'diary', 'guide_4', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词4', NULL);
-INSERT INTO `code_column_config` VALUES (289, 'diary', 'guide_5', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词5', NULL);
-INSERT INTO `code_column_config` VALUES (290, 'diary', 'guide_6', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词6', NULL);
-INSERT INTO `code_column_config` VALUES (291, 'diary', 'content_1', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容1', NULL);
-INSERT INTO `code_column_config` VALUES (292, 'diary', 'content_2', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容2', NULL);
-INSERT INTO `code_column_config` VALUES (293, 'diary', 'content_3', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容3', NULL);
-INSERT INTO `code_column_config` VALUES (294, 'diary', 'content_4', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容4', NULL);
-INSERT INTO `code_column_config` VALUES (295, 'diary', 'content_5', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容5', NULL);
-INSERT INTO `code_column_config` VALUES (296, 'diary', 'content_6', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容6', NULL);
-INSERT INTO `code_column_config` VALUES (297, 'diary', 'created_date', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', NULL, '创建时间', 'CreationTimestamp');
-INSERT INTO `code_column_config` VALUES (298, 'diary', 'updated_date', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', NULL, '更新时间', 'UpdateTimestamp');
-INSERT INTO `code_column_config` VALUES (299, 'diary', 'period', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', NULL, '时间类型', NULL);
+INSERT INTO `code_column_config`
+VALUES (262, 'diary_user', 'avatar_url', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'1', NULL, '头像链接', NULL);
+INSERT INTO `code_column_config`
+VALUES (263, 'diary_user', 'password', 'varchar', NULL, '', b'0', NULL, '', b'0', b'0', NULL, '密码哈希', NULL);
+INSERT INTO `code_column_config`
+VALUES (268, 'blog_comment', 'comment_id', 'varchar', NULL, '', b'1', NULL, 'PRI', b'1', b'0', NULL, '评论ID', NULL);
+INSERT INTO `code_column_config`
+VALUES (270, 'guide_tips', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'1', b'0', NULL, 'uuid', NULL);
+INSERT INTO `code_column_config`
+VALUES (271, 'guide_tips', 'content', 'longtext', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config`
+VALUES (272, 'guide_tips', 'tip_type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '提示类型', NULL);
+INSERT INTO `code_column_config`
+VALUES (273, 'guide_tips', 'period_type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '提示时间段', NULL);
+INSERT INTO `code_column_config`
+VALUES (274, 'guide_tag', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'1', b'0', NULL, 'uuid', NULL);
+INSERT INTO `code_column_config`
+VALUES (275, 'guide_tag', 'text', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config`
+VALUES (276, 'guide_motto', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'1', b'0', NULL, '自增id', NULL);
+INSERT INTO `code_column_config`
+VALUES (277, 'guide_motto', 'author', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '作者', NULL);
+INSERT INTO `code_column_config`
+VALUES (278, 'guide_motto', 'content', 'longtext', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config`
+VALUES (279, 'guide_motto', 'type', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '格言分类', NULL);
+INSERT INTO `code_column_config`
+VALUES (280, 'guide_mood', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'1', b'0', '=', 'uuid', NULL);
+INSERT INTO `code_column_config`
+VALUES (281, 'guide_mood', 'text', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', 'Like', '内容', NULL);
+INSERT INTO `code_column_config`
+VALUES (282, 'diary', 'id', 'varchar', NULL, '', b'0', NULL, 'PRI', b'1', b'0', '=', '自增id', NULL);
+INSERT INTO `code_column_config`
+VALUES (283, 'diary', 'mood', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', NULL, '心情贴纸', NULL);
+INSERT INTO `code_column_config`
+VALUES (284, 'diary', 'tag', 'varchar', NULL, '', b'1', 'Input', '', b'1', b'0', NULL, '标签', NULL);
+INSERT INTO `code_column_config`
+VALUES (285, 'diary', 'guide_1', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词1', NULL);
+INSERT INTO `code_column_config`
+VALUES (286, 'diary', 'guide_2', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词2', NULL);
+INSERT INTO `code_column_config`
+VALUES (287, 'diary', 'guide_3', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词3', NULL);
+INSERT INTO `code_column_config`
+VALUES (288, 'diary', 'guide_4', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词4', NULL);
+INSERT INTO `code_column_config`
+VALUES (289, 'diary', 'guide_5', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词5', NULL);
+INSERT INTO `code_column_config`
+VALUES (290, 'diary', 'guide_6', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'1', NULL, '引导词6', NULL);
+INSERT INTO `code_column_config`
+VALUES (291, 'diary', 'content_1', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容1', NULL);
+INSERT INTO `code_column_config`
+VALUES (292, 'diary', 'content_2', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容2', NULL);
+INSERT INTO `code_column_config`
+VALUES (293, 'diary', 'content_3', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容3', NULL);
+INSERT INTO `code_column_config`
+VALUES (294, 'diary', 'content_4', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容4', NULL);
+INSERT INTO `code_column_config`
+VALUES (295, 'diary', 'content_5', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容5', NULL);
+INSERT INTO `code_column_config`
+VALUES (296, 'diary', 'content_6', 'longtext', NULL, '', b'1', 'Textarea', '', b'1', b'0', NULL, '内容6', NULL);
+INSERT INTO `code_column_config`
+VALUES (297, 'diary', 'created_date', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', NULL, '创建时间',
+        'CreationTimestamp');
+INSERT INTO `code_column_config`
+VALUES (298, 'diary', 'updated_date', 'datetime', NULL, '', b'1', 'Date', '', b'1', b'1', NULL, '更新时间',
+        'UpdateTimestamp');
+INSERT INTO `code_column_config`
+VALUES (299, 'diary', 'period', 'varchar', NULL, '', b'1', NULL, '', b'1', b'1', NULL, '时间类型', NULL);
+INSERT INTO `code_column_config`
+VALUES (300, 'diary', 'user_id', 'varchar', NULL, '', b'1', NULL, 'MUL', b'1', b'1', NULL, '用户id', NULL);
+INSERT INTO `code_column_config`
+VALUES (301, 'diary', 'book_id', 'varchar', NULL, '', b'1', NULL, 'MUL', b'1', b'1', NULL, '日记本id', NULL);
 
 -- ----------------------------
 -- Table structure for code_gen_config
 -- ----------------------------
 DROP TABLE IF EXISTS `code_gen_config`;
-CREATE TABLE `code_gen_config`  (
-  `config_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `table_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表名',
-  `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者',
-  `cover` bit(1) NULL DEFAULT NULL COMMENT '是否覆盖',
+CREATE TABLE `code_gen_config`
+(
+    `config_id`  bigint(20)                                              NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `table_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表名',
+    `author`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者',
+    `cover`      bit(1)                                                  NULL DEFAULT NULL COMMENT '是否覆盖',
   `module_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '模块名称',
   `pack` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '至于哪个包下',
   `path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '前端代码生成的路径',
@@ -1432,27 +1484,35 @@ INSERT INTO `comment_like` VALUES ('c08742a72972424791b3036ac9a0edc7', '1', '11'
 -- Table structure for diary
 -- ----------------------------
 DROP TABLE IF EXISTS `diary`;
-CREATE TABLE `diary`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `mood` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '心情贴纸',
-  `tag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签',
-  `guide_1` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词1',
-  `guide_2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词2',
-  `guide_3` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词3',
-  `guide_4` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词4',
-  `guide_5` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词5',
-  `guide_6` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '引导词6',
-  `content_1` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容1',
-  `content_2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容2',
-  `content_3` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容3',
-  `content_4` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容4',
-  `content_5` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容5',
-  `content_6` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容6',
-  `created_date` datetime(0) NOT NULL COMMENT '创建时间',
-  `updated_date` datetime(0) NOT NULL COMMENT '更新时间',
-  `period` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '时间类型',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '日记表' ROW_FORMAT = Dynamic;
+CREATE TABLE `diary`
+(
+    `id`           varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT 'id',
+    `user_id`      varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '用户id',
+    `mood`         varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '心情贴纸',
+    `tag`          varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签',
+    `guide_1`      longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '引导词1',
+    `guide_2`      longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '引导词2',
+    `guide_3`      longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '引导词3',
+    `guide_4`      longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '引导词4',
+    `guide_5`      longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '引导词5',
+    `guide_6`      longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '引导词6',
+    `content_1`    longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '内容1',
+    `content_2`    longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '内容2',
+    `content_3`    longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '内容3',
+    `content_4`    longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '内容4',
+    `content_5`    longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '内容5',
+    `content_6`    longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '内容6',
+    `created_date` datetime(0)                                                   NOT NULL COMMENT '创建时间',
+    `updated_date` datetime(0)                                                   NOT NULL COMMENT '更新时间',
+    `period`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '时间类型',
+    `book_id`      varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '日记本id',
+    PRIMARY KEY (`id`) USING BTREE,
+    INDEX `user_id_index` (`user_id`) USING BTREE,
+    INDEX `book_id_index` (`book_id`) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '日记表'
+  ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of diary
@@ -1462,7 +1522,8 @@ CREATE TABLE `diary`  (
 -- Table structure for diary_user
 -- ----------------------------
 DROP TABLE IF EXISTS `diary_user`;
-CREATE TABLE `diary_user`  (
+CREATE TABLE `diary_user`
+(
   `uid` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'uid',
   `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
   `nickname` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '昵称',
@@ -2330,13 +2391,17 @@ CREATE TABLE `guide_mood`  (
 -- Table structure for guide_motto
 -- ----------------------------
 DROP TABLE IF EXISTS `guide_motto`;
-CREATE TABLE `guide_motto`  (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `author` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '作者',
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
-  `type` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '格言分类',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '名言警句' ROW_FORMAT = Dynamic;
+CREATE TABLE `guide_motto`
+(
+    `id`      varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT 'id',
+    `author`  varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '作者',
+    `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '内容',
+    `type`    varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '格言分类',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '名言警句'
+  ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of guide_motto
@@ -2346,7 +2411,8 @@ CREATE TABLE `guide_motto`  (
 -- Table structure for guide_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `guide_tag`;
-CREATE TABLE `guide_tag`  (
+CREATE TABLE `guide_tag`
+(
   `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'uuid',
   `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
   PRIMARY KEY (`id`) USING BTREE
@@ -2360,13 +2426,17 @@ CREATE TABLE `guide_tag`  (
 -- Table structure for guide_tips
 -- ----------------------------
 DROP TABLE IF EXISTS `guide_tips`;
-CREATE TABLE `guide_tips`  (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
-  `tip_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示类型',
-  `period_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示时间段',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '引导词' ROW_FORMAT = Dynamic;
+CREATE TABLE `guide_tips`
+(
+    `id`          varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'id',
+    `content`     longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci    NOT NULL COMMENT '内容',
+    `tip_type`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示类型',
+    `period_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '提示时间段',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '引导词'
+  ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of guide_tips
@@ -2376,7 +2446,8 @@ CREATE TABLE `guide_tips`  (
 -- Table structure for mnt_app
 -- ----------------------------
 DROP TABLE IF EXISTS `mnt_app`;
-CREATE TABLE `mnt_app`  (
+CREATE TABLE `mnt_app`
+(
   `app_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用名称',
   `upload_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '上传目录',

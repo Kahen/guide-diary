@@ -1,6 +1,21 @@
-
+/*
+ *  Copyright 2019-2020 Zheng Jie
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Diary;
 import me.zhengjie.modules.blog.repository.DiaryRepository;
@@ -26,9 +41,9 @@ import java.util.Map;
 
 /**
  * @author Kahen
- *
+ * @website https://el-admin.vip
  * @description 服务实现
- * @date 2020-12-16
+ * @date 2020-12-27
  **/
 @Service
 @RequiredArgsConstructor
@@ -38,24 +53,22 @@ public class DiaryServiceImpl implements DiaryService {
     private final DiaryMapper diaryMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable) {
-        Page<Diary> page = diaryRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
+    public Map<String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable) {
+        Page<Diary> page =
+                diaryRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
+                        criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(diaryMapper::toDto));
     }
 
     @Override
-    public List
-            <DiaryDto> queryAll(DiaryQueryCriteria criteria) {
-        return diaryMapper.toDto(diaryRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
-                QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
+    public List<DiaryDto> queryAll(DiaryQueryCriteria criteria) {
+        return diaryMapper.toDto(diaryRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Transactional
-    public DiaryDto findById(Long id) {
-        Diary diary = diaryRepository.findById(id).orElseGet(Diary
-                ::new);
+    public DiaryDto findById(String id) {
+        Diary diary = diaryRepository.findById(id).orElseGet(Diary::new);
         ValidationUtil.isNull(diary.getId(), "Diary", "id", id);
         return diaryMapper.toDto(diary);
     }
@@ -63,22 +76,22 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public DiaryDto create(Diary resources) {
+        resources.setId(IdUtil.simpleUUID());
         return diaryMapper.toDto(diaryRepository.save(resources));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(Diary resources) {
-        Diary diary = diaryRepository.findById(resources.getId
-                ()).orElseGet(Diary::new);
+        Diary diary = diaryRepository.findById(resources.getId()).orElseGet(Diary::new);
         ValidationUtil.isNull(diary.getId(), "Diary", "id", resources.getId());
         diary.copy(resources);
         diaryRepository.save(diary);
     }
 
     @Override
-    public void deleteAll(Long[] ids) {
-        for (Long id : ids) {
+    public void deleteAll(String[] ids) {
+        for (String id : ids) {
             diaryRepository.deleteById(id);
         }
     }
@@ -105,6 +118,8 @@ public class DiaryServiceImpl implements DiaryService {
             map.put("创建时间", diary.getCreatedDate());
             map.put("更新时间", diary.getUpdatedDate());
             map.put("时间类型", diary.getPeriod());
+            map.put("用户id", diary.getUserId());
+            map.put("日记本id", diary.getBookId());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);

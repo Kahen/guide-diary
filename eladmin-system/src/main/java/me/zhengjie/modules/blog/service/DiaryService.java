@@ -1,4 +1,18 @@
-
+/*
+ *  Copyright 2019-2020 Zheng Jie
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package me.zhengjie.modules.blog.service;
 
 import me.zhengjie.modules.blog.domain.Diary;
@@ -13,9 +27,9 @@ import java.util.Map;
 
 /**
  * @author Kahen
- *
+ * @website https://el-admin.vip
  * @description 服务接口
- * @date 2020-12-16
+ * @date 2020-12-27
  **/
 public interface DiaryService {
 
@@ -24,21 +38,17 @@ public interface DiaryService {
      *
      * @param criteria 条件
      * @param pageable 分页参数
-     * @return Map
-     * <String,Object>
+     * @return Map<String, Object>
      */
-    Map
-            <String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
      *
      * @param criteria 条件参数
-     * @return List
-     * <DiaryDto>
+     * @return List<DiaryDto>
      */
-    List
-            <DiaryDto> queryAll(DiaryQueryCriteria criteria);
+    List<DiaryDto> queryAll(DiaryQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -46,29 +56,26 @@ public interface DiaryService {
      * @param id ID
      * @return DiaryDto
      */
-    DiaryDto findById(Long id);
+    DiaryDto findById(String id);
 
     /**
      * 创建
-     *
      * @param resources /
-     * @return DiaryDto
-     */
+    * @return DiaryDto
+    */
     DiaryDto create(Diary resources);
 
     /**
      * 编辑
-     *
-     * @param resources /
-     */
+    * @param resources /
+    */
     void update(Diary resources);
 
     /**
      * 多选删除
-     *
      * @param ids /
      */
-    void deleteAll(Long[] ids);
+    void deleteAll(String[] ids);
 
     /**
      * 导出数据
@@ -77,6 +84,5 @@ public interface DiaryService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <DiaryDto> all, HttpServletResponse response) throws IOException;
+    void download(List<DiaryDto> all, HttpServletResponse response) throws IOException;
 }

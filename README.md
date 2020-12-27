@@ -84,7 +84,7 @@
 - eladmin-tools 系统第三方工具模块
 - eladmin-generator 系统代码生成模块
 ```
-    
+
 #### 系统预览
 <table>
     <tr>
@@ -134,5 +134,5 @@ mvn clean package docker:build -DpushImage
 docker run -p 58000:8000 --name diary-xxxx \
 --link mysql:db \
 --link redis:redis
--d diary/eladmin-system
+-d diary/eladmin-system 
 ```

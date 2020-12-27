@@ -1,6 +1,21 @@
-
+/*
+ *  Copyright 2019-2020 Zheng Jie
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package me.zhengjie.modules.blog.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Motto;
 import me.zhengjie.modules.blog.repository.MottoRepository;
@@ -26,9 +41,9 @@ import java.util.Map;
 
 /**
  * @author Kahen
- *
+ * @website https://el-admin.vip
  * @description 服务实现
- * @date 2020-12-16
+ * @date 2020-12-27
  **/
 @Service
 @RequiredArgsConstructor
@@ -38,24 +53,22 @@ public class MottoServiceImpl implements MottoService {
     private final MottoMapper mottoMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(MottoQueryCriteria criteria, Pageable pageable) {
-        Page<Motto> page = mottoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
+    public Map<String, Object> queryAll(MottoQueryCriteria criteria, Pageable pageable) {
+        Page<Motto> page =
+                mottoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,
+                        criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(mottoMapper::toDto));
     }
 
     @Override
-    public List
-            <MottoDto> queryAll(MottoQueryCriteria criteria) {
-        return mottoMapper.toDto(mottoRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
-                QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
+    public List<MottoDto> queryAll(MottoQueryCriteria criteria) {
+        return mottoMapper.toDto(mottoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
 
     @Override
     @Transactional
-    public MottoDto findById(Long id) {
-        Motto motto = mottoRepository.findById(id).orElseGet(Motto
-                ::new);
+    public MottoDto findById(String id) {
+        Motto motto = mottoRepository.findById(id).orElseGet(Motto::new);
         ValidationUtil.isNull(motto.getId(), "Motto", "id", id);
         return mottoMapper.toDto(motto);
     }
@@ -63,22 +76,22 @@ public class MottoServiceImpl implements MottoService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public MottoDto create(Motto resources) {
+        resources.setId(IdUtil.simpleUUID());
         return mottoMapper.toDto(mottoRepository.save(resources));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(Motto resources) {
-        Motto motto = mottoRepository.findById(resources.getId
-                ()).orElseGet(Motto::new);
+        Motto motto = mottoRepository.findById(resources.getId()).orElseGet(Motto::new);
         ValidationUtil.isNull(motto.getId(), "Motto", "id", resources.getId());
         motto.copy(resources);
         mottoRepository.save(motto);
     }
 
     @Override
-    public void deleteAll(Long[] ids) {
-        for (Long id : ids) {
+    public void deleteAll(String[] ids) {
+        for (String id : ids) {
             mottoRepository.deleteById(id);
         }
     }
