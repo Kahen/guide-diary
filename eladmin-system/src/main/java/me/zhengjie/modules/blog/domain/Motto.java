@@ -19,6 +19,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "guide_motto")
+@Accessors(chain = true)
 public class Motto implements Serializable {
 
     @Id
