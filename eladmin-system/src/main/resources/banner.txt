@@ -6,4 +6,4 @@ ${AnsiColor.BRIGHT_CYAN}░██░██    ███████ ${AnsiColor.
 ${AnsiColor.BRIGHT_CYAN}░██░░██  ██░░░░██ ${AnsiColor.BRIGHT_MAGENTA}░██  ░██░██░░░░  ░██  ░██
 ${AnsiColor.BRIGHT_CYAN}░██ ░░██░░████████${AnsiColor.BRIGHT_MAGENTA}░██  ░██░░██████ ███  ░██
 ${AnsiColor.BRIGHT_CYAN}░░   ░░  ░░░░░░░░ ${AnsiColor.BRIGHT_MAGENTA}░░   ░░  ░░░░░░ ░░░   ░░
-${AnsiColor.BRIGHT_BLUE}:: Kahen 🤓  :: Running Spring Boot ${spring-boot.version} ::
+${AnsiColor.BRIGHT_YELLOW}:: Kahen 🤓  :: Running Spring Boot ${spring-boot.version} ::
