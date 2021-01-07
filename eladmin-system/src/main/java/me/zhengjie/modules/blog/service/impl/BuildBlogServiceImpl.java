@@ -55,7 +55,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
     @Override
     public void build() {
-        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=1");
+        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=100");
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
@@ -80,15 +80,24 @@ public class BuildBlogServiceImpl implements BuildBlogService {
             diaryUsers.add(diaryUserService.buildDiaryUser(userObject));
             if (statusObject.containsKey("pic_urls")) {
                 JSONArray picUrls = statusObject.getJSONArray("pic_urls");
+                String imgUrlsStr = "";
                 if (picUrls.size() > 0) {
-                    for (Object picUrl : picUrls) {
-                        JSONObject jsonObject = (JSONObject) picUrl;
-                        images.add(
-                                new Img().setImgId(IdUtil.simpleUUID())
-                                        .setBlogId(statusObject.getLong("id").toString())
-                                        .setImgUrl(jsonObject.getString("thumbnail_pic"))
-                        );
+                    // for (Object picUrl : picUrls) {
+                    //
+                    // }
+                    JSONArray jsonArray = new JSONArray();
+
+                    for (int i = 0; i < picUrls.size(); i++) {
+                        JSONObject jsonObject = picUrls.getJSONObject(i);
+                        JSONObject jsonObject1 = new JSONObject();
+                        jsonObject1.put("" + i, jsonObject.getString("thumbnail_pic"));
+                        jsonArray.add(jsonObject1);
                     }
+                    images.add(
+                            new Img().setImgId(IdUtil.simpleUUID())
+                                    .setBlogId(statusObject.getLong("id").toString())
+                                    .setImgUrl(jsonArray.toJSONString())
+                    );
                 }
             }
         }
