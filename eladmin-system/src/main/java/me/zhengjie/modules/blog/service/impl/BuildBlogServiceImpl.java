@@ -55,7 +55,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
     @Override
     public void build() {
-        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=100");
+        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=10");
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
@@ -133,8 +133,6 @@ public class BuildBlogServiceImpl implements BuildBlogService {
                 DiaryUser user = diaryUserService.buildDiaryUser(commentObject.getJSONObject("user"));
                 diaryUsers.add(user);
             }
-
-
         }
         blogRepository.saveAll(blogs);
         diaryUserRepository.saveAll(diaryUsers);
