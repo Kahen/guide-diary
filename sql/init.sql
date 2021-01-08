@@ -9503,6 +9503,3 @@ CREATE TABLE `tool_qiniu_content`
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-ALTER TABLE `guide_diary`.`blog_img`
-    MODIFY COLUMN `img_url` varchar(8192) NOT NULL DEFAULT '' COMMENT '图片URL' AFTER `blog_id`;
