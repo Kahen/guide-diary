@@ -5,104 +5,201 @@
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
         <label class="el-form-item-label">uuid</label>
-        <el-input v-model="query.id" class="filter-item"
-                  clearable
-                  placeholder="uuid" style="width: 185px;" @keyup.enter.native="crud.toQuery"/>
-        <rrOperation :crud="crud"/>
+        <el-input
+          class="filter-item"
+          v-model="query.id"
+          clearable
+          placeholder="uuid"
+          style="width: 185px;"
+          @keyup.enter.native="crud.toQuery"
+        />
+        <label class="el-form-item-label">时间索引</label>
+        <el-input
+          class="filter-item"
+          v-model="query.dayTimestamp"
+          clearable
+          placeholder="时间索引"
+          style="width: 185px;"
+          @keyup.enter.native="crud.toQuery"
+        />
+        <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
-      <crudOperation :permission="permission"/>
+      <crudOperation :permission="permission" />
       <!--表单组件-->
-      <el-dialog :before-close="crud.cancelCU" :close-on-click-modal="false" :title="crud.status.title"
-                 :visible.sync="crud.status.cu > 0" width="500px">
+      <el-dialog
+        :before-close="crud.cancelCU"
+        :close-on-click-modal="false"
+        :title="crud.status.title"
+        :visible.sync="crud.status.cu > 0"
+        width="500px"
+      >
         <el-form ref="form" :model="form" :rules="rules" label-width="80px" size="small">
           <el-form-item
-            label="心情贴纸">
-            <el-input v-model="form.mood" style="width: 370px;"/>
+            label="心情贴纸"
+          >
+            <el-input v-model="form.mood" style="width: 370px;" />
           </el-form-item>
           <el-form-item
-            label="标签">
-            <el-input v-model="form.tag" style="width: 370px;"/>
+            label="标签"
+          >
+            <el-input v-model="form.tag" style="width: 370px;" />
           </el-form-item>
           <el-form-item
-            label="引导词1" prop="guide1">
-            <el-input v-model="form.guide1" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="引导词1"
+            prop="guide1"
+          >
+            <el-input
+              v-model="form.guide1"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="引导词2" prop="guide2">
-            <el-input v-model="form.guide2" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="引导词2"
+            prop="guide2"
+          >
+            <el-input
+              v-model="form.guide2"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="引导词3" prop="guide3">
-            <el-input v-model="form.guide3" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="引导词3"
+            prop="guide3"
+          >
+            <el-input
+              v-model="form.guide3"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="引导词4" prop="guide4">
-            <el-input v-model="form.guide4" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="引导词4"
+            prop="guide4"
+          >
+            <el-input
+              v-model="form.guide4"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="引导词5" prop="guide5">
-            <el-input v-model="form.guide5" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="引导词5"
+            prop="guide5"
+          >
+            <el-input
+              v-model="form.guide5"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="引导词6" prop="guide6">
-            <el-input v-model="form.guide6" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="引导词6"
+            prop="guide6"
+          >
+            <el-input
+              v-model="form.guide6"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="内容1">
-            <el-input v-model="form.content1" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="内容1"
+          >
+            <el-input
+              v-model="form.content1"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="内容2">
-            <el-input v-model="form.content2" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="内容2"
+          >
+            <el-input
+              v-model="form.content2"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="内容3">
-            <el-input v-model="form.content3" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="内容3"
+          >
+            <el-input
+              v-model="form.content3"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="内容4">
-            <el-input v-model="form.content4" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="内容4"
+          >
+            <el-input
+              v-model="form.content4"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="内容5">
-            <el-input v-model="form.content5" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="内容5"
+          >
+            <el-input
+              v-model="form.content5"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="内容6">
-            <el-input v-model="form.content6" :rows="3" style="width: 370px;"
-                      type="textarea"/>
+            label="内容6"
+          >
+            <el-input
+              v-model="form.content6"
+              :rows="3"
+              style="width: 370px;"
+              type="textarea"
+            />
           </el-form-item>
           <el-form-item
-            label="创建时间" prop="createdDate">
-            <el-date-picker v-model="form.createdDate" style="width: 370px;" type="datetime"/>
+            label="创建时间"
+            prop="createdDate"
+          >
+            <el-date-picker v-model="form.createdDate" style="width: 370px;" type="datetime" />
           </el-form-item>
           <el-form-item
-            label="更新时间" prop="updatedDate">
-            <el-date-picker v-model="form.updatedDate" style="width: 370px;" type="datetime"/>
+            label="更新时间"
+            prop="updatedDate"
+          >
+            <el-date-picker v-model="form.updatedDate" style="width: 370px;" type="datetime" />
           </el-form-item>
           <el-form-item
-            label="时间类型" prop="period">
-            <el-input v-model="form.period" style="width: 370px;"/>
+            label="时间类型"
+            prop="period"
+          >
+            <el-input v-model="form.period" style="width: 370px;" />
           </el-form-item>
           <el-form-item
-            label="用户id" prop="userId">
-            <el-input v-model="form.userId" style="width: 370px;"/>
+            label="用户id"
+            prop="userId"
+          >
+            <el-input v-model="form.userId" style="width: 370px;" />
           </el-form-item>
           <el-form-item
-            label="日记本id" prop="bookId">
-            <el-input v-model="form.bookId" style="width: 370px;"/>
+            label="时间索引"
+            prop="dayTimestamp"
+          >
+            <el-date-picker v-model="form.dayTimestamp" style="width: 370px;" type="date" value-format="timestamp" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -111,59 +208,109 @@
         </div>
       </el-dialog>
       <!--表格渲染-->
-      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;"
-                @selection-change="crud.selectionChangeHandler">
-        <el-table-column type="selection" width="55"/>
-        <el-table-column label="uuid"
-                         prop="id"/>
-        <el-table-column label="心情贴纸"
-                         prop="mood"/>
-        <el-table-column label="标签"
-                         prop="tag"/>
-        <el-table-column label="引导词1"
-                         prop="guide1"/>
-        <el-table-column label="引导词2"
-                         prop="guide2"/>
-        <el-table-column label="引导词3"
-                         prop="guide3"/>
-        <el-table-column label="引导词4"
-                         prop="guide4"/>
-        <el-table-column label="引导词5"
-                         prop="guide5"/>
-        <el-table-column label="引导词6"
-                         prop="guide6"/>
-        <el-table-column label="内容1"
-                         prop="content1"/>
-        <el-table-column label="内容2"
-                         prop="content2"/>
-        <el-table-column label="内容3"
-                         prop="content3"/>
-        <el-table-column label="内容4"
-                         prop="content4"/>
-        <el-table-column label="内容5"
-                         prop="content5"/>
-        <el-table-column label="内容6"
-                         prop="content6"/>
-        <el-table-column label="创建时间"
-                         prop="createdDate">
+      <el-table
+        ref="table"
+        v-loading="crud.loading"
+        :data="crud.data"
+        size="small"
+        style="width: 100%;"
+        @selection-change="crud.selectionChangeHandler"
+      >
+        <el-table-column type="selection" width="55" />
+        <el-table-column
+          label="uuid"
+          prop="id"
+        />
+        <el-table-column
+          label="心情贴纸"
+          prop="mood"
+        />
+        <el-table-column
+          label="标签"
+          prop="tag"
+        />
+        <el-table-column
+          label="引导词1"
+          prop="guide1"
+        />
+        <el-table-column
+          label="引导词2"
+          prop="guide2"
+        />
+        <el-table-column
+          label="引导词3"
+          prop="guide3"
+        />
+        <el-table-column
+          label="引导词4"
+          prop="guide4"
+        />
+        <el-table-column
+          label="引导词5"
+          prop="guide5"
+        />
+        <el-table-column
+          label="引导词6"
+          prop="guide6"
+        />
+        <el-table-column
+          label="内容1"
+          prop="content1"
+        />
+        <el-table-column
+          label="内容2"
+          prop="content2"
+        />
+        <el-table-column
+          label="内容3"
+          prop="content3"
+        />
+        <el-table-column
+          label="内容4"
+          prop="content4"
+        />
+        <el-table-column
+          label="内容5"
+          prop="content5"
+        />
+        <el-table-column
+          label="内容6"
+          prop="content6"
+        />
+        <el-table-column
+          label="创建时间"
+          prop="createdDate"
+        >
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.createdDate) }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="更新时间"
-                         prop="updatedDate">
+        <el-table-column
+          label="更新时间"
+          prop="updatedDate"
+        >
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.updatedDate) }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="时间类型"
-                         prop="period"/>
-        <el-table-column label="用户id"
-                         prop="userId"/>
-        <el-table-column label="日记本id"
-                         prop="bookId"/>
-        <el-table-column v-permission="['admin','diary:edit','diary:del']" align="center"
-                         label="操作" width="150px">
+        <el-table-column
+          label="时间类型"
+          prop="period"
+        />
+        <el-table-column
+          label="用户id"
+          prop="userId"
+        />
+        <el-table-column
+          label="时间索引"
+          prop="dayTimestamp"
+        />
+        <el-table-column
+          v-permission="['admin','diary:edit','diary:del']"
+          align="center"
+          label="操作"
+          width="150px"
+        >
           <template slot-scope="scope">
             <udOperation
               :data="scope.row"
@@ -173,14 +320,14 @@
         </el-table-column>
       </el-table>
       <!--分页组件-->
-      <pagination/>
+      <pagination />
     </div>
   </div>
 </template>
 
 <script>
 import crudDiary from '@/api/blog/diary'
-import CRUD, {crud, form, header, presenter} from '@crud/crud'
+import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
@@ -206,11 +353,11 @@ const defaultForm = {
   updatedDate: null,
   period: null,
   userId: null,
-  bookId: null
+  dayTimestamp: null
 }
 export default {
   name: 'Diary',
-  components: {pagination, crudOperation, rrOperation, udOperation},
+  components: { pagination, crudOperation, rrOperation, udOperation },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   cruds() {
     return CRUD({
@@ -218,7 +365,7 @@ export default {
       url: 'api/diary',
       idField: 'id',
       sort: 'id,desc',
-      crudMethod: {...crudDiary}
+      crudMethod: { ...crudDiary }
     })
   },
   data() {
@@ -230,43 +377,47 @@ export default {
       },
       rules: {
         guide1: [
-          {required: true, message: '引导词1不能为空', trigger: 'blur'}
+          { required: true, message: '引导词1不能为空', trigger: 'blur' }
         ],
         guide2: [
-          {required: true, message: '引导词2不能为空', trigger: 'blur'}
+          { required: true, message: '引导词2不能为空', trigger: 'blur' }
         ],
         guide3: [
-          {required: true, message: '引导词3不能为空', trigger: 'blur'}
+          { required: true, message: '引导词3不能为空', trigger: 'blur' }
         ],
         guide4: [
-          {required: true, message: '引导词4不能为空', trigger: 'blur'}
+          { required: true, message: '引导词4不能为空', trigger: 'blur' }
         ],
         guide5: [
-          {required: true, message: '引导词5不能为空', trigger: 'blur'}
+          { required: true, message: '引导词5不能为空', trigger: 'blur' }
         ],
         guide6: [
-          {required: true, message: '引导词6不能为空', trigger: 'blur'}
+          { required: true, message: '引导词6不能为空', trigger: 'blur' }
         ],
         createdDate: [
-          {required: true, message: '创建时间不能为空', trigger: 'blur'}
+          { required: true, message: '创建时间不能为空', trigger: 'blur' }
         ],
         updatedDate: [
-          {required: true, message: '更新时间不能为空', trigger: 'blur'}
+          { required: true, message: '更新时间不能为空', trigger: 'blur' }
         ],
         period: [
-          {required: true, message: '时间类型不能为空', trigger: 'blur'}
+          { required: true, message: '时间类型不能为空', trigger: 'blur' }
         ],
         userId: [
-          {required: true, message: '用户id不能为空', trigger: 'blur'}
+          { required: true, message: '用户id不能为空', trigger: 'blur' }
         ],
-        bookId: [
-          {required: true, message: '日记本id不能为空', trigger: 'blur'}
+        dayTimestamp: [
+          { required: true, message: '时间索引不能为空', trigger: 'blur' }
         ]
       },
       queryTypeOptions: [
         {
           key: 'id',
           display_name: 'uuid'
+        },
+        {
+          key: 'dayTimestamp',
+          display_name: '时间索引'
         }
       ]
     }
