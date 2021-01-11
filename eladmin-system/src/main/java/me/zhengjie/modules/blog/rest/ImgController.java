@@ -11,7 +11,6 @@ import me.zhengjie.modules.blog.service.dto.ImgQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class ImgController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('img:list')")
+//    @PreAuthorize("@el.check('img:list')")
     public void download(HttpServletResponse response, ImgQueryCriteria criteria) throws IOException {
         imgService.download(imgService.queryAll(criteria), response);
     }
@@ -42,7 +41,7 @@ public class ImgController {
     @GetMapping
     @Log("查询blog_img")
     @ApiOperation("查询blog_img")
-    @PreAuthorize("@el.check('img:list')")
+//    @PreAuthorize("@el.check('img:list')")
     public ResponseEntity
             <Object> query(ImgQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(imgService.queryAll(criteria, pageable), HttpStatus.OK);
@@ -51,7 +50,7 @@ public class ImgController {
     @PostMapping
     @Log("新增blog_img")
     @ApiOperation("新增blog_img")
-    @PreAuthorize("@el.check('img:add')")
+//    @PreAuthorize("@el.check('img:add')")
     public ResponseEntity
             <Object> create(@Validated @RequestBody Img resources) {
         return new ResponseEntity<>(imgService.create(resources), HttpStatus.CREATED);
@@ -60,7 +59,7 @@ public class ImgController {
     @PutMapping
     @Log("修改blog_img")
     @ApiOperation("修改blog_img")
-    @PreAuthorize("@el.check('img:edit')")
+//    @PreAuthorize("@el.check('img:edit')")
     public ResponseEntity
             <Object> update(@Validated @RequestBody Img resources) {
         imgService.update(resources);
@@ -69,7 +68,7 @@ public class ImgController {
 
     @Log("删除blog_img")
     @ApiOperation("删除blog_img")
-    @PreAuthorize("@el.check('img:del')")
+//    @PreAuthorize("@el.check('img:del')")
     @DeleteMapping
     public ResponseEntity
             <Object> delete(@RequestBody String[] ids) {

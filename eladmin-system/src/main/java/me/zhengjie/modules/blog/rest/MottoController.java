@@ -25,7 +25,6 @@ import me.zhengjie.modules.blog.service.dto.MottoQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +47,7 @@ public class MottoController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('motto:list')")
+//    @PreAuthorize("@el.check('motto:list')")
     public void download(HttpServletResponse response, MottoQueryCriteria criteria) throws IOException {
         mottoService.download(mottoService.queryAll(criteria), response);
     }
@@ -56,7 +55,7 @@ public class MottoController {
     @GetMapping
     @Log("查询guide_motto")
     @ApiOperation("查询guide_motto")
-    @PreAuthorize("@el.check('motto:list')")
+//    @PreAuthorize("@el.check('motto:list')")
     public ResponseEntity<Object> query(MottoQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(mottoService.queryAll(criteria, pageable), HttpStatus.OK);
     }
@@ -64,7 +63,7 @@ public class MottoController {
     @PostMapping
     @Log("新增guide_motto")
     @ApiOperation("新增guide_motto")
-    @PreAuthorize("@el.check('motto:add')")
+//    @PreAuthorize("@el.check('motto:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody Motto resources) {
         return new ResponseEntity<>(mottoService.create(resources), HttpStatus.CREATED);
     }
@@ -72,7 +71,7 @@ public class MottoController {
     @PutMapping
     @Log("修改guide_motto")
     @ApiOperation("修改guide_motto")
-    @PreAuthorize("@el.check('motto:edit')")
+//    @PreAuthorize("@el.check('motto:edit')")
     public ResponseEntity<Object> update(@Validated @RequestBody Motto resources) {
         mottoService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -80,7 +79,7 @@ public class MottoController {
 
     @Log("删除guide_motto")
     @ApiOperation("删除guide_motto")
-    @PreAuthorize("@el.check('motto:del')")
+//    @PreAuthorize("@el.check('motto:del')")
     @DeleteMapping
     public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         mottoService.deleteAll(ids);

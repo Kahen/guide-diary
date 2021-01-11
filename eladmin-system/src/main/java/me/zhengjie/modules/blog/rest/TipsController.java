@@ -25,7 +25,6 @@ import me.zhengjie.modules.blog.service.dto.TipsQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +47,7 @@ public class TipsController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('tips:list')")
+//    @PreAuthorize("@el.check('tips:list')")
     public void download(HttpServletResponse response, TipsQueryCriteria criteria) throws IOException {
         tipsService.download(tipsService.queryAll(criteria), response);
     }
@@ -56,7 +55,7 @@ public class TipsController {
     @GetMapping
     @Log("查询guide_tips")
     @ApiOperation("查询guide_tips")
-    @PreAuthorize("@el.check('tips:list')")
+//    @PreAuthorize("@el.check('tips:list')")
     public ResponseEntity<Object> query(TipsQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(tipsService.queryAll(criteria, pageable), HttpStatus.OK);
     }
@@ -64,7 +63,7 @@ public class TipsController {
     @PostMapping
     @Log("新增guide_tips")
     @ApiOperation("新增guide_tips")
-    @PreAuthorize("@el.check('tips:add')")
+//    @PreAuthorize("@el.check('tips:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody Tips resources) {
         return new ResponseEntity<>(tipsService.create(resources), HttpStatus.CREATED);
     }
@@ -72,7 +71,7 @@ public class TipsController {
     @PutMapping
     @Log("修改guide_tips")
     @ApiOperation("修改guide_tips")
-    @PreAuthorize("@el.check('tips:edit')")
+//    @PreAuthorize("@el.check('tips:edit')")
     public ResponseEntity<Object> update(@Validated @RequestBody Tips resources) {
         tipsService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -80,7 +79,7 @@ public class TipsController {
 
     @Log("删除guide_tips")
     @ApiOperation("删除guide_tips")
-    @PreAuthorize("@el.check('tips:del')")
+//    @PreAuthorize("@el.check('tips:del')")
     @DeleteMapping
     public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         tipsService.deleteAll(ids);

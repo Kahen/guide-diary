@@ -33,7 +33,7 @@ public class DiaryController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('diary:list')")
+//    @PreAuthorize("@el.check('diary:list')")
     public void download(HttpServletResponse response, DiaryQueryCriteria criteria) throws IOException {
         diaryService.download(diaryService.queryAll(criteria), response);
     }
@@ -41,15 +41,16 @@ public class DiaryController {
     @GetMapping
     @Log("查询diary")
     @ApiOperation("查询diary")
-    @PreAuthorize("@el.check('diary:list')")
+//    @PreAuthorize("@el.check('diary:list')")
     public ResponseEntity<Object> query(DiaryQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(diaryService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
+
     @PostMapping
     @Log("新增diary")
     @ApiOperation("新增diary")
-    @PreAuthorize("@el.check('diary:add')")
+//    @PreAuthorize("@el.check('diary:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody Diary resources) {
         return new ResponseEntity<>(diaryService.create(resources), HttpStatus.CREATED);
     }
@@ -57,7 +58,7 @@ public class DiaryController {
     @PutMapping
     @Log("修改diary")
     @ApiOperation("修改diary")
-    @PreAuthorize("@el.check('diary:edit')")
+//    @PreAuthorize("@el.check('diary:edit')")
     public ResponseEntity<Object> update(@Validated @RequestBody Diary resources) {
         diaryService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

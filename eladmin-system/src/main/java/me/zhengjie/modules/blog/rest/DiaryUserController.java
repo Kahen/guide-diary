@@ -11,7 +11,6 @@ import me.zhengjie.modules.blog.service.dto.DiaryUserQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class DiaryUserController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('diaryUser:list')")
+//    @PreAuthorize("@el.check('diaryUser:list')")
     public void download(HttpServletResponse response, DiaryUserQueryCriteria criteria) throws IOException {
         diaryUserService.download(diaryUserService.queryAll(criteria), response);
     }
@@ -42,7 +41,7 @@ public class DiaryUserController {
     @GetMapping
     @Log("查询diary_user")
     @ApiOperation("查询diary_user")
-    @PreAuthorize("@el.check('diaryUser:list')")
+//    @PreAuthorize("@el.check('diaryUser:list')")
     public ResponseEntity
             <Object> query(DiaryUserQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(diaryUserService.queryAll(criteria, pageable), HttpStatus.OK);
@@ -51,7 +50,7 @@ public class DiaryUserController {
     @PostMapping
     @Log("新增diary_user")
     @ApiOperation("新增diary_user")
-    @PreAuthorize("@el.check('diaryUser:add')")
+//    @PreAuthorize("@el.check('diaryUser:add')")
     public ResponseEntity
             <Object> create(@Validated @RequestBody DiaryUser resources) {
         return new ResponseEntity<>(diaryUserService.create(resources), HttpStatus.CREATED);
@@ -60,7 +59,7 @@ public class DiaryUserController {
     @PutMapping
     @Log("修改diary_user")
     @ApiOperation("修改diary_user")
-    @PreAuthorize("@el.check('diaryUser:edit')")
+//    @PreAuthorize("@el.check('diaryUser:edit')")
     public ResponseEntity
             <Object> update(@Validated @RequestBody DiaryUser resources) {
         diaryUserService.update(resources);
@@ -69,7 +68,7 @@ public class DiaryUserController {
 
     @Log("删除diary_user")
     @ApiOperation("删除diary_user")
-    @PreAuthorize("@el.check('diaryUser:del')")
+//    @PreAuthorize("@el.check('diaryUser:del')")
     @DeleteMapping
     public ResponseEntity
             <Object> delete(@RequestBody String[] ids) {

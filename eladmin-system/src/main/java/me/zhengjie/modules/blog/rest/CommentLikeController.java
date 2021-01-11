@@ -11,7 +11,6 @@ import me.zhengjie.modules.blog.service.dto.CommentLikeQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class CommentLikeController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('commentLike:list')")
+//    @PreAuthorize("@el.check('commentLike:list')")
     public void download(HttpServletResponse response, CommentLikeQueryCriteria criteria) throws IOException {
         commentLikeService.download(commentLikeService.queryAll(criteria), response);
     }
@@ -42,7 +41,7 @@ public class CommentLikeController {
     @GetMapping
     @Log("查询comment_like")
     @ApiOperation("查询comment_like")
-    @PreAuthorize("@el.check('commentLike:list')")
+//    @PreAuthorize("@el.check('commentLike:list')")
     public ResponseEntity
             <Object> query(CommentLikeQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(commentLikeService.queryAll(criteria, pageable), HttpStatus.OK);
@@ -51,7 +50,7 @@ public class CommentLikeController {
     @PostMapping
     @Log("新增comment_like")
     @ApiOperation("新增comment_like")
-    @PreAuthorize("@el.check('commentLike:add')")
+//    @PreAuthorize("@el.check('commentLike:add')")
     public ResponseEntity
             <Object> create(@Validated @RequestBody CommentLike resources) {
         return new ResponseEntity<>(commentLikeService.create(resources), HttpStatus.CREATED);
@@ -60,7 +59,7 @@ public class CommentLikeController {
     @PutMapping
     @Log("修改comment_like")
     @ApiOperation("修改comment_like")
-    @PreAuthorize("@el.check('commentLike:edit')")
+//    @PreAuthorize("@el.check('commentLike:edit')")
     public ResponseEntity
             <Object> update(@Validated @RequestBody CommentLike resources) {
         commentLikeService.update(resources);
@@ -69,7 +68,7 @@ public class CommentLikeController {
 
     @Log("删除comment_like")
     @ApiOperation("删除comment_like")
-    @PreAuthorize("@el.check('commentLike:del')")
+//    @PreAuthorize("@el.check('commentLike:del')")
     @DeleteMapping
     public ResponseEntity
             <Object> delete(@RequestBody String[] ids) {
