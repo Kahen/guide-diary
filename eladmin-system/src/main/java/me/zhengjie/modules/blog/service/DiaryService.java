@@ -77,4 +77,6 @@ public interface DiaryService {
      * @throws IOException /
      */
     void download(List<DiaryDto> all, HttpServletResponse response) throws IOException;
+
+    DiaryDto findDiaryByUserIdAndDayTimestamp(String userId, String dateTime);
 }

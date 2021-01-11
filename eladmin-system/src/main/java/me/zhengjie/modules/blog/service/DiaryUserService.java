@@ -81,4 +81,5 @@ public interface DiaryUserService {
     public DiaryUser buildDiaryUser(JSONObject userObject);
 
     void saveAll(List<DiaryUser> diaryUsers);
+
 }

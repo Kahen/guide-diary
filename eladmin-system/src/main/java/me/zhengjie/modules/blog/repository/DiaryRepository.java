@@ -10,4 +10,12 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @date 2021-01-11
  **/
 public interface DiaryRepository extends JpaRepository<Diary, String>, JpaSpecificationExecutor<Diary> {
+    /**
+     * 查找日记
+     *
+     * @param userId  /
+     * @param dayTime /
+     * @return /
+     */
+    Diary findDiaryByUserIdAndDayTimestamp(String userId, String dayTime);
 }

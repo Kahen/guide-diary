@@ -38,8 +38,7 @@ public class DiaryServiceImpl implements DiaryService {
     private final DiaryMapper diaryMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable) {
+    public Map<String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable) {
         Page<Diary> page = diaryRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(diaryMapper::toDto));
     }
@@ -85,11 +84,8 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public void download(List
-                                 <DiaryDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String, Object>> list = new ArrayList<>();
+    public void download(List<DiaryDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (DiaryDto diary : all) {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("心情贴纸", diary.getMood());
@@ -114,5 +110,11 @@ public class DiaryServiceImpl implements DiaryService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public DiaryDto findDiaryByUserIdAndDayTimestamp(String userId, String dateTime) {
+        Diary diary = diaryRepository.findDiaryByUserIdAndDayTimestamp(userId, dateTime);
+        return diaryMapper.toDto(diary);
     }
 }

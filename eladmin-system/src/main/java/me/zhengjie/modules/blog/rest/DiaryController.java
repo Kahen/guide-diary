@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.Log;
 import me.zhengjie.modules.blog.domain.Diary;
 import me.zhengjie.modules.blog.service.DiaryService;
+import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -73,5 +75,12 @@ public class DiaryController {
             <Object> delete(@RequestBody String[] ids) {
         diaryService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Object> findOne(@PathVariable(name = "id") String id, @Param("userId") String userId) {
+
+        DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userId, id);
+        return new ResponseEntity<>(diaryDto, HttpStatus.OK);
     }
 }
