@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * @author Kahen
  * @description 服务实现
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 @Service
 @RequiredArgsConstructor
@@ -38,7 +38,8 @@ public class DiaryServiceImpl implements DiaryService {
     private final DiaryMapper diaryMapper;
 
     @Override
-    public Map<String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable) {
+    public Map
+            <String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable) {
         Page<Diary> page = diaryRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(diaryMapper::toDto));
     }
@@ -55,7 +56,7 @@ public class DiaryServiceImpl implements DiaryService {
     public DiaryDto findById(String id) {
         Diary diary = diaryRepository.findById(id).orElseGet(Diary
                 ::new);
-        ValidationUtil.isNull(diary.getId(), "Diary", "id", id);
+        ValidationUtil.isNull(diary.getId(), "Diary", "id ", id);
         return diaryMapper.toDto(diary);
     }
 
@@ -84,8 +85,11 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public void download(List<DiaryDto> all, HttpServletResponse response) throws IOException {
-        List<Map<String, Object>> list = new ArrayList<>();
+    public void download(List
+                                 <DiaryDto> all, HttpServletResponse response) throws IOException {
+        List
+                <Map
+                        <String, Object>> list = new ArrayList<>();
         for (DiaryDto diary : all) {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("心情贴纸", diary.getMood());

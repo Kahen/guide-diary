@@ -5,7 +5,6 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -21,12 +20,11 @@ import java.sql.Timestamp;
 /**
  * @author Kahen
  * @description /
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 @Entity
 @Data
 @Table(name = "diary")
-@Accessors(chain = true)
 public class Diary implements Serializable {
 
     @Id
@@ -119,9 +117,9 @@ public class Diary implements Serializable {
     private String userId;
 
     @Column(name = "day_timestamp", nullable = false)
-    @NotNull
+    @NotBlank
     @ApiModelProperty(value = "时间索引")
-    private Long dayTimestamp;
+    private String dayTimestamp;
 
     public void copy(Diary source) {
         BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));

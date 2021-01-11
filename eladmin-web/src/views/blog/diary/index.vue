@@ -199,7 +199,7 @@
             label="时间索引"
             prop="dayTimestamp"
           >
-            <el-date-picker v-model="form.dayTimestamp" style="width: 370px;" type="date" value-format="timestamp" />
+            <el-date-picker v-model="form.dayTimestamp" style="width: 370px;" type="date" value-format="yyyy-MM-dd" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -210,8 +210,8 @@
       <!--表格渲染-->
       <el-table
         ref="table"
-        v-loading="crud.loading"
         :data="crud.data"
+        v-loading="crud.loading"
         size="small"
         style="width: 100%;"
         @selection-change="crud.selectionChangeHandler"

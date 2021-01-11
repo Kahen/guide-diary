@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * @author Kahen
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 public interface DiaryRepository extends JpaRepository<Diary, String>, JpaSpecificationExecutor<Diary> {
 }

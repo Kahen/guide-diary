@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * @author Kahen
  * @description 服务接口
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 public interface DiaryService {
 
@@ -26,7 +26,8 @@ public interface DiaryService {
      * @return Map
      * <String,Object>
      */
-    Map<String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable);
+    Map
+            <String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -35,7 +36,8 @@ public interface DiaryService {
      * @return List
      * <DiaryDto>
      */
-    List<DiaryDto> queryAll(DiaryQueryCriteria criteria);
+    List
+            <DiaryDto> queryAll(DiaryQueryCriteria criteria);
 
     /**
      * 根据ID查询

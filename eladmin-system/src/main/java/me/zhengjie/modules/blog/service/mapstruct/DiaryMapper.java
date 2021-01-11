@@ -9,7 +9,7 @@ import org.mapstruct.ReportingPolicy;
 
 /**
  * @author Kahen
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DiaryMapper extends BaseMapper
