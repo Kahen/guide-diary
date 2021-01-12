@@ -9,8 +9,13 @@ import me.zhengjie.modules.blog.domain.Diary;
 import me.zhengjie.modules.blog.service.DiaryService;
 import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
+import me.zhengjie.modules.blog.utils.TokenFormatUtils;
+import me.zhengjie.modules.security.service.OnlineUserService;
+import me.zhengjie.modules.security.service.dto.OnlineUserDto;
+import me.zhengjie.modules.system.service.dto.UserDto;
+import me.zhengjie.utils.RedisUtils;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +35,8 @@ import java.io.IOException;
 public class DiaryController {
 
     private final DiaryService diaryService;
+    private final OnlineUserService onlineUserService;
+    private final RedisUtils redisUtils;
 
     @Log("导出数据")
     @ApiOperation("导出数据")
@@ -78,9 +85,16 @@ public class DiaryController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Object> findOne(@PathVariable(name = "id") String id, @Param("userId") String userId) {
+    public ResponseEntity<Object> findOne(@PathVariable(name = "id") String id, @RequestHeader HttpHeaders httpHeaders) {
+        if (!httpHeaders.containsKey("Authorization")) {
+            return new ResponseEntity<>("not user", HttpStatus.OK);
+        }
+        OnlineUserDto authorization = onlineUserService.getOne(TokenFormatUtils.bearerTokenToOnlineToken(httpHeaders.getFirst("Authorization")));
+        UserDto userDto = (UserDto) redisUtils.get("user::username:" + authorization.getUserName());
 
-        DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userId, id);
+
+        DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userDto.getUid(), id);
         return new ResponseEntity<>(diaryDto, HttpStatus.OK);
+//        return new ResponseEntity<>( HttpStatus.OK);
     }
 }
