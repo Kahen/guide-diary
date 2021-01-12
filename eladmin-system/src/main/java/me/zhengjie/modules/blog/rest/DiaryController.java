@@ -6,7 +6,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.Log;
 import me.zhengjie.modules.blog.domain.Diary;
+import me.zhengjie.modules.blog.domain.Tips;
 import me.zhengjie.modules.blog.service.DiaryService;
+import me.zhengjie.modules.blog.service.TipsService;
 import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
 import me.zhengjie.modules.blog.utils.TokenFormatUtils;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Kahen
@@ -37,6 +40,7 @@ public class DiaryController {
     private final DiaryService diaryService;
     private final OnlineUserService onlineUserService;
     private final RedisUtils redisUtils;
+    private final TipsService tipsService;
 
     @Log("导出数据")
     @ApiOperation("导出数据")
@@ -92,8 +96,19 @@ public class DiaryController {
         OnlineUserDto authorization = onlineUserService.getOne(TokenFormatUtils.bearerTokenToOnlineToken(httpHeaders.getFirst("Authorization")));
         UserDto userDto = (UserDto) redisUtils.get("user::username:" + authorization.getUserName());
 
-
+        // todo: fix bug
         DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userDto.getUid(), id);
+        if (diaryDto == null) {
+            List<Tips> tips = tipsService.buildRamDomTips("daily");
+            DiaryDto diaryDto1 = new DiaryDto();
+            diaryDto1.setGuide1(tips.get(0).getContent());
+            diaryDto1.setGuide2(tips.get(1).getContent());
+            diaryDto1.setGuide3(tips.get(2).getContent());
+            diaryDto1.setGuide4(tips.get(3).getContent());
+            diaryDto1.setGuide5(tips.get(4).getContent());
+            diaryDto1.setGuide6(tips.get(5).getContent());
+            return new ResponseEntity<>(diaryDto1, HttpStatus.OK);
+        }
         return new ResponseEntity<>(diaryDto, HttpStatus.OK);
 //        return new ResponseEntity<>( HttpStatus.OK);
     }

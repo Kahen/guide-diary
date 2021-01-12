@@ -19,10 +19,13 @@ import me.zhengjie.modules.blog.domain.Tips;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
+
 /**
  * @author Kahen
  * @website https://el-admin.vip
  * @date 2020-12-27
  **/
 public interface TipsRepository extends JpaRepository<Tips, String>, JpaSpecificationExecutor<Tips> {
+    List<Tips> findTipsByPeriodType(String period);
 }
