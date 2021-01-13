@@ -13,7 +13,6 @@ import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
 import me.zhengjie.modules.security.service.OnlineUserService;
 import me.zhengjie.modules.system.service.dto.UserDto;
-import me.zhengjie.utils.RedisUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,7 +36,6 @@ public class DiaryController {
 
     private final DiaryService diaryService;
     private final OnlineUserService onlineUserService;
-    private final RedisUtils redisUtils;
     private final TipsService tipsService;
 
     @Log("导出数据")
@@ -102,6 +100,7 @@ public class DiaryController {
             diaryDto1.setGuide4(tips.get(3).getContent());
             diaryDto1.setGuide5(tips.get(4).getContent());
             diaryDto1.setGuide6(tips.get(5).getContent());
+            diaryDto1.setUserId(userInfo.getUid());
             return new ResponseEntity<>(diaryDto1, HttpStatus.OK);
         }
         return new ResponseEntity<>(diaryDto, HttpStatus.OK);
