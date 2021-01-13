@@ -11,9 +11,7 @@ import me.zhengjie.modules.blog.service.DiaryService;
 import me.zhengjie.modules.blog.service.TipsService;
 import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
-import me.zhengjie.modules.blog.utils.TokenFormatUtils;
 import me.zhengjie.modules.security.service.OnlineUserService;
-import me.zhengjie.modules.security.service.dto.OnlineUserDto;
 import me.zhengjie.modules.system.service.dto.UserDto;
 import me.zhengjie.utils.RedisUtils;
 import org.springframework.data.domain.Pageable;
@@ -93,11 +91,8 @@ public class DiaryController {
         if (!httpHeaders.containsKey("Authorization")) {
             return new ResponseEntity<>("not user", HttpStatus.OK);
         }
-        OnlineUserDto authorization = onlineUserService.getOne(TokenFormatUtils.bearerTokenToOnlineToken(httpHeaders.getFirst("Authorization")));
-        UserDto userDto = (UserDto) redisUtils.get("user::username:" + authorization.getUserName());
-
-        // todo: fix bug
-        DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userDto.getUid(), id);
+        UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
+        DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userInfo.getUid(), id);
         if (diaryDto == null) {
             List<Tips> tips = tipsService.buildRamDomTips("daily");
             DiaryDto diaryDto1 = new DiaryDto();

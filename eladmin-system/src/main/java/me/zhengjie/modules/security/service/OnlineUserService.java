@@ -2,9 +2,11 @@
 package me.zhengjie.modules.security.service;
 
 import lombok.extern.slf4j.Slf4j;
+import me.zhengjie.modules.blog.utils.TokenFormatUtils;
 import me.zhengjie.modules.security.config.bean.SecurityProperties;
 import me.zhengjie.modules.security.service.dto.JwtUserDto;
 import me.zhengjie.modules.security.service.dto.OnlineUserDto;
+import me.zhengjie.modules.system.service.dto.UserDto;
 import me.zhengjie.utils.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
@@ -183,5 +185,11 @@ public class OnlineUserService {
                 kickOut(onlineUser.getKey());
             }
         }
+    }
+
+
+    public UserDto findOnlineUserInfo(String auth) {
+        OnlineUserDto onlineUserDto = (OnlineUserDto) redisUtils.get(TokenFormatUtils.bearerTokenToOnlineToken(auth));
+        return (UserDto) redisUtils.get("user::username:" + onlineUserDto.getUserName());
     }
 }
