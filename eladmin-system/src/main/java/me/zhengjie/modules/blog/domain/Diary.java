@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -97,13 +96,13 @@ public class Diary implements Serializable {
     private String content6;
 
     @Column(name = "created_date", nullable = false)
-    @NotNull
+//    @NotNull
     @CreationTimestamp
     @ApiModelProperty(value = "创建时间")
     private Timestamp createdDate;
 
     @Column(name = "updated_date", nullable = false)
-    @NotNull
+//    @NotNull
     @UpdateTimestamp
     @ApiModelProperty(value = "更新时间")
     private Timestamp updatedDate;
