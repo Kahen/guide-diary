@@ -117,4 +117,10 @@ public class DiaryServiceImpl implements DiaryService {
         Diary diary = diaryRepository.findDiaryByUserIdAndDayTimestamp(userId, dateTime);
         return diaryMapper.toDto(diary);
     }
+
+    @Override
+    public List<DiaryDto> findDiaryByUser(String userId, Pageable pageable) {
+        List<Diary> diaries = diaryRepository.findDiaryByUserIdOrderByCreatedDateDesc(userId, pageable);
+        return diaryMapper.toDto(diaries);
+    }
 }

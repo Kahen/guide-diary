@@ -14,6 +14,7 @@ import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
 import me.zhengjie.modules.security.service.OnlineUserService;
 import me.zhengjie.modules.system.service.dto.UserDto;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,18 @@ public class DiaryController {
     public ResponseEntity
             <Object> query(DiaryQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(diaryService.queryAll(criteria, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("timeline")
+    @Log("查询时间线")
+    @ApiOperation("查询时间线")
+    public ResponseEntity<Object> findAllByUser(@PageableDefault Pageable pageable, @RequestHeader HttpHeaders httpHeaders) {
+        if (!httpHeaders.containsKey("Authorization")) {
+            return new ResponseEntity<>("not user", HttpStatus.OK);
+        }
+        UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
+        List<DiaryDto> diaryByUser = diaryService.findDiaryByUser(userInfo.getUid(), pageable);
+        return new ResponseEntity<>(diaryByUser, HttpStatus.OK);
     }
 
     @PostMapping

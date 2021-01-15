@@ -26,8 +26,7 @@ public interface DiaryService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(DiaryQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -36,8 +35,7 @@ public interface DiaryService {
      * @return List
      * <DiaryDto>
      */
-    List
-            <DiaryDto> queryAll(DiaryQueryCriteria criteria);
+    List<DiaryDto> queryAll(DiaryQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -78,5 +76,21 @@ public interface DiaryService {
      */
     void download(List<DiaryDto> all, HttpServletResponse response) throws IOException;
 
+    /**
+     * 根据userid 和时间查
+     *
+     * @param userId   /
+     * @param dateTime /
+     * @return /
+     */
     DiaryDto findDiaryByUserIdAndDayTimestamp(String userId, String dateTime);
+
+    /**
+     * findDiaryByUserIdOrderByCreatedDate
+     *
+     * @param userId   /
+     * @param pageable /
+     * @return /
+     */
+    List<DiaryDto> findDiaryByUser(String userId, Pageable pageable);
 }
