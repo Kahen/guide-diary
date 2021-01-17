@@ -12,7 +12,7 @@ import me.zhengjie.modules.blog.service.TipsService;
 import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
 import me.zhengjie.modules.security.service.OnlineUserService;
-import me.zhengjie.modules.system.service.dto.UserDto;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
 import me.zhengjie.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -61,11 +61,12 @@ public class DiaryController {
     @Log("查询时间线")
     @ApiOperation("查询时间线")
     public ResponseEntity<Object> findAllByUser(@PageableDefault Pageable pageable, @RequestHeader HttpHeaders httpHeaders) {
-        if (!httpHeaders.containsKey("Authorization")) {
-            return new ResponseEntity<>("not user", HttpStatus.OK);
-        }
-        UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
-        List<DiaryDto> diaryByUser = diaryService.findDiaryByUser(userInfo.getUid(), pageable);
+//        if (!httpHeaders.containsKey("Authorization")) {
+//            return new ResponseEntity<>("not user", HttpStatus.OK);
+//        }
+//        UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
+        JwtUserDto currentUser = (JwtUserDto) SecurityUtils.getCurrentUser();
+        List<DiaryDto> diaryByUser = diaryService.findDiaryByUser(currentUser.getUser().getUid(), pageable);
         return new ResponseEntity<>(diaryByUser, HttpStatus.OK);
     }
 
@@ -100,12 +101,13 @@ public class DiaryController {
 
     @GetMapping("{id}")
     public ResponseEntity<Object> findOne(@PathVariable(name = "id") String id, @RequestHeader HttpHeaders httpHeaders) {
-        if (!httpHeaders.containsKey("Authorization")) {
-            return new ResponseEntity<>("not user", HttpStatus.OK);
-        }
-        System.out.println(SecurityUtils.getCurrentUsername());
-        UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
-        DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userInfo.getUid(), id);
+//        if (!httpHeaders.containsKey("Authorization")) {
+//            return new ResponseEntity<>("not user", HttpStatus.OK);
+//        }
+//        System.out.println(SecurityUtils.getCurrentUsername());
+//        UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
+        JwtUserDto currentUser = (JwtUserDto) SecurityUtils.getCurrentUser();
+        DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(currentUser.getUser().getUid(), id);
         if (diaryDto == null) {
             List<Tips> tips = tipsService.buildRamDomTips("daily");
             DiaryDto diaryDto1 = new DiaryDto();
@@ -115,7 +117,7 @@ public class DiaryController {
             diaryDto1.setGuide4(tips.get(3).getContent());
             diaryDto1.setGuide5(tips.get(4).getContent());
             diaryDto1.setGuide6(tips.get(5).getContent());
-            diaryDto1.setUserId(userInfo.getUid());
+            diaryDto1.setUserId(currentUser.getUser().getUid());
             return new ResponseEntity<>(diaryDto1, HttpStatus.OK);
         }
         return new ResponseEntity<>(diaryDto, HttpStatus.OK);
