@@ -13,6 +13,7 @@ import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
 import me.zhengjie.modules.security.service.OnlineUserService;
 import me.zhengjie.modules.system.service.dto.UserDto;
+import me.zhengjie.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
@@ -102,6 +103,7 @@ public class DiaryController {
         if (!httpHeaders.containsKey("Authorization")) {
             return new ResponseEntity<>("not user", HttpStatus.OK);
         }
+        System.out.println(SecurityUtils.getCurrentUsername());
         UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
         DiaryDto diaryDto = diaryService.findDiaryByUserIdAndDayTimestamp(userInfo.getUid(), id);
         if (diaryDto == null) {
