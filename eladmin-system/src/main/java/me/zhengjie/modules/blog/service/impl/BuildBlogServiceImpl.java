@@ -89,9 +89,9 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
                     for (int i = 0; i < picUrls.size(); i++) {
                         JSONObject jsonObject = picUrls.getJSONObject(i);
-                        JSONObject jsonObject1 = new JSONObject();
-                        jsonObject1.put("" + i, jsonObject.getString("thumbnail_pic"));
-                        jsonArray.add(jsonObject1);
+//                        JSONObject jsonObject1 = new JSONObject();
+//                        jsonObject1.put("" + i, jsonObject.getString("thumbnail_pic"));
+                        jsonArray.add(jsonObject.getString("thumbnail_pic"));
                     }
                     images.add(
                             new Img().setImgId(IdUtil.simpleUUID())
