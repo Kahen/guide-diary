@@ -123,9 +123,11 @@ public class DiaryController {
             return new ResponseEntity<>(diaryDto1, HttpStatus.OK);
         }
         ImgDto imgDto = imgService.findByDiaryId(diaryDto.getId());
+        if (imgDto != null) {
 
-        JSONArray array = JSONArray.parseArray(imgDto.getImgUrl());
-        diaryDto.setImgUrls(array.toJavaList(String.class));
+            JSONArray array = JSONArray.parseArray(imgDto.getImgUrl());
+            diaryDto.setImgUrls(array.toJavaList(String.class));
+        }
         return new ResponseEntity<>(diaryDto, HttpStatus.OK);
 //        return new ResponseEntity<>( HttpStatus.OK);
     }
