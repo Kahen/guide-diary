@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author Kahen
@@ -113,4 +114,6 @@ public class DiaryDto implements Serializable {
      * 时间索引
      */
     private String dayTimestamp;
+
+    private List<String> imgUrls;
 }

@@ -1,6 +1,7 @@
 
 package me.zhengjie.modules.blog.rest;
 
+import com.alibaba.fastjson.JSONArray;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +9,11 @@ import me.zhengjie.annotation.Log;
 import me.zhengjie.modules.blog.domain.Diary;
 import me.zhengjie.modules.blog.domain.Tips;
 import me.zhengjie.modules.blog.service.DiaryService;
+import me.zhengjie.modules.blog.service.ImgService;
 import me.zhengjie.modules.blog.service.TipsService;
 import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
-import me.zhengjie.modules.security.service.OnlineUserService;
+import me.zhengjie.modules.blog.service.dto.ImgDto;
 import me.zhengjie.modules.security.service.dto.JwtUserDto;
 import me.zhengjie.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
@@ -37,8 +39,8 @@ import java.util.List;
 public class DiaryController {
 
     private final DiaryService diaryService;
-    private final OnlineUserService onlineUserService;
     private final TipsService tipsService;
+    private final ImgService imgService;
 
     @Log("导出数据")
     @ApiOperation("导出数据")
@@ -120,6 +122,10 @@ public class DiaryController {
             diaryDto1.setUserId(currentUser.getUser().getUid());
             return new ResponseEntity<>(diaryDto1, HttpStatus.OK);
         }
+        ImgDto imgDto = imgService.findByDiaryId(diaryDto.getId());
+
+        JSONArray array = JSONArray.parseArray(imgDto.getImgUrl());
+        diaryDto.setImgUrls(array.toJavaList(String.class));
         return new ResponseEntity<>(diaryDto, HttpStatus.OK);
 //        return new ResponseEntity<>( HttpStatus.OK);
     }

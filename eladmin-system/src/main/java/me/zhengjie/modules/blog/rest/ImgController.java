@@ -42,8 +42,7 @@ public class ImgController {
     @Log("查询blog_img")
     @ApiOperation("查询blog_img")
 //    @PreAuthorize("@el.check('img:list')")
-    public ResponseEntity
-            <Object> query(ImgQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity<Object> query(ImgQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(imgService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -51,8 +50,7 @@ public class ImgController {
     @Log("新增blog_img")
     @ApiOperation("新增blog_img")
 //    @PreAuthorize("@el.check('img:add')")
-    public ResponseEntity
-            <Object> create(@Validated @RequestBody Img resources) {
+    public ResponseEntity<Object> create(@Validated @RequestBody Img resources) {
         return new ResponseEntity<>(imgService.create(resources), HttpStatus.CREATED);
     }
 
@@ -60,8 +58,7 @@ public class ImgController {
     @Log("修改blog_img")
     @ApiOperation("修改blog_img")
 //    @PreAuthorize("@el.check('img:edit')")
-    public ResponseEntity
-            <Object> update(@Validated @RequestBody Img resources) {
+    public ResponseEntity<Object> update(@Validated @RequestBody Img resources) {
         imgService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -70,8 +67,7 @@ public class ImgController {
     @ApiOperation("删除blog_img")
 //    @PreAuthorize("@el.check('img:del')")
     @DeleteMapping
-    public ResponseEntity
-            <Object> delete(@RequestBody String[] ids) {
+    public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         imgService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
