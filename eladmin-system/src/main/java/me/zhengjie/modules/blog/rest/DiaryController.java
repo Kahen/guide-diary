@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -120,6 +121,14 @@ public class DiaryController {
             diaryDto1.setGuide5(tips.get(4).getContent());
             diaryDto1.setGuide6(tips.get(5).getContent());
             diaryDto1.setUserId(currentUser.getUser().getUid());
+            List<String> imgUrls = new ArrayList<>();
+            imgUrls.add("transparent.png");
+            imgUrls.add("transparent.png");
+            imgUrls.add("transparent.png");
+            imgUrls.add("transparent.png");
+            imgUrls.add("transparent.png");
+            imgUrls.add("transparent.png");
+            diaryDto1.setImgUrls(imgUrls);
             return new ResponseEntity<>(diaryDto1, HttpStatus.OK);
         }
         ImgDto imgDto = imgService.findByDiaryId(diaryDto.getId());
