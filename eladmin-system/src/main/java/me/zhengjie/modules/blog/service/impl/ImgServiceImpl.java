@@ -64,7 +64,9 @@ public class ImgServiceImpl implements ImgService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ImgDto create(Img resources) {
-        resources.setImgId(IdUtil.simpleUUID());
+        if (resources.getImgId() == null) {
+            resources.setImgId(IdUtil.simpleUUID());
+        }
         return imgMapper.toDto(imgRepository.save(resources));
     }
 

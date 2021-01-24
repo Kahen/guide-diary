@@ -116,4 +116,6 @@ public class DiaryDto implements Serializable {
     private String dayTimestamp;
 
     private List<String> imgUrls;
+
+    private String imgId;
 }

@@ -133,7 +133,7 @@ public class DiaryController {
         }
         ImgDto imgDto = imgService.findByDiaryId(diaryDto.getId());
         if (imgDto != null) {
-
+            diaryDto.setImgId(imgDto.getImgId());
             JSONArray array = JSONArray.parseArray(imgDto.getImgUrl());
             diaryDto.setImgUrls(array.toJavaList(String.class));
         }
