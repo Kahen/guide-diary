@@ -88,9 +88,8 @@ public interface DiaryService {
     /**
      * findDiaryByUserIdOrderByCreatedDate
      *
-     * @param userId   /
-     * @param pageable /
+     * @param userId /
      * @return /
      */
-    List<DiaryDto> findDiaryByUser(String userId, Pageable pageable);
+    List<DiaryDto> findDiaryByUser(String userId);
 }

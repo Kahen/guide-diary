@@ -119,8 +119,8 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public List<DiaryDto> findDiaryByUser(String userId, Pageable pageable) {
-        List<Diary> diaries = diaryRepository.findDiaryByUserIdOrderByCreatedDateDesc(userId, pageable);
+    public List<DiaryDto> findDiaryByUser(String userId) {
+        List<Diary> diaries = diaryRepository.findDiaryByUserIdOrderByDayTimestampDesc(userId);
         return diaryMapper.toDto(diaries);
     }
 }

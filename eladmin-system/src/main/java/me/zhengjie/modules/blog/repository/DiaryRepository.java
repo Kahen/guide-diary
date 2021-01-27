@@ -2,7 +2,6 @@
 package me.zhengjie.modules.blog.repository;
 
 import me.zhengjie.modules.blog.domain.Diary;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -25,9 +24,9 @@ public interface DiaryRepository extends JpaRepository<Diary, String>, JpaSpecif
     /**
      * 查时间线
      *
-     * @param userId   /
-     * @param pageable /
+     * @param userId /
      * @return /
      */
-    List<Diary> findDiaryByUserIdOrderByCreatedDateDesc(String userId, Pageable pageable);
+    List<Diary> findDiaryByUserIdOrderByDayTimestampDesc(String userId);
+
 }

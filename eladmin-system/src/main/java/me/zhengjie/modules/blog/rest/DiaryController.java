@@ -17,7 +17,6 @@ import me.zhengjie.modules.blog.service.dto.ImgDto;
 import me.zhengjie.modules.security.service.dto.JwtUserDto;
 import me.zhengjie.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,13 +62,13 @@ public class DiaryController {
     @GetMapping("timeline")
     @Log("查询时间线")
     @ApiOperation("查询时间线")
-    public ResponseEntity<Object> findAllByUser(@PageableDefault Pageable pageable, @RequestHeader HttpHeaders httpHeaders) {
+    public ResponseEntity<Object> findAllByUser(@RequestHeader HttpHeaders httpHeaders) {
 //        if (!httpHeaders.containsKey("Authorization")) {
 //            return new ResponseEntity<>("not user", HttpStatus.OK);
 //        }
 //        UserDto userInfo = onlineUserService.findOnlineUserInfo(httpHeaders.getFirst("Authorization"));
         JwtUserDto currentUser = (JwtUserDto) SecurityUtils.getCurrentUser();
-        List<DiaryDto> diaryByUser = diaryService.findDiaryByUser(currentUser.getUser().getUid(), pageable);
+        List<DiaryDto> diaryByUser = diaryService.findDiaryByUser(currentUser.getUser().getUid());
         return new ResponseEntity<>(diaryByUser, HttpStatus.OK);
     }
 
