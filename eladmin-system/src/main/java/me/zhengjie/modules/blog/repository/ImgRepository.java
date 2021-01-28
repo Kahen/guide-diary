@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @date 2020-12-09
  **/
 public interface ImgRepository extends JpaRepository<Img, String>, JpaSpecificationExecutor<Img> {
+    Img findImgByBlogId(String diaryId);
 }

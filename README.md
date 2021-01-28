@@ -1,4 +1,4 @@
-<h1 style="text-align: center">EL-ADMIN 后台管理系统</h1>
+<h1 style="text-align: center">格子日志后台管理系统</h1>
 <div style="text-align: center">
 
 [![AUR](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/elunez/eladmin/blob/master/LICENSE)

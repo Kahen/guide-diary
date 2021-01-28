@@ -14,19 +14,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * @author Kahen
  * @description /
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 @Entity
 @Data
-@Table(name = "diary")
 @Accessors(chain = true)
+@Table(name = "diary")
 public class Diary implements Serializable {
 
     @Id
@@ -97,13 +96,13 @@ public class Diary implements Serializable {
     private String content6;
 
     @Column(name = "created_date", nullable = false)
-    @NotNull
+//    @NotNull
     @CreationTimestamp
     @ApiModelProperty(value = "创建时间")
     private Timestamp createdDate;
 
     @Column(name = "updated_date", nullable = false)
-    @NotNull
+//    @NotNull
     @UpdateTimestamp
     @ApiModelProperty(value = "更新时间")
     private Timestamp updatedDate;
@@ -119,9 +118,9 @@ public class Diary implements Serializable {
     private String userId;
 
     @Column(name = "day_timestamp", nullable = false)
-    @NotNull
+    @NotBlank
     @ApiModelProperty(value = "时间索引")
-    private Long dayTimestamp;
+    private String dayTimestamp;
 
     public void copy(Diary source) {
         BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));

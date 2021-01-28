@@ -6,8 +6,8 @@
         <!-- 搜索 -->
         <label class="el-form-item-label">uuid</label>
         <el-input
-          class="filter-item"
           v-model="query.id"
+          class="filter-item"
           clearable
           placeholder="uuid"
           style="width: 185px;"
@@ -15,8 +15,8 @@
         />
         <label class="el-form-item-label">时间索引</label>
         <el-input
-          class="filter-item"
           v-model="query.dayTimestamp"
+          class="filter-item"
           clearable
           placeholder="时间索引"
           style="width: 185px;"
@@ -199,7 +199,7 @@
             label="时间索引"
             prop="dayTimestamp"
           >
-            <el-date-picker v-model="form.dayTimestamp" style="width: 370px;" type="date" value-format="timestamp" />
+            <el-date-picker v-model="form.dayTimestamp" style="width: 370px;" type="date" value-format="yyyy-MM-dd" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">

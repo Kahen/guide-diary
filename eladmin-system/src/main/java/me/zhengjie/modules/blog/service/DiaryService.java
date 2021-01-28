@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * @author Kahen
  * @description 服务接口
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 public interface DiaryService {
 
@@ -75,4 +75,21 @@ public interface DiaryService {
      * @throws IOException /
      */
     void download(List<DiaryDto> all, HttpServletResponse response) throws IOException;
+
+    /**
+     * 根据userid 和时间查
+     *
+     * @param userId   /
+     * @param dateTime /
+     * @return /
+     */
+    DiaryDto findDiaryByUserIdAndDayTimestamp(String userId, String dateTime);
+
+    /**
+     * findDiaryByUserIdOrderByCreatedDate
+     *
+     * @param userId /
+     * @return /
+     */
+    List<DiaryDto> findDiaryByUser(String userId);
 }

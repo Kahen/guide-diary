@@ -11,7 +11,6 @@ import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class CommentController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('comment:list')")
+//    @PreAuthorize("@el.check('comment:list')")
     public void download(HttpServletResponse response, CommentQueryCriteria criteria) throws IOException {
         commentService.download(commentService.queryAll(criteria), response);
     }
@@ -42,7 +41,7 @@ public class CommentController {
     @GetMapping
     @Log("查询blog_comment")
     @ApiOperation("查询blog_comment")
-    @PreAuthorize("@el.check('comment:list')")
+//    @PreAuthorize("@el.check('comment:list')")
     public ResponseEntity
             <Object> query(CommentQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(commentService.queryAll(criteria, pageable), HttpStatus.OK);
@@ -51,7 +50,7 @@ public class CommentController {
     @PostMapping
     @Log("新增blog_comment")
     @ApiOperation("新增blog_comment")
-    @PreAuthorize("@el.check('comment:add')")
+//    @PreAuthorize("@el.check('comment:add')")
     public ResponseEntity
             <Object> create(@Validated @RequestBody Comment resources) {
         return new ResponseEntity<>(commentService.create(resources), HttpStatus.CREATED);
@@ -60,7 +59,7 @@ public class CommentController {
     @PutMapping
     @Log("修改blog_comment")
     @ApiOperation("修改blog_comment")
-    @PreAuthorize("@el.check('comment:edit')")
+//    @PreAuthorize("@el.check('comment:edit')")
     public ResponseEntity
             <Object> update(@Validated @RequestBody Comment resources) {
         commentService.update(resources);
@@ -69,7 +68,7 @@ public class CommentController {
 
     @Log("删除blog_comment")
     @ApiOperation("删除blog_comment")
-    @PreAuthorize("@el.check('comment:del')")
+//    @PreAuthorize("@el.check('comment:del')")
     @DeleteMapping
     public ResponseEntity
             <Object> delete(@RequestBody String[] ids) {

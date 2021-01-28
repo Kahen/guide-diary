@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * @author Kahen
  * @description 服务实现
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 @Service
 @RequiredArgsConstructor
@@ -55,7 +55,7 @@ public class DiaryServiceImpl implements DiaryService {
     public DiaryDto findById(String id) {
         Diary diary = diaryRepository.findById(id).orElseGet(Diary
                 ::new);
-        ValidationUtil.isNull(diary.getId(), "Diary", "id", id);
+        ValidationUtil.isNull(diary.getId(), "Diary", "id ", id);
         return diaryMapper.toDto(diary);
     }
 
@@ -110,5 +110,17 @@ public class DiaryServiceImpl implements DiaryService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public DiaryDto findDiaryByUserIdAndDayTimestamp(String userId, String dateTime) {
+        Diary diary = diaryRepository.findDiaryByUserIdAndDayTimestamp(userId, dateTime);
+        return diaryMapper.toDto(diary);
+    }
+
+    @Override
+    public List<DiaryDto> findDiaryByUser(String userId) {
+        List<Diary> diaries = diaryRepository.findDiaryByUserIdOrderByDayTimestampDesc(userId);
+        return diaryMapper.toDto(diaries);
     }
 }

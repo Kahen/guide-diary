@@ -75,9 +75,18 @@ public class DiaryUserDto implements Serializable {
         }
 
         return new UserDto().setEnabled(true)
+                .setAvatarPath(user.getAvatarUrl())
+                .setEmail("null")
+                .setUid(user.getUid())
                 .setUsername(user.getName())
                 .setPassword(user.getPassword())
-                .setDept(new DeptSmallDto().setId(System.currentTimeMillis()).setName("用户"));
+                .setDept(new DeptSmallDto().setId(System.currentTimeMillis()).setName("用户")).setCreateTime(user.getCreateTime())
+                .setNickName(user.getNickname())
+                .setDescription(user.getDescription())
+                .setFollowersCount(user.getFollowersCount())
+                .setFriendsCount(user.getFriendsCount())
+                .setStatuesCount(user.getStatusesCount())
+                .setAvatarPath(user.getAvatarUrl());
 
     }
 }

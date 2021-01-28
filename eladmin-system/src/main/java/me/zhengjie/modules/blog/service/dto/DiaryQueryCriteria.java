@@ -6,7 +6,7 @@ import me.zhengjie.annotation.Query;
 
 /**
  * @author Kahen
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 @Data
 public class DiaryQueryCriteria {
@@ -21,5 +21,5 @@ public class DiaryQueryCriteria {
      * 精确
      */
     @Query
-    private Long dayTimestamp;
+    private String dayTimestamp;
 }

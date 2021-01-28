@@ -64,7 +64,9 @@ public class ImgServiceImpl implements ImgService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ImgDto create(Img resources) {
-        resources.setImgId(IdUtil.simpleUUID());
+        if (resources.getImgId() == null) {
+            resources.setImgId(IdUtil.simpleUUID());
+        }
         return imgMapper.toDto(imgRepository.save(resources));
     }
 
@@ -86,20 +88,20 @@ public class ImgServiceImpl implements ImgService {
     }
 
     @Override
-    public void download(List
-                                 <ImgDto> all, HttpServletResponse response) throws IOException {
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+    public void download(List<ImgDto> all, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (ImgDto img : all) {
-            Map
-                    <String
-                            , Object> map = new LinkedHashMap<>();
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("博客ID", img.getBlogId());
             map.put("图片URL", img.getImgUrl());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public ImgDto findByDiaryId(String diaryId) {
+        Img imgByBlogId = imgRepository.findImgByBlogId(diaryId);
+        return imgMapper.toDto(imgByBlogId);
     }
 }

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import me.zhengjie.base.BaseDTO;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -18,9 +18,12 @@ import java.util.Set;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UserDto extends BaseDTO implements Serializable {
+public class UserDto implements Serializable {
 
     private Long id;
+
+    private String uid;
+
 
     private Set<RoleSmallDto> roles;
 
@@ -33,6 +36,23 @@ public class UserDto extends BaseDTO implements Serializable {
     private String username;
 
     private String nickName;
+
+    private String description;
+
+    private String createBy;
+
+    private String updatedBy;
+
+    private Timestamp createTime;
+
+    private Timestamp updateTime;
+
+    private Long followersCount;
+
+    private Long friendsCount;
+
+    private Long statuesCount;
+
 
     private String email;
 

@@ -108,4 +108,12 @@ public class TipsServiceImpl implements TipsService {
         }
         FileUtil.downloadExcel(list, response);
     }
+
+    @Override
+    public List<Tips> buildRamDomTips(String period) {
+        List<Tips> tipsByPeriodType = tipsRepository.findTipsByPeriodType(period);
+        int r = (int) (System.currentTimeMillis() % (tipsByPeriodType.size() - 6));
+
+        return tipsByPeriodType.subList(r, r + 6);
+    }
 }

@@ -5,11 +5,12 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author Kahen
  * @description /
- * @date 2021-01-08
+ * @date 2021-01-11
  **/
 @Data
 public class DiaryDto implements Serializable {
@@ -112,5 +113,9 @@ public class DiaryDto implements Serializable {
     /**
      * 时间索引
      */
-    private Long dayTimestamp;
+    private String dayTimestamp;
+
+    private List<String> imgUrls;
+
+    private String imgId;
 }

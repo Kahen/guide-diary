@@ -11,7 +11,6 @@ import me.zhengjie.modules.blog.service.dto.RepostQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class RepostController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('repost:list')")
+//    @PreAuthorize("@el.check('repost:list')")
     public void download(HttpServletResponse response, RepostQueryCriteria criteria) throws IOException {
         repostService.download(repostService.queryAll(criteria), response);
     }
@@ -42,7 +41,7 @@ public class RepostController {
     @GetMapping
     @Log("查询blog_repost")
     @ApiOperation("查询blog_repost")
-    @PreAuthorize("@el.check('repost:list')")
+//    @PreAuthorize("@el.check('repost:list')")
     public ResponseEntity
             <Object> query(RepostQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(repostService.queryAll(criteria, pageable), HttpStatus.OK);
@@ -51,7 +50,7 @@ public class RepostController {
     @PostMapping
     @Log("新增blog_repost")
     @ApiOperation("新增blog_repost")
-    @PreAuthorize("@el.check('repost:add')")
+//    @PreAuthorize("@el.check('repost:add')")
     public ResponseEntity
             <Object> create(@Validated @RequestBody Repost resources) {
         return new ResponseEntity<>(repostService.create(resources), HttpStatus.CREATED);
@@ -60,7 +59,7 @@ public class RepostController {
     @PutMapping
     @Log("修改blog_repost")
     @ApiOperation("修改blog_repost")
-    @PreAuthorize("@el.check('repost:edit')")
+//    @PreAuthorize("@el.check('repost:edit')")
     public ResponseEntity
             <Object> update(@Validated @RequestBody Repost resources) {
         repostService.update(resources);
@@ -69,7 +68,7 @@ public class RepostController {
 
     @Log("删除blog_repost")
     @ApiOperation("删除blog_repost")
-    @PreAuthorize("@el.check('repost:del')")
+//    @PreAuthorize("@el.check('repost:del')")
     @DeleteMapping
     public ResponseEntity
             <Object> delete(@RequestBody String[] ids) {

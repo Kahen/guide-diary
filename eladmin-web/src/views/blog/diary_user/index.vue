@@ -46,7 +46,6 @@
         <el-form ref="form" :model="form" :rules="rules" label-width="80px" size="small">
           <el-form-item
             label="uid"
-            prop="uid"
           >
             <el-input v-model="form.uid" style="width: 370px;" />
           </el-form-item>
@@ -160,6 +159,10 @@
           prop="avatarUrl"
         />
         <el-table-column
+          label="密码哈希"
+          prop="password"
+        />
+        <el-table-column
           v-permission="['admin','diaryUser:edit','diaryUser:del']"
           align="center"
           label="操作"
@@ -180,12 +183,12 @@
 </template>
 
 <script>
+import crudDiaryUser from '@/api/blog/diaryUser'
 import CRUD, { crud, form, header, presenter } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
-import crudDiaryUser from '@/api/blog/diaryUser'
 
 const defaultForm = {
   uid: null,
@@ -220,9 +223,6 @@ export default {
         del: ['admin', 'diaryUser:del']
       },
       rules: {
-        uid: [
-          { required: true, message: 'uid不能为空', trigger: 'blur' }
-        ],
         name: [
           { required: true, message: '用户名不能为空', trigger: 'blur' }
         ],
@@ -246,6 +246,9 @@ export default {
         ],
         avatarUrl: [
           { required: true, message: '头像链接不能为空', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '密码哈希不能为空', trigger: 'blur' }
         ]
       },
       queryTypeOptions: [

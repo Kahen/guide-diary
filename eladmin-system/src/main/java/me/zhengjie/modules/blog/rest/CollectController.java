@@ -11,7 +11,6 @@ import me.zhengjie.modules.blog.service.dto.CollectQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class CollectController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('collect:list')")
+//    @PreAuthorize("@el.check('collect:list')")
     public void download(HttpServletResponse response, CollectQueryCriteria criteria) throws IOException {
         collectService.download(collectService.queryAll(criteria), response);
     }
@@ -42,7 +41,7 @@ public class CollectController {
     @GetMapping
     @Log("查询blog_collect")
     @ApiOperation("查询blog_collect")
-    @PreAuthorize("@el.check('collect:list')")
+//    @PreAuthorize("@el.check('collect:list')")
     public ResponseEntity
             <Object> query(CollectQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(collectService.queryAll(criteria, pageable), HttpStatus.OK);
@@ -51,7 +50,7 @@ public class CollectController {
     @PostMapping
     @Log("新增blog_collect")
     @ApiOperation("新增blog_collect")
-    @PreAuthorize("@el.check('collect:add')")
+//    @PreAuthorize("@el.check('collect:add')")
     public ResponseEntity
             <Object> create(@Validated @RequestBody Collect resources) {
         return new ResponseEntity<>(collectService.create(resources), HttpStatus.CREATED);
@@ -60,7 +59,7 @@ public class CollectController {
     @PutMapping
     @Log("修改blog_collect")
     @ApiOperation("修改blog_collect")
-    @PreAuthorize("@el.check('collect:edit')")
+//    @PreAuthorize("@el.check('collect:edit')")
     public ResponseEntity
             <Object> update(@Validated @RequestBody Collect resources) {
         collectService.update(resources);
@@ -69,7 +68,7 @@ public class CollectController {
 
     @Log("删除blog_collect")
     @ApiOperation("删除blog_collect")
-    @PreAuthorize("@el.check('collect:del')")
+//    @PreAuthorize("@el.check('collect:del')")
     @DeleteMapping
     public ResponseEntity
             <Object> delete(@RequestBody String[] ids) {
