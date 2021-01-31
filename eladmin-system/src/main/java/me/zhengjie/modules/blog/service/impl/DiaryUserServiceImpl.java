@@ -116,7 +116,7 @@ public class DiaryUserServiceImpl implements DiaryUserService {
                 .setName(userObject.getString("name"))
                 .setNickname(userObject.getString("screen_name"))
                 .setCreateTime(new Timestamp(DateFormatUtils.formatDate(userObject.getString("created_at"))))
-                .setAvatarUrl("profile_image_url")
+                .setAvatarUrl(userObject.getString("avatar_hd"))
                 .setDescription(userObject.getString("description"))
                 .setFollowersCount(userObject.getLong("followers_count"))
                 .setFriendsCount(userObject.getLong("friends_count"))

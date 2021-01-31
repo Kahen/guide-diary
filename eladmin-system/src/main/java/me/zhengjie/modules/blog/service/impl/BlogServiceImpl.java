@@ -4,16 +4,20 @@ package me.zhengjie.modules.blog.service.impl;
 import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Blog;
+import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.BlogRepository;
+import me.zhengjie.modules.blog.repository.DiaryUserRepository;
 import me.zhengjie.modules.blog.service.BlogService;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
 import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.BlogMapper;
+import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,9 +40,10 @@ import java.util.Map;
 public class BlogServiceImpl implements BlogService {
 
 
-
     private final BlogRepository blogRepository;
     private final BlogMapper blogMapper;
+    private final DiaryUserRepository diaryUserRepository;
+    private final DiaryUserMapper diaryUserMapper;
 
     @Override
     public Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable) {
@@ -101,6 +106,19 @@ public class BlogServiceImpl implements BlogService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public Page<BlogDto> homeLine(Pageable pageable) {
+        Page<Blog> blogs = blogRepository.findAll(pageable);
+        List<BlogDto> blogDtos = new ArrayList<>();
+        for (Blog blog : blogs.getContent()) {
+            DiaryUser diaryUser = diaryUserRepository.findById(blog.getUserId()).orElse(null);
+            BlogDto blogDto = blogMapper.toDto(blog);
+            blogDto.setDiaryUserDto(diaryUserMapper.toDto(diaryUser));
+            blogDtos.add(blogDto);
+        }
+        return new PageImpl<>(blogDtos, pageable, blogs.getTotalElements());
     }
 
 

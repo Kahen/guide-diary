@@ -4,6 +4,7 @@ package me.zhengjie.modules.blog.service;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
 import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -77,5 +78,12 @@ public interface BlogService {
      */
     void download(List<BlogDto> all, HttpServletResponse response) throws IOException;
 
+    /**
+     * 主页
+     *
+     * @param pageable /
+     * @return /
+     */
+    Page<BlogDto> homeLine(Pageable pageable);
 
 }

@@ -49,4 +49,6 @@ public class BlogDto implements Serializable {
      * 是否原创
      */
     private String isOriginal;
+
+    private DiaryUserDto diaryUserDto;
 }

@@ -71,4 +71,13 @@ public class BlogController {
         blogService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @GetMapping("homeLine")
+    @Log("查询blog")
+    @ApiOperation("查询blog")
+//    @PreAuthorize("@el.check('blog:list')")
+    public ResponseEntity<Object> query(Pageable pageable) {
+        return new ResponseEntity<>(blogService.homeLine(pageable), HttpStatus.OK);
+    }
 }
