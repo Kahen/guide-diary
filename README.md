@@ -131,7 +131,7 @@
 - 修改dockerHost
 ```shell script
 mvn clean package docker:build -DpushImage
-docker run -p 58000:8000 --name diary-system \
+docker run -p 8000:8000 --name diary-system \
 --link mysql:db \
 --link redis:redis
 -d diary/eladmin-system 

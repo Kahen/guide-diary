@@ -63,10 +63,10 @@ public class DiaryUserDto implements Serializable {
      */
     private String avatarUrl;
 
-    /**
-     * 密码哈希
-     */
-    private String password;
+//    /**
+//     * 密码哈希
+//     */
+//    private String password;
 
 
     public static UserDto toUserDto(DiaryUser user) {

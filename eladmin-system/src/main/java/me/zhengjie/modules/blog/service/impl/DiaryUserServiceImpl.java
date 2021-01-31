@@ -102,7 +102,7 @@ public class DiaryUserServiceImpl implements DiaryUserService {
             map.put("博客数", diaryUser.getStatusesCount());
             map.put("创建时间", diaryUser.getCreateTime());
             map.put("头像链接", diaryUser.getAvatarUrl());
-            map.put("密码哈希", diaryUser.getPassword());
+//            map.put("密码哈希", diaryUser.getPassword());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
