@@ -4,6 +4,7 @@ package me.zhengjie.modules.blog.service;
 import me.zhengjie.modules.blog.domain.Diary;
 import me.zhengjie.modules.blog.service.dto.DiaryDto;
 import me.zhengjie.modules.blog.service.dto.DiaryQueryCriteria;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -91,5 +92,5 @@ public interface DiaryService {
      * @param userId /
      * @return /
      */
-    List<DiaryDto> findDiaryByUser(String userId);
+    Page<DiaryDto> findDiaryByUser(String userId, Pageable pageable);
 }

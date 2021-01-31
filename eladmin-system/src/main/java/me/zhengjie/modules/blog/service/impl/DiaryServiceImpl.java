@@ -14,6 +14,7 @@ import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -119,8 +120,12 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public List<DiaryDto> findDiaryByUser(String userId) {
-        List<Diary> diaries = diaryRepository.findDiaryByUserIdOrderByDayTimestampDesc(userId);
-        return diaryMapper.toDto(diaries);
+    public Page<DiaryDto> findDiaryByUser(String userId, Pageable pageable) {
+        Page<Diary> diaries = diaryRepository.findDiaryByUserIdOrderByDayTimestampDesc(userId, pageable);
+        List<DiaryDto> list = new ArrayList<>();
+        for (Diary diary : diaries.getContent()) {
+            list.add(diaryMapper.toDto(diary));
+        }
+        return new PageImpl<DiaryDto>(list, pageable, diaries.getTotalElements());
     }
 }
