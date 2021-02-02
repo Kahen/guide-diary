@@ -9,12 +9,10 @@ public class IDWorkerTest {
     //下面两个每个5位，加起来就是10位的工作机器id
     private final long workerId;    //工作id
     private final long datacenterId;   //数据id
-    //初始时间戳
-    private final long twepoch = 1288834974657L;
     //12位的序列号
     private long sequence;
     //长度为5位
-    private long workerIdBits = 5L;
+    private final long workerIdBits = 5L;
     private long datacenterIdBits = 5L;
     //最大值
     private long maxWorkerId = -1L ^ (-1L << workerIdBits);
@@ -104,6 +102,8 @@ public class IDWorkerTest {
          * | 是按位或运算符，例如：x | y，只有当x，y都为0的时候结果才为0，其它情况结果都为1。
          * 因为个部分只有相应位上的值有意义，其它位上都是0，所以将各部分的值进行 | 运算就能得到最终拼接好的id
          */
+        //初始时间戳
+        long twepoch = 1288834974657L;
         return ((timestamp - twepoch) << timestampLeftShift) |
                 (datacenterId << datacenterIdShift) |
                 (workerId << workerIdShift) |

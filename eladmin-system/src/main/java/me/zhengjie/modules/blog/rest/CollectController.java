@@ -42,8 +42,7 @@ public class CollectController {
     @Log("查询blog_collect")
     @ApiOperation("查询blog_collect")
 //    @PreAuthorize("@el.check('collect:list')")
-    public ResponseEntity
-            <Object> query(CollectQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity<Object> query(CollectQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(collectService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
@@ -70,8 +69,7 @@ public class CollectController {
     @ApiOperation("删除blog_collect")
 //    @PreAuthorize("@el.check('collect:del')")
     @DeleteMapping
-    public ResponseEntity
-            <Object> delete(@RequestBody String[] ids) {
+    public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         collectService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }

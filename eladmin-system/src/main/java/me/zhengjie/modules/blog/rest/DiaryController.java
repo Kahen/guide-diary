@@ -55,8 +55,7 @@ public class DiaryController {
     @Log("查询diary")
     @ApiOperation("查询diary")
 //    @PreAuthorize("@el.check('diary:list')")
-    public ResponseEntity
-            <Object> query(DiaryQueryCriteria criteria, Pageable pageable) {
+    public ResponseEntity<Object> query(DiaryQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(diaryService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 

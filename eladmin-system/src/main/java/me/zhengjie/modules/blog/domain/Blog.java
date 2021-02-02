@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,7 +52,7 @@ public class Blog implements Serializable {
     private Timestamp createTime;
 
     @Column(name = "publish_time")
-    @UpdateTimestamp
+//    @UpdateTimestamp
     @ApiModelProperty(value = "发布时间")
     private Timestamp publishTime;
 
