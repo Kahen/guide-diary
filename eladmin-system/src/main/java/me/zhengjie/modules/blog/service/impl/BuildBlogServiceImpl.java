@@ -68,6 +68,9 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         JSONArray statuses = blogsObject.getJSONArray("statuses");
         for (Object status : statuses) {
             JSONObject statusObject = (JSONObject) status;
+            if (blogRepository.existsById(statusObject.getLong("id").toString())) {
+                continue;
+            }
             blogs.add(
                     new Blog()
                             .setBlogId(statusObject.getLong("id").toString())

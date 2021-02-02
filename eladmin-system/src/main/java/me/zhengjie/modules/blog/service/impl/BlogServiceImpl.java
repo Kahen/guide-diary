@@ -5,13 +5,16 @@ import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.DiaryUser;
+import me.zhengjie.modules.blog.domain.Img;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.repository.DiaryUserRepository;
+import me.zhengjie.modules.blog.repository.ImgRepository;
 import me.zhengjie.modules.blog.service.BlogService;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
 import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.BlogMapper;
 import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
+import me.zhengjie.modules.blog.service.mapstruct.ImgMapper;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
@@ -31,7 +34,6 @@ import java.util.Map;
 
 /**
  * @author Kahen
- *
  * @description 服务实现
  * @date 2020-12-09
  **/
@@ -44,6 +46,8 @@ public class BlogServiceImpl implements BlogService {
     private final BlogMapper blogMapper;
     private final DiaryUserRepository diaryUserRepository;
     private final DiaryUserMapper diaryUserMapper;
+    private final ImgRepository imgRepository;
+    private final ImgMapper imgMapper;
 
     @Override
     public Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable) {
@@ -116,6 +120,10 @@ public class BlogServiceImpl implements BlogService {
             DiaryUser diaryUser = diaryUserRepository.findById(blog.getUserId()).orElse(null);
             BlogDto blogDto = blogMapper.toDto(blog);
             blogDto.setDiaryUserDto(diaryUserMapper.toDto(diaryUser));
+            Img imgByBlogId = imgRepository.findImgByBlogId(blog.getBlogId());
+            if (imgByBlogId != null) {
+                blogDto.setImgDto(imgMapper.toDto(imgByBlogId));
+            }
             blogDtos.add(blogDto);
         }
         return new PageImpl<>(blogDtos, pageable, blogs.getTotalElements());

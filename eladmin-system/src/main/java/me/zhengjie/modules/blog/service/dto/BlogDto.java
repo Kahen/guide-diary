@@ -51,4 +51,6 @@ public class BlogDto implements Serializable {
     private String isOriginal;
 
     private DiaryUserDto diaryUserDto;
+
+    private ImgDto imgDto;
 }
