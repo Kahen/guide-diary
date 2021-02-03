@@ -55,7 +55,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
     @Override
     public void build() {
-        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=100");
+        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=50");
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
@@ -69,6 +69,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         for (Object status : statuses) {
             JSONObject statusObject = (JSONObject) status;
             if (blogRepository.existsById(statusObject.getLong("id").toString())) {
+                log.info("duplicate blog");
                 continue;
             }
             blogs.add(
