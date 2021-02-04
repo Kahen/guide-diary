@@ -53,4 +53,8 @@ public class BlogDto implements Serializable {
     private DiaryUserDto diaryUserDto;
 
     private ImgDto imgDto;
+
+    private LikeDto like;
+
+    private CollectDto collect;
 }

@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @date 2020-12-09
  **/
 public interface CollectRepository extends JpaRepository<Collect, String>, JpaSpecificationExecutor<Collect> {
+    Collect findCollectByBlogIdAndUserId(String blogId, String userId);
 }

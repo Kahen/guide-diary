@@ -7,7 +7,10 @@ import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.Log;
 import me.zhengjie.modules.blog.domain.Like;
 import me.zhengjie.modules.blog.service.LikeService;
+import me.zhengjie.modules.blog.service.dto.LikeDto;
 import me.zhengjie.modules.blog.service.dto.LikeQueryCriteria;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
+import me.zhengjie.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +48,15 @@ public class LikeController {
     public ResponseEntity
             <Object> query(LikeQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(likeService.queryAll(criteria, pageable), HttpStatus.OK);
+    }
+
+    @Log("点赞一个blog")
+    @ApiOperation("点赞blog")
+    @GetMapping("{blogId}")
+    public ResponseEntity<Object> createOrUpdate(@PathVariable(value = "blogId") String blogId, @RequestParam(value = "likeId") String likeId) {
+        JwtUserDto currentUser = (JwtUserDto) SecurityUtils.getCurrentUser();
+        LikeDto likeDto = likeService.createOrUpdate(currentUser, likeId, blogId);
+        return new ResponseEntity<>(likeDto, HttpStatus.OK);
     }
 
     @PostMapping

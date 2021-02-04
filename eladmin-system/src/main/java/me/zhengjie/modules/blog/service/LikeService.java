@@ -4,6 +4,7 @@ package me.zhengjie.modules.blog.service;
 import me.zhengjie.modules.blog.domain.Like;
 import me.zhengjie.modules.blog.service.dto.LikeDto;
 import me.zhengjie.modules.blog.service.dto.LikeQueryCriteria;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -79,4 +80,6 @@ public interface LikeService {
      */
     void download(List
                           <LikeDto> all, HttpServletResponse response) throws IOException;
+
+    LikeDto createOrUpdate(JwtUserDto currentUser, String likeId, String blogId);
 }

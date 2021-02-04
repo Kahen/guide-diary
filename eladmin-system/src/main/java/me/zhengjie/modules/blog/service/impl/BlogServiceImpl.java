@@ -3,22 +3,14 @@ package me.zhengjie.modules.blog.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
-import me.zhengjie.modules.blog.domain.Blog;
-import me.zhengjie.modules.blog.domain.DiaryUser;
-import me.zhengjie.modules.blog.domain.Img;
-import me.zhengjie.modules.blog.repository.BlogRepository;
-import me.zhengjie.modules.blog.repository.DiaryUserRepository;
-import me.zhengjie.modules.blog.repository.ImgRepository;
+import me.zhengjie.modules.blog.domain.*;
+import me.zhengjie.modules.blog.repository.*;
 import me.zhengjie.modules.blog.service.BlogService;
 import me.zhengjie.modules.blog.service.dto.BlogDto;
 import me.zhengjie.modules.blog.service.dto.BlogQueryCriteria;
-import me.zhengjie.modules.blog.service.mapstruct.BlogMapper;
-import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
-import me.zhengjie.modules.blog.service.mapstruct.ImgMapper;
-import me.zhengjie.utils.FileUtil;
-import me.zhengjie.utils.PageUtil;
-import me.zhengjie.utils.QueryHelp;
-import me.zhengjie.utils.ValidationUtil;
+import me.zhengjie.modules.blog.service.mapstruct.*;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
+import me.zhengjie.utils.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -48,6 +40,10 @@ public class BlogServiceImpl implements BlogService {
     private final DiaryUserMapper diaryUserMapper;
     private final ImgRepository imgRepository;
     private final ImgMapper imgMapper;
+    private final LikeRepository likeRepository;
+    private final CollectRepository collectRepository;
+    private final LikeMapper likeMapper;
+    private final CollectMapper collectMapper;
 
     @Override
     public Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable) {
@@ -123,6 +119,15 @@ public class BlogServiceImpl implements BlogService {
             Img imgByBlogId = imgRepository.findImgByBlogId(blog.getBlogId());
             if (imgByBlogId != null) {
                 blogDto.setImgDto(imgMapper.toDto(imgByBlogId));
+            }
+            JwtUserDto currentUser = (JwtUserDto) SecurityUtils.getCurrentUser();
+            Like likeByBlogIdAndUserId = likeRepository.findLikeByBlogIdAndUserId(blog.getBlogId(), currentUser.getUser().getUid());
+            if (likeByBlogIdAndUserId != null) {
+                blogDto.setLike(likeMapper.toDto(likeByBlogIdAndUserId));
+            }
+            Collect collectByBlogIdAndUserId = collectRepository.findCollectByBlogIdAndUserId(blog.getBlogId(), currentUser.getUser().getUid());
+            if (collectByBlogIdAndUserId != null) {
+                blogDto.setCollect(collectMapper.toDto(collectByBlogIdAndUserId));
             }
             blogDtos.add(blogDto);
         }

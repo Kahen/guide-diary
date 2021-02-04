@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @date 2020-12-09
  **/
 public interface LikeRepository extends JpaRepository<Like, String>, JpaSpecificationExecutor<Like> {
+    Like findLikeByBlogIdAndUserId(String blogId, String userId);
 }

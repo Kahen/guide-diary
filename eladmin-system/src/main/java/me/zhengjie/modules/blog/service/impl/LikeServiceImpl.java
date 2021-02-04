@@ -9,10 +9,8 @@ import me.zhengjie.modules.blog.service.LikeService;
 import me.zhengjie.modules.blog.service.dto.LikeDto;
 import me.zhengjie.modules.blog.service.dto.LikeQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.LikeMapper;
-import me.zhengjie.utils.FileUtil;
-import me.zhengjie.utils.PageUtil;
-import me.zhengjie.utils.QueryHelp;
-import me.zhengjie.utils.ValidationUtil;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
+import me.zhengjie.utils.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,15 +38,13 @@ public class LikeServiceImpl implements LikeService {
     private final LikeMapper likeMapper;
 
     @Override
-    public Map
-            <String, Object> queryAll(LikeQueryCriteria criteria, Pageable pageable) {
+    public Map<String, Object> queryAll(LikeQueryCriteria criteria, Pageable pageable) {
         Page<Like> page = likeRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(likeMapper::toDto));
     }
 
     @Override
-    public List
-            <LikeDto> queryAll(LikeQueryCriteria criteria) {
+    public List<LikeDto> queryAll(LikeQueryCriteria criteria) {
         return likeMapper.toDto(likeRepository.findAll((root, criteriaQuery, criteriaBuilder) ->
                 QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
     }
@@ -95,5 +92,18 @@ public class LikeServiceImpl implements LikeService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public LikeDto createOrUpdate(JwtUserDto currentUser, String likeId, String blogId) {
+        if (StringUtils.isBlank(likeId)) {
+            Like like = new Like().setLikeId(IdUtil.simpleUUID())
+                    .setBlogId(blogId)
+                    .setUserId(currentUser.getUser().getUid())
+                    .setCreateTime(new Timestamp(System.currentTimeMillis()));
+            return likeMapper.toDto(likeRepository.save(like));
+        }
+        likeRepository.deleteById(likeId);
+        return new LikeDto();
     }
 }
