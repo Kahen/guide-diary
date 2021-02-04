@@ -28,8 +28,7 @@ public interface LikeService {
      * @return Map
      * <String,Object>
      */
-    Map
-            <String, Object> queryAll(LikeQueryCriteria criteria, Pageable pageable);
+    Map<String, Object> queryAll(LikeQueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询所有数据不分页
@@ -38,8 +37,7 @@ public interface LikeService {
      * @return List
      * <LikeDto>
      */
-    List
-            <LikeDto> queryAll(LikeQueryCriteria criteria);
+    List<LikeDto> queryAll(LikeQueryCriteria criteria);
 
     /**
      * 根据ID查询
@@ -78,8 +76,7 @@ public interface LikeService {
      * @param response /
      * @throws IOException /
      */
-    void download(List
-                          <LikeDto> all, HttpServletResponse response) throws IOException;
+    void download(List<LikeDto> all, HttpServletResponse response) throws IOException;
 
     LikeDto createOrUpdate(JwtUserDto currentUser, String likeId, String blogId);
 }

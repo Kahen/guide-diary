@@ -9,10 +9,8 @@ import me.zhengjie.modules.blog.service.CollectService;
 import me.zhengjie.modules.blog.service.dto.CollectDto;
 import me.zhengjie.modules.blog.service.dto.CollectQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.CollectMapper;
-import me.zhengjie.utils.FileUtil;
-import me.zhengjie.utils.PageUtil;
-import me.zhengjie.utils.QueryHelp;
-import me.zhengjie.utils.ValidationUtil;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
+import me.zhengjie.utils.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -94,5 +93,18 @@ public class CollectServiceImpl implements CollectService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public CollectDto createOrUpdate(JwtUserDto currentUser, String collectId, String blogId) {
+        if (StringUtils.isBlank(collectId)) {
+            Collect like = new Collect().setCollectId(IdUtil.simpleUUID())
+                    .setBlogId(blogId)
+                    .setUserId(currentUser.getUser().getUid())
+                    .setCreateTime(new Timestamp(System.currentTimeMillis()));
+            return collectMapper.toDto(collectRepository.save(like));
+        }
+        collectRepository.deleteById(collectId);
+        return new CollectDto();
     }
 }

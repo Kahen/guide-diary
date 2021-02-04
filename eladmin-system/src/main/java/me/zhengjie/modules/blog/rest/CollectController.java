@@ -7,7 +7,10 @@ import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.Log;
 import me.zhengjie.modules.blog.domain.Collect;
 import me.zhengjie.modules.blog.service.CollectService;
+import me.zhengjie.modules.blog.service.dto.CollectDto;
 import me.zhengjie.modules.blog.service.dto.CollectQueryCriteria;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
+import me.zhengjie.utils.SecurityUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,5 +75,14 @@ public class CollectController {
     public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         collectService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Log("收藏一个blog")
+    @ApiOperation("收藏blog")
+    @GetMapping("{blogId}")
+    public ResponseEntity<Object> createOrUpdate(@PathVariable(value = "blogId") String blogId, @RequestParam(value = "collectId") String collectId) {
+        JwtUserDto currentUser = (JwtUserDto) SecurityUtils.getCurrentUser();
+        CollectDto collectDto = collectService.createOrUpdate(currentUser, collectId, blogId);
+        return new ResponseEntity<>(collectDto, HttpStatus.OK);
     }
 }

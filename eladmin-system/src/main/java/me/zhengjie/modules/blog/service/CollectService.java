@@ -4,6 +4,7 @@ package me.zhengjie.modules.blog.service;
 import me.zhengjie.modules.blog.domain.Collect;
 import me.zhengjie.modules.blog.service.dto.CollectDto;
 import me.zhengjie.modules.blog.service.dto.CollectQueryCriteria;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -76,4 +77,8 @@ public interface CollectService {
      * @throws IOException /
      */
     void download(List<CollectDto> all, HttpServletResponse response) throws IOException;
+
+    CollectDto createOrUpdate(JwtUserDto currentUser, String collectId, String blogId);
+
+
 }
