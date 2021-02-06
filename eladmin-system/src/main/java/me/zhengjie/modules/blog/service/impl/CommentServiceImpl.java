@@ -4,17 +4,20 @@ package me.zhengjie.modules.blog.service.impl;
 import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Comment;
+import me.zhengjie.modules.blog.domain.DiaryUser;
 import me.zhengjie.modules.blog.repository.CommentRepository;
+import me.zhengjie.modules.blog.repository.DiaryUserRepository;
 import me.zhengjie.modules.blog.service.CommentService;
-import me.zhengjie.modules.blog.service.DiaryUserService;
 import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.CommentMapper;
+import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
 import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +43,8 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final CommentMapper commentMapper;
-    private final DiaryUserService diaryUserService;
+    private final DiaryUserRepository diaryUserRepository;
+    private final DiaryUserMapper diaryUserMapper;
 
     @Override
     public Map<String, Object> queryAll(CommentQueryCriteria criteria, Pageable pageable) {
@@ -103,5 +107,19 @@ public class CommentServiceImpl implements CommentService {
         }
         FileUtil.downloadExcel(list, response);
     }
+
+    @Override
+    public Page<CommentDto> findCommentsByBlogId(String blogId, Pageable pageable) {
+        Page<Comment> commentPage = commentRepository.findCommentsByBlogId(blogId, pageable);
+        List<CommentDto> commentDtos = new ArrayList<>();
+        for (Comment comment : commentPage.getContent()) {
+            CommentDto commentDto = commentMapper.toDto(comment);
+            DiaryUser diaryUser = diaryUserRepository.findById(comment.getUserId()).orElse(null);
+            commentDto.setDiaryUserDto(diaryUserMapper.toDto(diaryUser));
+            commentDtos.add(commentDto);
+        }
+        return new PageImpl<>(commentDtos, pageable, commentPage.getTotalElements());
+    }
+
 
 }

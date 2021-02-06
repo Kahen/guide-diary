@@ -49,4 +49,6 @@ public class CommentDto implements Serializable {
      * 评论ID
      */
     private String commentId;
+
+    private DiaryUserDto diaryUserDto;
 }

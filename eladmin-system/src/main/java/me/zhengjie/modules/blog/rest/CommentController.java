@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.Log;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.service.CommentService;
+import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,5 +76,13 @@ public class CommentController {
             <Object> delete(@RequestBody String[] ids) {
         commentService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Log("找一个blog的评论")
+    @ApiOperation("找一个blog的评论")
+    @GetMapping("{blogId}")
+    public ResponseEntity<Object> findByBlogId(@PathVariable(value = "blogId") String blogId, Pageable pageable) {
+        Page<CommentDto> commentDtos = commentService.findCommentsByBlogId(blogId, pageable);
+        return new ResponseEntity<>(commentDtos, HttpStatus.OK);
     }
 }

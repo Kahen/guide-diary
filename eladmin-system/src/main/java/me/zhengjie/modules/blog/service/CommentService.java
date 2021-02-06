@@ -4,6 +4,7 @@ package me.zhengjie.modules.blog.service;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -77,4 +78,6 @@ public interface CommentService {
      */
     void download(List<CommentDto> all, HttpServletResponse response) throws IOException;
 
+
+    Page<CommentDto> findCommentsByBlogId(String blogId, Pageable pageable);
 }
