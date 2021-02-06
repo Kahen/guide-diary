@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * @author Kahen
- *
  * @date 2020-12-09
  **/
 public interface RepostRepository extends JpaRepository<Repost, String>, JpaSpecificationExecutor<Repost> {
+
+    Long countRepostsByBlogId(String blogId);
 }

@@ -57,4 +57,12 @@ public class BlogDto implements Serializable {
     private LikeDto like;
 
     private CollectDto collect;
+
+    private Long commentCount;
+
+    private Long likeCount;
+
+    private Long collectCount;
+
+    private Long repostCount;
 }

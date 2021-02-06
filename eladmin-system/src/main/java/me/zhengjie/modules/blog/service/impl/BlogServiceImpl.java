@@ -44,6 +44,10 @@ public class BlogServiceImpl implements BlogService {
     private final CollectRepository collectRepository;
     private final LikeMapper likeMapper;
     private final CollectMapper collectMapper;
+    private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
+    private final RepostRepository repostRepository;
+    private final RepostMapper repostMapper;
 
     @Override
     public Map<String, Object> queryAll(BlogQueryCriteria criteria, Pageable pageable) {
@@ -129,6 +133,14 @@ public class BlogServiceImpl implements BlogService {
             if (collectByBlogIdAndUserId != null) {
                 blogDto.setCollect(collectMapper.toDto(collectByBlogIdAndUserId));
             }
+            Long likesByBlogId = likeRepository.countLikesByBlogId(blog.getBlogId());
+            Long collectsByBlogId = collectRepository.countCollectsByBlogId(blog.getBlogId());
+            Long repostsByBlogId = repostRepository.countRepostsByBlogId(blog.getBlogId());
+            Long countCommentByBlogId = commentRepository.countCommentByBlogId(blog.getBlogId());
+            blogDto.setCommentCount(countCommentByBlogId);
+            blogDto.setCollectCount(collectsByBlogId);
+            blogDto.setRepostCount(repostsByBlogId);
+            blogDto.setLikeCount(likesByBlogId);
             blogDtos.add(blogDto);
         }
         return new PageImpl<>(blogDtos, pageable, blogs.getTotalElements());
