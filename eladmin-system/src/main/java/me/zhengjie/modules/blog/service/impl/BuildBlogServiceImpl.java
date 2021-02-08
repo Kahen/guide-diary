@@ -55,7 +55,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
     @Override
     public void build() {
-        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=50");
+        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=20");
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
@@ -107,7 +107,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         }
         ArrayList<Comment> comments = new ArrayList<>();
         for (Blog blog : blogs) {
-            String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&id=" + blog.getBlogId() + "&count=1");
+            String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&id=" + blog.getBlogId() + "&count=20");
             JSONObject jsonObject = JSON.parseObject(s);
             if (jsonObject.containsKey("error")) {
                 log.info(jsonObject.getString("error"));

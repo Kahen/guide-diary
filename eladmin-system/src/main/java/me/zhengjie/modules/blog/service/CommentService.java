@@ -80,4 +80,6 @@ public interface CommentService {
 
 
     Page<CommentDto> findCommentsByBlogId(String blogId, Pageable pageable);
+
+    CommentDto addCommentByBlogId(String blogId, String body);
 }

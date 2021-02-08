@@ -2,6 +2,7 @@
 package me.zhengjie.modules.blog.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.domain.DiaryUser;
@@ -12,10 +13,8 @@ import me.zhengjie.modules.blog.service.dto.CommentDto;
 import me.zhengjie.modules.blog.service.dto.CommentQueryCriteria;
 import me.zhengjie.modules.blog.service.mapstruct.CommentMapper;
 import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
-import me.zhengjie.utils.FileUtil;
-import me.zhengjie.utils.PageUtil;
-import me.zhengjie.utils.QueryHelp;
-import me.zhengjie.utils.ValidationUtil;
+import me.zhengjie.modules.security.service.dto.JwtUserDto;
+import me.zhengjie.utils.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -122,4 +122,21 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
+    @Override
+    public CommentDto addCommentByBlogId(String blogId, String body) {
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        String simpleUuid = IdUtil.simpleUUID();
+        JwtUserDto currentUser = (JwtUserDto) SecurityUtils.getCurrentUser();
+        Comment save = commentRepository.save(new Comment()
+                .setCommentId(simpleUuid)
+                .setContent(jsonObject.getString("commentArea"))
+                .setBlogId(blogId)
+                .setPid(simpleUuid)
+                .setUserId(currentUser.getUser().getUid())
+                .setReplyId("0")
+                .setPublishTime(new Timestamp(System.currentTimeMillis())));
+        CommentDto commentDto = commentMapper.toDto(save);
+        commentDto.setDiaryUserDto(diaryUserMapper.toDto(diaryUserRepository.findById(save.getUserId()).orElse(null)));
+        return commentDto;
+    }
 }

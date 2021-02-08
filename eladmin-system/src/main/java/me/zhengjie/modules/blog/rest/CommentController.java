@@ -58,12 +58,19 @@ public class CommentController {
         return new ResponseEntity<>(commentService.create(resources), HttpStatus.CREATED);
     }
 
+    @PostMapping("{blogId}")
+    @Log("用户评论")
+    @ApiOperation("用户评论")
+    public ResponseEntity<Object> addComment(@PathVariable(value = "blogId") String blogId, @RequestBody String body) {
+
+        return new ResponseEntity<>(commentService.addCommentByBlogId(blogId, body), HttpStatus.OK);
+    }
+
     @PutMapping
     @Log("修改blog_comment")
     @ApiOperation("修改blog_comment")
 //    @PreAuthorize("@el.check('comment:edit')")
-    public ResponseEntity
-            <Object> update(@Validated @RequestBody Comment resources) {
+    public ResponseEntity<Object> update(@Validated @RequestBody Comment resources) {
         commentService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -72,8 +79,7 @@ public class CommentController {
     @ApiOperation("删除blog_comment")
 //    @PreAuthorize("@el.check('comment:del')")
     @DeleteMapping
-    public ResponseEntity
-            <Object> delete(@RequestBody String[] ids) {
+    public ResponseEntity<Object> delete(@RequestBody String[] ids) {
         commentService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
