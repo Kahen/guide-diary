@@ -128,4 +128,10 @@ public class DiaryUserServiceImpl implements DiaryUserService {
     public void saveAll(List<DiaryUser> diaryUsers) {
         diaryUserRepository.saveAll(diaryUsers);
     }
+
+    @Override
+    public DiaryUser findByEmail(String email) {
+        return diaryUserRepository.findDiaryUserByName(email);
+    }
+
 }

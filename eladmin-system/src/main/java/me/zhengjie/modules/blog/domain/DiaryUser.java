@@ -68,6 +68,10 @@ public class DiaryUser implements Serializable {
     @ApiModelProperty(value = "密码哈希")
     private String password;
 
+    @Column(name = "enable")
+    @ApiModelProperty(value = "是否启用")
+    private Integer enable;
+
     public void copy(DiaryUser source) {
         BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }

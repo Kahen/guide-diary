@@ -1,7 +1,9 @@
 
 package me.zhengjie.modules.security.rest;
 
+import cn.hutool.captcha.generator.RandomGenerator;
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.wf.captcha.base.Captcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +14,13 @@ import me.zhengjie.annotation.rest.AnonymousGetMapping;
 import me.zhengjie.annotation.rest.AnonymousPostMapping;
 import me.zhengjie.config.RsaProperties;
 import me.zhengjie.exception.BadRequestException;
+import me.zhengjie.modules.blog.domain.ActiveCode;
+import me.zhengjie.modules.blog.domain.DiaryUser;
+import me.zhengjie.modules.blog.domain.HttpResult;
+import me.zhengjie.modules.blog.service.ActiveCodeService;
+import me.zhengjie.modules.blog.service.DiaryUserService;
+import me.zhengjie.modules.blog.service.dto.DiaryUserDto;
+import me.zhengjie.modules.blog.service.mapstruct.DiaryUserMapper;
 import me.zhengjie.modules.security.config.bean.LoginCodeEnum;
 import me.zhengjie.modules.security.config.bean.LoginProperties;
 import me.zhengjie.modules.security.config.bean.SecurityProperties;
@@ -29,14 +38,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -57,6 +66,10 @@ public class AuthorizationController {
     private final OnlineUserService onlineUserService;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final ActiveCodeService activeCodeService;
+    private final DiaryUserService diaryUserService;
+    private final DiaryUserMapper diaryUserMapper;
+
     @Resource
     private LoginProperties loginProperties;
 
@@ -128,5 +141,79 @@ public class AuthorizationController {
     public ResponseEntity<Object> logout(HttpServletRequest request) {
         onlineUserService.logout(tokenProvider.getToken(request));
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation("重新发送验证码")
+    @AnonymousGetMapping("/reSendActiveCode")
+    public ResponseEntity<Object> reSendActiveCode(@RequestParam(value = "email") String email) {
+        DiaryUser diaryUser = diaryUserService.findByEmail(email);
+        if (diaryUser.getEnable() == 1) {
+            return new ResponseEntity<>(new HttpResult(HttpResult.Type.WARN, "该账户已激活"), HttpStatus.OK);
+        }
+        RandomGenerator randomGenerator = new RandomGenerator("0123456789", 6);
+        String activeCode = randomGenerator.generate();
+        ActiveCode activeCodeByEmail = activeCodeService.create(
+                new ActiveCode()
+                        .setEmail(email)
+                        .setActiveCode(activeCode));
+        activeCodeService.sendActiveCode(activeCodeByEmail.getEmail(), activeCodeByEmail.getActiveCode());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation("获取邮箱验证码")
+    @AnonymousPostMapping(value = "/activeCode")
+    public ResponseEntity<Object> getActiveCode(@RequestBody String body) throws Exception {
+
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        String email = jsonObject.getString("email");
+        if (diaryUserService.findByEmail(email) != null) {
+            return ResponseEntity.ok(new HttpResult(HttpResult.Type.WARN, "该帐号已存在"));
+        }
+        RandomGenerator randomGenerator = new RandomGenerator("0123456789", 6);
+        String activeCode = randomGenerator.generate();
+        String password = RsaUtils.decryptByPrivateKey(RsaProperties.privateKey, jsonObject.getString("password"));
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashPassword = passwordEncoder.encode(password);
+
+        ActiveCode activeCodeByEmail = activeCodeService.create(
+                new ActiveCode()
+                        .setEmail(email)
+                        .setActiveCode(activeCode));
+        activeCodeService.sendActiveCode(activeCodeByEmail.getEmail(), activeCodeByEmail.getActiveCode());
+        DiaryUserDto diaryUserDto = diaryUserService.create(
+                new DiaryUser().setUid(IdUtil.simpleUUID())
+                        .setAvatarUrl("https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg")
+                        .setDescription("")
+                        .setCreateTime(new Timestamp(System.currentTimeMillis()))
+                        .setName(email)
+                        .setNickname(jsonObject.getString("nickname"))
+                        .setFollowersCount(0L)
+                        .setFriendsCount(0L)
+                        .setStatusesCount(0L)
+                        .setPassword(hashPassword)
+                        .setEnable(0)
+        );
+        return new ResponseEntity<>(new HttpResult(HttpResult.Type.SUCCESS, diaryUserDto.getName(), diaryUserDto), HttpStatus.OK);
+    }
+
+    @ApiOperation("激活用户")
+    @AnonymousGetMapping(value = "enable")
+    public ResponseEntity<Object> enable(@RequestParam(value = "email") String email
+            , @RequestParam(value = "activeCode") String activeCode) {
+        ActiveCode activeCodeByEmail = activeCodeService.findActiveCodeByEmail(email);
+        if (activeCodeByEmail == null) {
+            return new ResponseEntity<>(new HttpResult(HttpResult.Type.WARN, "未请求发送激活码"), HttpStatus.OK);
+        }
+        if (activeCodeByEmail.getActiveCode().equalsIgnoreCase(activeCode)) {
+            DiaryUser diaryUser = diaryUserService.findByEmail(email);
+            if (diaryUser.getEnable() == 1) {
+                return new ResponseEntity<>(new HttpResult(HttpResult.Type.WARN, "该账户已激活"), HttpStatus.OK);
+            }
+            diaryUser.setEnable(1);
+            diaryUserService.update(diaryUser);
+            return new ResponseEntity<>(new HttpResult(HttpResult.Type.SUCCESS, "注册成功", diaryUserMapper.toDto(diaryUser)), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new HttpResult(HttpResult.Type.ERROR, "验证码错误"), HttpStatus.OK);
+        }
     }
 }

@@ -63,6 +63,10 @@ public class DiaryUserDto implements Serializable {
      */
     private String avatarUrl;
 
+    /**
+     * 是否启用
+     */
+    private Integer enable;
 //    /**
 //     * 密码哈希
 //     */

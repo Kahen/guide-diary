@@ -82,4 +82,5 @@ public interface DiaryUserService {
 
     void saveAll(List<DiaryUser> diaryUsers);
 
+    DiaryUser findByEmail(String email);
 }
