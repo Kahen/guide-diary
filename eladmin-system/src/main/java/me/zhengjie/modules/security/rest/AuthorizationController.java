@@ -166,8 +166,19 @@ public class AuthorizationController {
 
         JSONObject jsonObject = JSONObject.parseObject(body);
         String email = jsonObject.getString("email");
-        if (diaryUserService.findByEmail(email) != null) {
-            return ResponseEntity.ok(new HttpResult(HttpResult.Type.WARN, "该帐号已存在"));
+        DiaryUser byEmail = diaryUserService.findByEmail(email);
+        if (byEmail != null) {
+            if (byEmail.getEnable() != 0) {
+                return ResponseEntity.ok(new HttpResult(HttpResult.Type.WARN, "该帐号已存在"));
+            }
+            RandomGenerator randomGenerator = new RandomGenerator("0123456789", 6);
+            String activeCode = randomGenerator.generate();
+            ActiveCode activeCodeByEmail = activeCodeService.create(
+                    new ActiveCode()
+                            .setEmail(email)
+                            .setActiveCode(activeCode));
+            activeCodeService.sendActiveCode(email, activeCodeByEmail.getActiveCode());
+            return ResponseEntity.ok().body(new HttpResult(HttpResult.Type.SUCCESS, "该帐号已存在但未激活，已重新发送激活邮箱，请注意查收"));
         }
         RandomGenerator randomGenerator = new RandomGenerator("0123456789", 6);
         String activeCode = randomGenerator.generate();

@@ -78,7 +78,7 @@ public class DiaryUserDto implements Serializable {
             return null;
         }
 
-        return new UserDto().setEnabled(true)
+        return new UserDto().setEnabled(user.getEnable() != 0)
                 .setAvatarPath(user.getAvatarUrl())
                 .setEmail("null")
                 .setUid(user.getUid())
