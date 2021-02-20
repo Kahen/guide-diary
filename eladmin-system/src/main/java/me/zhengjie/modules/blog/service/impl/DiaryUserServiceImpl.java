@@ -121,7 +121,8 @@ public class DiaryUserServiceImpl implements DiaryUserService {
                 .setFollowersCount(userObject.getLong("followers_count"))
                 .setFriendsCount(userObject.getLong("friends_count"))
                 .setPassword(passwordEncoder.encode("123456"))
-                .setStatusesCount(userObject.getLong("statuses_count"));
+                .setStatusesCount(userObject.getLong("statuses_count"))
+                .setEnable(1);
     }
 
     @Override
