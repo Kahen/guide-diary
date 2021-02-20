@@ -2,7 +2,11 @@
 package me.zhengjie.modules.blog.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSONArray;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import me.zhengjie.config.FileProperties;
 import me.zhengjie.modules.blog.domain.Img;
 import me.zhengjie.modules.blog.repository.ImgRepository;
 import me.zhengjie.modules.blog.service.ImgService;
@@ -13,12 +17,20 @@ import me.zhengjie.utils.FileUtil;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 import me.zhengjie.utils.ValidationUtil;
+import org.apache.poi.util.IOUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -33,10 +45,13 @@ import java.util.Map;
  **/
 @Service
 @RequiredArgsConstructor
+@EnableAsync
+@Slf4j
 public class ImgServiceImpl implements ImgService {
 
     private final ImgRepository imgRepository;
     private final ImgMapper imgMapper;
+    private final FileProperties fileProperties;
 
     @Override
     public Map
@@ -103,5 +118,39 @@ public class ImgServiceImpl implements ImgService {
     public ImgDto findByDiaryId(String diaryId) {
         Img imgByBlogId = imgRepository.findImgByBlogId(diaryId);
         return imgMapper.toDto(imgByBlogId);
+    }
+
+    @Override
+    @Async
+    public void fetchImages(String blogId, JSONArray picUrls) {
+        JSONArray jsonArray = new JSONArray();
+        for (Object picUrl : picUrls) {
+            String url = (String) picUrl;
+            File file = HttpUtil.downloadFileFromUrl(url, "~/");
+            FileInputStream input = null;
+            try {
+                input = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            MultipartFile multipartFile = null;
+            try {
+                assert input != null;
+                multipartFile = new MockMultipartFile(file.getName(), file.getName(), "text/plain", IOUtils.toByteArray(input));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            assert multipartFile != null;
+            String suffix = FileUtil.getExtensionName(multipartFile.getOriginalFilename());
+            String type = FileUtil.getFileType(suffix);
+            File upload = FileUtil.upload(multipartFile, fileProperties.getPath().getPath() + type + File.separator);
+
+            assert upload != null;
+            jsonArray.add(upload.getName());
+            boolean delete = file.delete();
+            log.info(String.valueOf(delete));
+        }
+        imgRepository.save(new
+                Img().setImgId(IdUtil.simpleUUID()).setImgUrl(jsonArray.toJSONString()).setBlogId(blogId));
     }
 }

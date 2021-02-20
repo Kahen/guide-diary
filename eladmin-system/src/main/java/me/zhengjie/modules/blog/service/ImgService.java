@@ -1,6 +1,7 @@
 
 package me.zhengjie.modules.blog.service;
 
+import com.alibaba.fastjson.JSONArray;
 import me.zhengjie.modules.blog.domain.Img;
 import me.zhengjie.modules.blog.service.dto.ImgDto;
 import me.zhengjie.modules.blog.service.dto.ImgQueryCriteria;
@@ -79,4 +80,5 @@ public interface ImgService {
 
     ImgDto findByDiaryId(String diaryId);
 
+    void fetchImages(String blogId, JSONArray picUrls);
 }

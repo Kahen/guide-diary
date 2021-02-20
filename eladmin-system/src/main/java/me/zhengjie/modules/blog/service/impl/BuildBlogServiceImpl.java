@@ -1,22 +1,22 @@
 package me.zhengjie.modules.blog.service.impl;
 
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.modules.blog.constant.BlogConstants;
 import me.zhengjie.modules.blog.domain.Blog;
 import me.zhengjie.modules.blog.domain.Comment;
 import me.zhengjie.modules.blog.domain.DiaryUser;
-import me.zhengjie.modules.blog.domain.Img;
 import me.zhengjie.modules.blog.repository.BlogRepository;
 import me.zhengjie.modules.blog.repository.CommentRepository;
 import me.zhengjie.modules.blog.repository.DiaryUserRepository;
 import me.zhengjie.modules.blog.repository.ImgRepository;
 import me.zhengjie.modules.blog.service.BuildBlogService;
 import me.zhengjie.modules.blog.service.DiaryUserService;
+import me.zhengjie.modules.blog.service.ImgService;
 import me.zhengjie.modules.blog.utils.DateFormatUtils;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,7 @@ import java.util.List;
  */
 @Service(value = "buildBlogService")
 @Slf4j
+@RequiredArgsConstructor
 public class BuildBlogServiceImpl implements BuildBlogService {
 
 
@@ -44,14 +45,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
     private final DiaryUserRepository diaryUserRepository;
     private final CommentRepository commentRepository;
     private final ImgRepository imgRepository;
-
-    public BuildBlogServiceImpl(DiaryUserService diaryUserService, BlogRepository blogRepository, DiaryUserRepository diaryUserRepository, CommentRepository commentRepository, ImgRepository imgRepository) {
-        this.diaryUserService = diaryUserService;
-        this.blogRepository = blogRepository;
-        this.diaryUserRepository = diaryUserRepository;
-        this.commentRepository = commentRepository;
-        this.imgRepository = imgRepository;
-    }
+    private final ImgService imgService;
 
 
     @Override
@@ -73,7 +67,6 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         }
         List<Blog> blogs = new ArrayList<>();
         List<DiaryUser> diaryUsers = new ArrayList<>();
-        List<Img> images = new ArrayList<>();
         JSONArray statuses = blogsObject.getJSONArray("statuses");
         for (Object status : statuses) {
             JSONObject statusObject = (JSONObject) status;
@@ -102,15 +95,9 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
                     for (int i = 0; i < picUrls.size(); i++) {
                         JSONObject jsonObject = picUrls.getJSONObject(i);
-//                        JSONObject jsonObject1 = new JSONObject();
-//                        jsonObject1.put("" + i, jsonObject.getString("thumbnail_pic"));
                         jsonArray.add(jsonObject.getString("thumbnail_pic"));
                     }
-                    images.add(
-                            new Img().setImgId(IdUtil.simpleUUID())
-                                    .setBlogId(statusObject.getLong("id").toString())
-                                    .setImgUrl(jsonArray.toJSONString())
-                    );
+                    imgService.fetchImages(statusObject.getLong("id").toString(), jsonArray);
                 }
             }
         }
@@ -154,6 +141,5 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         blogRepository.saveAll(blogs);
         diaryUserRepository.saveAll(diaryUsers);
         commentRepository.saveAll(comments);
-        imgRepository.saveAll(images);
     }
 }
