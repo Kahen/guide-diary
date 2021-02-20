@@ -56,8 +56,9 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
     @Override
     public void build() {
+        log.info("抓取开始，目前：" + tokenCache);
         String accessToken = BlogConstants.accessToken(tokenCache);
-        String blogStr = HttpUtil.get(HOME_BASE_URL + accessToken + "&count=2");
+        String blogStr = HttpUtil.get(HOME_BASE_URL + accessToken + "&count=50");
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
@@ -67,7 +68,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
                 tokenCache = 0;
             }
             log.info(blogsObject.getString("error"));
-            log.info("博客token的位置以修改为{},值为{}", tokenCache, accessToken);
+            log.info("博客token的位置已修改为{},值为{}", tokenCache, BlogConstants.accessToken(tokenCache));
             return;
         }
         List<Blog> blogs = new ArrayList<>();
@@ -115,7 +116,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         }
         ArrayList<Comment> comments = new ArrayList<>();
         for (Blog blog : blogs) {
-            String s = HttpUtil.get(COMMENT_URL + accessToken + "&id=" + blog.getBlogId() + "&count=2");
+            String s = HttpUtil.get(COMMENT_URL + accessToken + "&id=" + blog.getBlogId() + "&count=50");
             JSONObject jsonObject = JSON.parseObject(s);
             if (jsonObject.containsKey("error")) {
                 log.info(jsonObject.getString("error"));

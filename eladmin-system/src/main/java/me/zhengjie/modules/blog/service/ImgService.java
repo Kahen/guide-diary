@@ -78,4 +78,5 @@ public interface ImgService {
     void download(List<ImgDto> all, HttpServletResponse response) throws IOException;
 
     ImgDto findByDiaryId(String diaryId);
+
 }
