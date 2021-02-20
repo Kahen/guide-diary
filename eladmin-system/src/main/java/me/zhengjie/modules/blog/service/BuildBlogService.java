@@ -9,5 +9,5 @@ public interface BuildBlogService {
     /**
      * 建微博评论任务
      */
-    public void build();
+    void build();
 }

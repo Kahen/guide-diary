@@ -36,6 +36,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
     private static final String HOME_BASE_URL = "https://api.weibo.com/2/statuses/home_timeline.json?";
     private static final String PUBLIC_BASE_URL = "https://api.weibo.com/2/statuses/public_timeline.json?";
     private static final String COMMENT_URL = "https://api.weibo.com/2/comments/show.json?";
+    static Integer tokenCache = 0;
 
 
     private final DiaryUserService diaryUserService;
@@ -55,11 +56,18 @@ public class BuildBlogServiceImpl implements BuildBlogService {
 
     @Override
     public void build() {
-        String blogStr = HttpUtil.get(HOME_BASE_URL + BlogConstants.accessToken() + "&count=20");
+        String accessToken = BlogConstants.accessToken(tokenCache);
+        String blogStr = HttpUtil.get(HOME_BASE_URL + accessToken + "&count=2");
         JSONObject blogsObject = JSON.parseObject(blogStr);
 
         if (blogsObject.containsKey("error")) {
+            if (tokenCache < BlogConstants.getTokensSize()) {
+                tokenCache++;
+            } else {
+                tokenCache = 0;
+            }
             log.info(blogsObject.getString("error"));
+            log.info("博客token的位置以修改为{},值为{}", tokenCache, accessToken);
             return;
         }
         List<Blog> blogs = new ArrayList<>();
@@ -84,7 +92,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
             diaryUsers.add(diaryUserService.buildDiaryUser(userObject));
             if (statusObject.containsKey("pic_urls")) {
                 JSONArray picUrls = statusObject.getJSONArray("pic_urls");
-                String imgUrlsStr = "";
+
                 if (picUrls.size() > 0) {
                     // for (Object picUrl : picUrls) {
                     //
@@ -107,7 +115,7 @@ public class BuildBlogServiceImpl implements BuildBlogService {
         }
         ArrayList<Comment> comments = new ArrayList<>();
         for (Blog blog : blogs) {
-            String s = HttpUtil.get(COMMENT_URL + BlogConstants.accessToken() + "&id=" + blog.getBlogId() + "&count=20");
+            String s = HttpUtil.get(COMMENT_URL + accessToken + "&id=" + blog.getBlogId() + "&count=2");
             JSONObject jsonObject = JSON.parseObject(s);
             if (jsonObject.containsKey("error")) {
                 log.info(jsonObject.getString("error"));
